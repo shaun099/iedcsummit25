@@ -96,7 +96,7 @@ const Navbar = () => {
             ))}
 
 
-            {/* Be Our Sponsor Link
+            {/* Be Our Sponsor Link */}
             <div className="relative">
               <Link 
                 to="/be-our-sponsor"
@@ -106,7 +106,7 @@ const Navbar = () => {
                   Be Our Sponsor
                 </div>
               </Link>
-              {/* Active Indicator 
+              {/* Active Indicator */}
               {activeSection === 'Be Our Sponsor' && (
                 <img 
                   src={ellipse1} 
@@ -114,7 +114,7 @@ const Navbar = () => {
                   className="w-8 h-8 absolute top-0 right-2"
                 />
               )}
-            </div> */}
+            </div>
 
             {/* Register Button */}
             <a 
