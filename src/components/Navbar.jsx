@@ -118,7 +118,7 @@ const Navbar = () => {
 
             {/* Register Button */}
             <a 
-              href="https://tickets.startupmission.in/iedc-summit-2025"
+              href="https://tickets.startupmission.in/iedc-summit-2025?code=earlybird" target='_blank'
               className="w-40 h-10 relative bg-blue-600 rounded-xl hover:bg-blue-700 transition-all duration-300 flex items-center justify-center"
             >
               <div className="text-white text-lg font-semibold font-clash-display leading-6">REGISTER NOW</div>
@@ -177,17 +177,17 @@ const Navbar = () => {
               </div>
             ))}
             <a
-              href="https://tickets.startupmission.in/iedc-summit-2025"
+              href="https://tickets.startupmission.in/iedc-summit-2025?code=earlybird" target="_blank"
               className="block w-full bg-blue-600 text-white text-lg font-bold py-2 text-center rounded-lg hover:bg-blue-700 transition-all duration-300 mt-4"
             >
               REGISTER NOW
             </a>
-            <Link
+            {/* <Link
               to="/be-our-sponsor"
               className="block w-full bg-blue-600 text-white text-lg font-bold py-2 text-center rounded-lg hover:bg-blue-700 transition-all duration-300 mt-2"
             >
               BE OUR SPONSOR
-            </Link>
+            </Link> */}
           </div>
         )}
       </div>

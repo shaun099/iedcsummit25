@@ -361,6 +361,29 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-6 border-t border-gray-800">
+          <div className="flex flex-wrap items-center justify-center gap-5 text-sm mb-6">
+            <a 
+              target="_blank" 
+              href="https://policy.ksum.in/privacy_policy.html" 
+              className="text-gray-500 hover:text-blue-400 transition-colors font-gilroy-light"
+            >
+              Privacy Policy
+            </a>
+            <a 
+              target="_blank" 
+              href="https://policy.ksum.in/terms.html" 
+              className="text-gray-500 hover:text-blue-400 transition-colors font-gilroy-light"
+            >
+              Terms &amp; Conditions
+            </a>
+            <a 
+              target="_blank" 
+              href="https://policy.ksum.in/refund_policy.html" 
+              className="text-gray-500 hover:text-blue-400 transition-colors font-gilroy-light"
+            >
+              Refund Policy
+            </a>
+          </div>
           <p className="text-center text-gray-500 text-sm font-gilroy-light">
             © 2025 Kerala Startup Mission. All Rights Reserved.
           </p>
