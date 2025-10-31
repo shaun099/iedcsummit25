@@ -6,7 +6,7 @@ import Highlights from "./components/Highlights";
 import Gallery from "./components/Gallery";
 import Directions from "./components/Directions";
 import Footer from "./components/Footer";
-import Test from "./components/Test";
+
 
 import "./fonts/ClashDisplay-Variable.ttf";
 import "./fonts/Gilroy-Light.otf";
@@ -23,7 +23,6 @@ function App() {
       <Gallery />
       <Highlights />
       <Directions />
-      <Schedule />
       <Footer />
     </div>
   );
