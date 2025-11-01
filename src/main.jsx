@@ -7,26 +7,29 @@ import ExternalFormRedirect from "./components/ExternalFormRedirect";
 import Schedule from "./components/Schedule.jsx";
 import Footer from "./components/Footer.jsx";
 import { SponsorForm } from './components/SponsorForm'
+import { ScrollToTop } from './components/ScrollToTop';
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/be-our-sponsor" element={<SponsorForm />} />
-        <Route
-          path="/Schedule"
-          element={
-            <>
-              <Schedule />
-              <Footer />
-            </>
-          }
-        />
-        {/* <Route path="/be-our-sponsor" element={<SponsorForm />} /> */}
-        {/* Catch-all route for external form redirects */}
-        <Route path="/:formName" element={<ExternalFormRedirect />} />
-      </Routes>
+      <ScrollToTop>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/be-our-sponsor" element={<SponsorForm />} />
+          <Route
+            path="/Schedule"
+            element={
+              <>
+                <Schedule />
+                <Footer />
+              </>
+            }
+          />
+          {/* <Route path="/be-our-sponsor" element={<SponsorForm />} /> */}
+          {/* Catch-all route for external form redirects */}
+          <Route path="/:formName" element={<ExternalFormRedirect />} />
+        </Routes>
+      </ScrollToTop>
     </Router>
   </StrictMode>
 );

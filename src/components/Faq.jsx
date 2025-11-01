@@ -1,25 +1,70 @@
-import React, { useState } from "react";
-import LogoLoop from "./LogoLoop";
-import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
+import React, { useState, useEffect, useRef } from "react";
 import { ArrowDown } from "lucide-react";
-import side_Image from "../assets/side_image.png";
+
 const Faq = () => {
-  const { ref: sectionRef, isVisible: sectionVisible } = useScrollFadeInUp();
   const [expandedItems, setExpandedItems] = useState([]);
+  const [cardHeights, setCardHeights] = useState({});
+  const [sectionHeight, setSectionHeight] = useState("160vh");
 
   const toggleExpand = (index) => {
     setExpandedItems((prev) => (prev.includes(index) ? [] : [index]));
   };
 
+  const updateCardHeight = (index, height) => {
+    setCardHeights((prev) => ({ ...prev, [index]: height }));
+  };
+
   const calculateTopPosition = (index) => {
-    let top = 20;
-    const baseSpacing = window.innerWidth >= 768 ? 105 : 80;
+    let top = 15;
+    const baseSpacing = window.innerWidth >= 768 ? 80 : 70;
     for (let i = 0; i < index; i++) {
-      // Base spacing is 60px, expanded items add 200px more
-      top += expandedItems.includes(i) ? 380 : baseSpacing;
+      if (expandedItems.includes(i) && cardHeights[i]) {
+        top += cardHeights[i] + 15;
+      } else {
+        top += baseSpacing;
+      }
+    }
+    // Add extra spacing for the last item
+    if (index === faqs.length - 1) {
+      top += 35;
     }
     return top;
   };
+
+  useEffect(() => {
+    const screenWidth = window.innerWidth;
+    const isMobile = screenWidth < 768;
+    const isTablet = screenWidth >= 768 && screenWidth < 1024;
+    
+    const baseSpacing = isMobile ? 60 : 70;
+    let calculatedHeight = 15; // Initial top margin
+    
+    faqs.forEach((_, index) => {
+      if (expandedItems.includes(index) && cardHeights[index]) {
+        calculatedHeight += cardHeights[index] + 15;
+      } else {
+        calculatedHeight += baseSpacing;
+      }
+    });
+    
+    // Add header height and bottom padding (different for mobile, tablet, and desktop)
+    const headerHeight = isMobile ? 140 : 160;
+    let bottomPadding;
+    
+    if (isMobile) {
+      bottomPadding = 40;
+    } else if (isTablet) {
+      bottomPadding = 100;
+    } else {
+      bottomPadding = 200;
+    }
+    
+    calculatedHeight += headerHeight + bottomPadding;
+    
+    const calculatedVh = `${calculatedHeight}px`;
+    
+    setSectionHeight(calculatedVh);
+  }, [expandedItems, cardHeights]);
 
   const faqs = [
     {
@@ -83,49 +128,50 @@ const Faq = () => {
   return (
     <section
       id="Schedule"
-      className={`w-full overflow-y-hidden  bg-white relative ${
-        sectionVisible ? "fade-in-up-visible" : "fade-in-up-hidden"
-      }`}
-      ref={sectionRef}
+      className="w-full overflow-y-hidden bg-white relative"
     >
-      <div className="hidden lg:block w-auto fixed left-0 top-0 h-[100%]">
-        <img
-          src={side_Image}
-          alt="Side Left"
-          className="h-full w-auto object-cover"
-        />
-      </div>
-      <div className="mb-8 md:mb-5 min-h-[160vh] md:min-h-[240vh] md:flex md:flex-col md:items-center  relative py-10 px-5 ">
+      <div 
+        className="mb-8 md:mb-5 md:flex md:flex-col md:items-center relative py-10 px-5"
+        style={{ minHeight: sectionHeight }}
+      >
         <div className="w-full md:text-center">
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-light md:font-black font-clash-display text-blue-500  relative z-20 ">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-light md:font-black text-blue-500 relative z-20">
             FAQ
           </h2>
           <div className="w-full px-0">
-            <h3 className="text-xl font-light font-clash-display">
+            <h3 className="text-lg md:text-xl font-light">
               Any Doubts...?!
             </h3>
           </div>
         </div>
 
-        <div className="w-full md:w-[70%] min-h-[60vh]  mt-10 relative ">
+        <div className="w-full md:w-[70%] min-h-[20vh] mt-10 relative scale-90 md:scale-95 origin-top pb-20">
           <div className="w-full relative mx-auto rounded-4xl h-1/2 bg-transparent"></div>
           {faqs.map((item, index) => (
             <div
               key={index}
-              className={`absolute w-full  mx-auto rounded-4xl z-9 px-5 py-4 md:px-10 md:py-5 transition-all duration-300 shadow-xl border border-blue-500 ${
+              ref={(el) => {
+                if (el && expandedItems.includes(index)) {
+                  const height = el.offsetHeight;
+                  if (cardHeights[index] !== height) {
+                    updateCardHeight(index, height);
+                  }
+                }
+              }}
+              className={`absolute w-full mx-auto rounded-4xl z-9 px-4 py-3 md:px-8 md:py-4 transition-all duration-300 shadow-xl border border-blue-500 ${
                 expandedItems.includes(index)
                   ? "bg-blue-500 text-white"
                   : "bg-white text-black"
               }`}
               style={{
                 top: `${calculateTopPosition(index)}px`,
-                height: expandedItems.includes(index) ? "100%" : "100%",
+                height: expandedItems.includes(index) || index === faqs.length - 1 ? "auto" : "100%",
               }}
             >
               <div className="w-full h-auto flex flex-row justify-between items-center">
-                <div className="font-clash-display font-medium text-xl md:text-4xl flex flex-row items-center gap-2 flex-1">
+                <div className="font-normal font-clash-display text-lg md:text-2xl lg:text-3xl flex flex-row items-center gap-2 flex-1">
                   <ArrowDown
-                    size={window.innerWidth >= 700 ? 40 : 24}
+                    size={window.innerWidth >= 700 ? 30 : 20}
                     className={`cursor-pointer transition-transform duration-300 flex-shrink-0 ${
                       expandedItems.includes(index)
                         ? "rotate-360"
@@ -142,8 +188,8 @@ const Faq = () => {
                 </div>
               </div>
               {expandedItems.includes(index) && (
-                <div className="mt-4 text-sm text-left">
-                  <p className="mb-3 font-gilroy-light md:text-xl md:mt-8">
+                <div className="mt-4 text-left">
+                  <p className="mb-3 text-base md:text-lg lg:text-xl md:mt-8 leading-relaxed">
                     {item.description}
                   </p>
                 </div>
@@ -153,19 +199,11 @@ const Faq = () => {
         </div>
       </div>
 
-      <div className="hidden lg:block w-auto fixed right-0 top-0 h-[100%]">
-        <img
-          src={side_Image}
-          alt="Side Left"
-          className="h-full w-auto object-cover"
-        />
-      </div>
-
       {/* Colored Blocks at Bottom */}
-      <img
-        src="/hero-blocks.png"
-        alt="Decorative blocks"
-        className="w-full h-20 sm:h-24 object-cover mt-25 md:hidden relative z-50"
+      <img 
+        src="/hero-blocks.png" 
+        alt="Decorative blocks" 
+        className="w-full h-20 sm:h-24 absolute bottom-0 left-0 object-cover"
       />
     </section>
   );

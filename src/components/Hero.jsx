@@ -3,19 +3,33 @@ import LogoLoop from './LogoLoop';
 import { useState, useEffect } from 'react';
 
 const Hero = () => {
-  const [DaysLeft, setDaysLeft] = useState(0);
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
 
   useEffect(() => {
-    const calculateDaysLeft = () => {
-      const eventDate = new Date('2025-12-22T00:00:00').getTime();
-      const today = new Date().getTime();
-      const timeLeft = eventDate - today;
-      const days = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
-      setDaysLeft(Math.max(days, 0));
+    const calculateTimeLeft = () => {
+      const eventDate = new Date('2025-12-22T09:00:00').getTime();
+      const now = new Date().getTime();
+      const difference = eventDate - now;
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000)
+        });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
     };
 
-    calculateDaysLeft();
-    const timer = setInterval(calculateDaysLeft, 1000); // Update every sec
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
     return () => clearInterval(timer);
   }, []);
 
@@ -88,16 +102,37 @@ const Hero = () => {
         />
 
         {/* Countdown Badge - Mobile */}
-        <div className="absolute bottom-30 left-5 animate-fade-in-up" style={{animationDelay: '0.9s'}}>
-          <div className="flex items-center gap-0">
-            {/* Days - First digit */}
-            <span className="text-blue-600 text-5xl font-bold font-gilroy-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>
-            {/* Days - Second digit */}
-            <span className="text-blue-600 text-5xl font-bold font-gilroy-bold">{String(DaysLeft).padStart(2, '0')[1]}</span>
-            {/* Label */}
-            <div className="flex flex-col items-start justify-center ml-0 gap-0">
-              <span className="text-blue-600 text-xl font-bold font-gilroy-bold leading-none">DAYS</span>
-              <span className="text-blue-600 text-xl font-gilroy-bold leading-none">TO GO</span>
+        <div className="absolute bottom-15 left-1 animate-fade-in-up" style={{animationDelay: '0.9s'}}>
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-lg border-2 border-blue-200">
+            <div className="grid grid-cols-4 gap-2">
+              {/* Days */}
+              <div className="flex flex-col items-center">
+                <div className="text-blue-600 text-3xl font-bold font-gilroy-bold leading-none">
+                  {String(timeLeft.days).padStart(2, '0')}
+                </div>
+                <div className="text-blue-400 text-xs font-bold font-gilroy-bold mt-1">DAYS</div>
+              </div>
+              {/* Hours */}
+              <div className="flex flex-col items-center">
+                <div className="text-blue-600 text-3xl font-bold font-gilroy-bold leading-none">
+                  {String(timeLeft.hours).padStart(2, '0')}
+                </div>
+                <div className="text-blue-400 text-xs font-bold font-gilroy-bold mt-1">HRS</div>
+              </div>
+              {/* Minutes */}
+              <div className="flex flex-col items-center">
+                <div className="text-blue-600 text-3xl font-bold font-gilroy-bold leading-none">
+                  {String(timeLeft.minutes).padStart(2, '0')}
+                </div>
+                <div className="text-blue-400 text-xs font-bold font-gilroy-bold mt-1">MIN</div>
+              </div>
+              {/* Seconds */}
+              <div className="flex flex-col items-center">
+                <div className="text-blue-600 text-3xl font-bold font-gilroy-bold leading-none">
+                  {String(timeLeft.seconds).padStart(2, '0')}
+                </div>
+                <div className="text-blue-400 text-xs font-bold font-gilroy-bold mt-1">SEC</div>
+              </div>
             </div>
           </div>
         </div>
@@ -203,15 +238,36 @@ const Hero = () => {
 
         {/* Countdown Badge - Near Hero Image */}
         <div className="absolute bottom-[10vh] md:bottom-[15vh] lg:bottom-[23vh] right-[5%] md:right-[50%] lg:right-[40%] animate-fade-in-up" style={{animationDelay: '0.9s'}}>
-          <div className="flex items-center gap-0 lg:gap-1">
-            {/* Days - First digit */}
-            <span className="text-blue-600 text-[7vh] md:text-[10vh] lg:text-[12vh] font-bold font-gilroy-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>
-            {/* Days - Second digit */}
-            <span className="text-blue-600 text-[7vh] md:text-[10vh] lg:text-[12vh] font-bold font-gilroy-bold">{String(DaysLeft).padStart(2, '0')[1]}</span>
-            {/* Label */}
-            <div className="flex flex-col items-start justify-center ml-0 lg:ml-0 gap-0">
-              <span className="text-blue-600 text-[1.5vh] md:text-[4vh] lg:text-[5vh] font-bold font-gilroy-bold leading-none">DAYS</span>
-              <span className="text-blue-600 text-[1.2vh] md:text-[4vh] lg:text-[4vh] font-bold font-gilroy-bold leading-none -mt-[0.5vh]">TO GO</span>
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-4 md:px-6 lg:px-8 py-3 md:py-4 lg:py-5 shadow-xl border-2 border-blue-200">
+            <div className="grid grid-cols-4 gap-2 md:gap-4 lg:gap-6">
+              {/* Days */}
+              <div className="flex flex-col items-center">
+                <div className="text-blue-600 text-[4vh] md:text-[6vh] lg:text-[8vh] font-bold font-gilroy-bold leading-none">
+                  {String(timeLeft.days).padStart(2, '0')}
+                </div>
+                <div className="text-blue-400 text-[1.2vh] md:text-[1.8vh] lg:text-[2.5vh] font-bold font-gilroy-bold mt-1">DAYS</div>
+              </div>
+              {/* Hours */}
+              <div className="flex flex-col items-center">
+                <div className="text-blue-600 text-[4vh] md:text-[6vh] lg:text-[8vh] font-bold font-gilroy-bold leading-none">
+                  {String(timeLeft.hours).padStart(2, '0')}
+                </div>
+                <div className="text-blue-400 text-[1.2vh] md:text-[1.8vh] lg:text-[2.5vh] font-bold font-gilroy-bold mt-1">HRS</div>
+              </div>
+              {/* Minutes */}
+              <div className="flex flex-col items-center">
+                <div className="text-blue-600 text-[4vh] md:text-[6vh] lg:text-[8vh] font-bold font-gilroy-bold leading-none">
+                  {String(timeLeft.minutes).padStart(2, '0')}
+                </div>
+                <div className="text-blue-400 text-[1.2vh] md:text-[1.8vh] lg:text-[2.5vh] font-bold font-gilroy-bold mt-1">MIN</div>
+              </div>
+              {/* Seconds */}
+              <div className="flex flex-col items-center">
+                <div className="text-blue-600 text-[4vh] md:text-[6vh] lg:text-[8vh] font-bold font-gilroy-bold leading-none">
+                  {String(timeLeft.seconds).padStart(2, '0')}
+                </div>
+                <div className="text-blue-400 text-[1.2vh] md:text-[1.8vh] lg:text-[2.5vh] font-bold font-gilroy-bold mt-1">SEC</div>
+              </div>
             </div>
           </div>
         </div>
