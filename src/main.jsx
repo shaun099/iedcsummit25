@@ -17,7 +17,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/" element={<App />} />
           <Route path="/be-our-sponsor" element={<SponsorForm />} />
           <Route
-            path="/Schedule"
+            path="/schedule"
             element={
               <>
                 <Schedule />
@@ -25,8 +25,7 @@ createRoot(document.getElementById("root")).render(
               </>
             }
           />
-          {/* <Route path="/be-our-sponsor" element={<SponsorForm />} /> */}
-          {/* Catch-all route for external form redirects */}
+          {/* Catch-all route for external form redirects - MUST be last */}
           <Route path="/:formName" element={<ExternalFormRedirect />} />
         </Routes>
       </ScrollToTop>
