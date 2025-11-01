@@ -42,7 +42,7 @@ const Hero = () => {
           </div>
 
           {/* Register Button */}
-          <a href="https://tickets.startupmission.in/iedc-summit-2025" target="_blank" rel="noopener noreferrer" className="w-[200px] h-11 rounded-xl flex items-center justify-center relative overflow-hidden group hover:shadow-lg transition-shadow mb-3 z-20 animate-scale-in" style={{backgroundImage: 'url(/hero-blocks.png)', backgroundSize: 'cover', backgroundPosition: 'center', animationDelay: '0.3s'}}>
+          <a href="https://tickets.startupmission.in/iedc-summit-2025?code=earlybird" target="_blank" rel="noopener noreferrer" className="w-[200px] h-11 rounded-xl flex items-center justify-center relative overflow-hidden group hover:shadow-lg transition-shadow mb-3 z-20 animate-scale-in" style={{backgroundImage: 'url(/hero-blocks.png)', backgroundSize: 'cover', backgroundPosition: 'center', animationDelay: '0.3s'}}>
             <div className="absolute inset-0 bg-violet-600 group-hover:bg-violet-800 transition-bg-color duration-300"></div>
             <div className="text-neutral-100 text-lg font-semibold font-clash-display tracking-tight relative z-10">REGISTER NOW</div>
           </a>
@@ -156,7 +156,7 @@ const Hero = () => {
 
             {/* Register Button */}
             <a 
-              href="https://tickets.startupmission.in/iedc-summit-2025" 
+              href="https://tickets.startupmission.in/iedc-summit-2025?code=earlybird" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="px-8 lg:px-12 py-3 lg:py-4 rounded-[29px] flex items-center justify-center mt-[2vh]  transition-colors duration-300 relative overflow-hidden group inline-block"
