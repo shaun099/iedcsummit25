@@ -88,13 +88,7 @@ const Faq = () => {
       }`}
       ref={sectionRef}
     >
-      <div className="hidden lg:block w-auto fixed left-0 top-0 h-[100%]">
-        <img
-          src={side_Image}
-          alt="Side Left"
-          className="h-full w-auto object-cover"
-        />
-      </div>
+      
       <div className="mb-8 md:mb-5 min-h-[160vh] md:min-h-[240vh] md:flex md:flex-col md:items-center  relative py-10 px-5 ">
         <div className="w-full md:text-center">
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-light md:font-black font-clash-display text-blue-500  relative z-20 ">
@@ -153,13 +147,7 @@ const Faq = () => {
         </div>
       </div>
 
-      <div className="hidden lg:block w-auto fixed right-0 top-0 h-[100%]">
-        <img
-          src={side_Image}
-          alt="Side Left"
-          className="h-full w-auto object-cover"
-        />
-      </div>
+      
 
       {/* Colored Blocks at Bottom */}
       <img
