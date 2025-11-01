@@ -194,7 +194,7 @@ const Schedule = () => {
           {schedule.map((item, index) => (
             <div
               key={index}
-              className="absolute w-full  mx-auto rounded-4xl z-9 px-5 py-4 md:px-10 md:py-8 transition-all duration-300 shadow-xl"
+              className="absolute w-full  mx-auto rounded-4xl z-9 px-5 py-4 md:px-10 md:py-5 transition-all duration-300 shadow-xl"
               style={{
                 top: `${calculateTopPosition(index)}px`,
                 height: expandedItems.includes(index) ? "100%" : "100%",
@@ -204,12 +204,18 @@ const Schedule = () => {
               <div className="w-full h-auto flex flex-row justify-between">
                 <div className="font-clash-display font-medium text-xl md:text-4xl flex flex-row items-center gap-2">
                   <ArrowDown
-                    className={`w-10 cursor-pointer transition-transform duration-300 ${
-                      expandedItems.includes(index) ? "rotate-180" : ""
+                    size={window.innerWidth >= 700 ? 40 : 24}
+                    className={`cursor-pointer transition-transform duration-300 rotate-z-315 ${
+                      expandedItems.includes(index) ? "rotate-45" : ""
                     }`}
                     onClick={() => toggleExpand(index)}
                   />
-                  {item.time}
+                  <span>
+                    {item.time.split(" ")[0]}
+                    <span className="text-sm md:text-xl ml-1 lowercase">
+                      {item.time.split(" ")[1]} IST
+                    </span>
+                  </span>
                 </div>
                 <div className="font-clash-display font-medium text-xl md:text-4xl">
                   {item.event}
@@ -267,7 +273,7 @@ const Schedule = () => {
       <img
         src="/hero-blocks.png"
         alt="Decorative blocks"
-        className="w-full h-20 sm:h-24 object-cover mt-25 md:hidden "
+        className="w-full h-20 sm:h-24 object-cover mt-25 md:hidden relative z-50"
       />
     </section>
   );
