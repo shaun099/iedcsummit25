@@ -4,9 +4,9 @@ import Hero from "./components/Hero";
 import About from "./components/About";
 import Highlights from "./components/Highlights";
 import Gallery from "./components/Gallery";
-// import Directions from "./components/Directions";
+import Directions from "./components/Directions";
 import Footer from "./components/Footer";
-
+import Faq from "./components/Faq";
 
 import "./fonts/ClashDisplay-Variable.ttf";
 import "./fonts/Gilroy-Light.otf";
@@ -21,7 +21,8 @@ function App() {
       <About />
       <Gallery />
       <Highlights />
-      {/* <Directions /> */}
+      <Directions />
+      <Faq />
       <Footer />
     </div>
   );
