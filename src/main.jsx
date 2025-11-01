@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import ExternalFormRedirect from "./components/ExternalFormRedirect";
 import Schedule from "./components/Schedule.jsx";
 import Footer from "./components/Footer.jsx";
+import Navbar from "./components/Navbar.jsx";
 import { SponsorForm } from './components/SponsorForm'
 import { ScrollToTop } from './components/ScrollToTop';
 
@@ -20,6 +21,7 @@ createRoot(document.getElementById("root")).render(
             path="/schedule"
             element={
               <>
+                <Navbar />
                 <Schedule />
                 <Footer />
               </>

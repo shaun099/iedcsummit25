@@ -5,8 +5,6 @@ import ellipse2 from '/Ellipse2.svg';
 import ellipse3 from '/Ellipse3.svg';
 import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
 const summits = [
-  { year: '2024', title: 'IEDC Summit 2024', location: 'NIT Calicut', videoId: 'ZeQyHm8sfC4', type: 'youtube' },
-  { year: '2023', title: 'IEDC Summit 2023', location: 'College of Engineering, Trivandrum', videoId: 'C2-KdDvvUK3', type: 'instagram' },
   { year: '2023', title: 'IEDC Summit 2023', location: 'Rajagiri School of Engineering & Technology', videoId: 'w1Fr8mSf__8', type: 'youtube' },
   { year: '2022', title: 'IEDC Summit 2022', location: "St. Joseph's College of Engineering & Technology", videoId: 'fPmUPSigxrg', type: 'youtube' },
   { year: '2021', title: 'IEDC Summit 2021', location: 'Adi Shankara Institute of Engineering and Technology, Cochin', videoId: 'zxxGtCYnhD4', type: 'youtube' },
@@ -119,34 +117,12 @@ const Gallery = () => {
           </button>
         </div>  
       </div>
-        {/* Colored Blocks at Bottom - Using PNG */}
-              <img 
-                src="/hero-blocks.png" 
-                alt="Decorative blocks" 
-                className="w-full h-20 sm:h-24 absolute bottom-20 left-0 object-cover"
-              />
-              {/* Scrolling Text Loop */}
-              <div className="w-full absolute bottom-12 left-0 -skew-y-2">
-                <LogoLoop
-                  logos={[
-                    { text: 'IEDC SUMMIT 2025' },
-                    { text: 'IEDC SUMMIT 2025' },
-                    { text: 'IEDC SUMMIT 2025' },
-                    { text: 'IEDC SUMMIT 2025' },
-                    { text: 'IEDC SUMMIT 2025' },
-                    { text: 'IEDC SUMMIT 2025' },
-                    { text: 'IEDC SUMMIT 2025' },
-                    { text: 'IEDC SUMMIT 2025' },
-                  ]}
-                  speed={80}
-                  direction="right"
-                  logoHeight={20}
-                  gap={40}
-                  pauseOnHover={true}
-                  className=" font-gilroy-bold bg-blue-600 py-5 text-white"
-                  ariaLabel="IEDC Summit 2025"
-                />
-              </div>
+      {/* Colored Blocks at Bottom */}
+      <img 
+        src="/hero-blocks.png" 
+        alt="Decorative blocks" 
+        className="w-full h-20 sm:h-24 absolute bottom-0 left-0 object-cover"
+      />
     </section>
   );
 };

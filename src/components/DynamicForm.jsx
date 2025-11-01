@@ -26,9 +26,6 @@ const DynamicForm = ({
 
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
-  const [showConfirmation, setShowConfirmation] = useState(false);
-  const [submittedData, setSubmittedData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const validateForm = () => {
     const newErrors = {};
@@ -118,16 +115,10 @@ const DynamicForm = ({
       return;
     }
 
-    setIsLoading(true);
-
     try {
       if (onSubmit) {
         await onSubmit(formData);
       }
-
-      // Store the submitted data for the confirmation modal
-      setSubmittedData(formData);
-      setShowConfirmation(true);
       setSubmitted(true);
       
       // Reset form after successful submission
@@ -138,12 +129,9 @@ const DynamicForm = ({
         });
         setFormData(resetData);
         setSubmitted(false);
-      }, 5000);
+      }, 3000);
     } catch (error) {
       console.error('Error submitting form:', error);
-      alert('Error submitting form. Please try again.');
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -397,17 +385,9 @@ const DynamicForm = ({
               <div className="pt-8">
                 <button
                   type="submit"
-                  disabled={isLoading}
-                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-clash-display font-bold text-lg py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 disabled:scale-100 disabled:cursor-not-allowed"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-clash-display font-bold text-lg py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
-                  {isLoading ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <span className="inline-block animate-spin">⏳</span>
-                      Submitting...
-                    </span>
-                  ) : (
-                    submitButtonText
-                  )}
+                  {submitButtonText}
                 </button>
                 <p className="text-center text-blue-400 text-sm mt-4 font-gilroy-medium">
                   We will review your application and contact you soon

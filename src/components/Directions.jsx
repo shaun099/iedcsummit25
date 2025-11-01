@@ -3,7 +3,7 @@ import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
 import LogoLoop from './LogoLoop';
 
 const Directions = () => {
-  const [activeTransport, setActiveTransport] = useState('flight');
+  const [activeTransport, setActiveTransport] = useState('train');
   const [hasAnimated, setHasAnimated] = useState(false);
   const headerRef = React.useRef(null);
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollFadeInUp();
@@ -15,14 +15,6 @@ const Directions = () => {
   }, [sectionVisible, hasAnimated]);
 
   const lbsDirections = {
-    flight: {
-      title: 'For those arriving by flight',
-      airports: [
-        { name: 'Mangaluru International Airport', distance: 'Approx 71km away' },
-        { name: 'Kannur International Airport', distance: 'Approx 115km away' },
-      ],
-      note: 'From the Airport choose train / bus / taxi'
-    },
     train: {
       title: 'For those arriving by train',
       stations: [
@@ -38,7 +30,15 @@ const Directions = () => {
         'From Kannur Bus Stand : Take a bus to Kasaragod via NH-LS & get down cherkala, then move to Povval Lbs Stop',
         'Povval > LBS College Entrance Gate, Just 500m away | Auto taxi fare of 40₹',
       ]
-    }
+    },
+    flight: {
+      title: 'For those arriving by flight',
+      airports: [
+        { name: 'Mangaluru International Airport', distance: 'Approx 71km away' },
+        { name: 'Kannur International Airport', distance: 'Approx 115km away' },
+      ],
+      note: 'From the Airport choose train / bus / taxi'
+    },
   };
 
   return (
@@ -103,7 +103,7 @@ const Directions = () => {
                       : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                   }`}
                 >
-                  {mode === 'flight' ? '✈️ Flight' : mode === 'train' ? '🚂 Train' : '🚌 Bus'}
+                  {mode === 'train' ? '🚂 Train' : mode === 'bus' ? '🚌 Bus' : '✈️ Flight'}
                 </button>
               ))}
             </div>
@@ -119,21 +119,6 @@ const Directions = () => {
                       {data.title}
                     </h4>
 
-                    {activeTransport === 'flight' && (
-                      <>
-                        <div className="space-y-3">
-                          {data.airports?.map((airport, idx) => (
-                            <div key={idx} className="pb-3 border-b border-gray-200 last:border-b-0">
-                              <p className="text-gray-800 font-medium">{airport.name}</p>
-                              <p className="text-gray-600 text-sm">{airport.distance}</p>
-                            </div>
-                          ))}
-                        </div>
-                        <p className="text-blue-600 font-medium text-sm mt-4 p-3 bg-blue-50 rounded-lg">
-                          {data.note}
-                        </p>
-                      </>
-                    )}
 
                     {activeTransport === 'train' && (
                       <div className="space-y-3">
@@ -156,6 +141,22 @@ const Directions = () => {
                         ))}
                       </div>
                     )}
+
+                    {activeTransport === 'flight' && (
+                      <>
+                        <div className="space-y-3">
+                          {data.airports?.map((airport, idx) => (
+                            <div key={idx} className="pb-3 border-b border-gray-200 last:border-b-0">
+                              <p className="text-gray-800 font-medium">{airport.name}</p>
+                              <p className="text-gray-600 text-sm">{airport.distance}</p>
+                            </div>
+                          ))}
+                        </div>
+                        <p className="text-blue-600 font-medium text-sm mt-4 p-3 bg-blue-50 rounded-lg">
+                          {data.note}
+                        </p>
+                      </>
+                    )}
                   </>
                 );
               })()}
@@ -172,7 +173,7 @@ const Directions = () => {
               />
       
       {/* Scrolling Text Loop */}
-      <div className="w-full absolute bottom-12 left-0 -skew-y-2">
+      <div className="w-full absolute bottom-12 left-0 skew-y-2">
                       <LogoLoop
                         logos={[
                           { text: 'IEDC SUMMIT 2025' },

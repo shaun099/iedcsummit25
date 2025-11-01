@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ArrowDown } from "lucide-react";
+import LogoLoop from "./LogoLoop";
 
 const Faq = () => {
   const [expandedItems, setExpandedItems] = useState([]);
@@ -127,7 +128,7 @@ const Faq = () => {
 
   return (
     <section
-      id="Schedule"
+      id="faq"
       className="w-full overflow-y-hidden bg-white relative"
     >
       <div 
@@ -198,13 +199,35 @@ const Faq = () => {
           ))}
         </div>
       </div>
-
       {/* Colored Blocks at Bottom */}
-      <img 
-        src="/hero-blocks.png" 
-        alt="Decorative blocks" 
-        className="w-full h-20 sm:h-24 absolute bottom-0 left-0 object-cover"
-      />
+            <img 
+              src="/hero-blocks.png" 
+              alt="Decorative blocks" 
+              className="w-full h-20 sm:h-24 object-cover"
+            />
+      
+            {/* Scrolling Text Loop */}
+            <div className="w-full -mt-7 mb-10 -skew-y-2">
+              <LogoLoop
+                logos={[
+                  { text: 'IEDC SUMMIT 2025' },
+                  { text: 'IEDC SUMMIT 2025' },
+                  { text: 'IEDC SUMMIT 2025' },
+                  { text: 'IEDC SUMMIT 2025' },
+                  { text: 'IEDC SUMMIT 2025' },
+                  { text: 'IEDC SUMMIT 2025' },
+                  { text: 'IEDC SUMMIT 2025' },
+                  { text: 'IEDC SUMMIT 2025' },
+                ]}
+                speed={80}
+                direction="left"
+                logoHeight={20}
+                gap={40}
+                pauseOnHover={true}
+                className="font-gilroy-bold bg-blue-600 py-5  text-white"
+                ariaLabel="IEDC Summit 2025"
+              />
+            </div>
     </section>
   );
 };
