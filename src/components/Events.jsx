@@ -1,48 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import side_image from '../assets/side_image.png';
 
 export default function EventsPage() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [events, setEvents] = useState([]);
+  useEffect(() => {
+  const fetchEvents = async () => {
+    try {
+      const fetchedEvents = await fetch("https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue");
+      const eventsData = await fetchedEvents.json();
+      
+      // Transform the nested agenda structure into a flat array
+      const transformedEvents = [];
+      
+      if (eventsData.agenda) {
+        Object.values(eventsData.agenda).forEach(dateGroup => {
+          Object.values(dateGroup).forEach(venueEvents => {
+            venueEvents.forEach(event => {
+              transformedEvents.push({
+                title: event.name,
+                description: event.description,
+                registrationLink: event.link || "",
+              });
+            });
+          });
+        });
+      }
+      
+      setEvents(transformedEvents);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+  };
 
-  const events = [
-    {
-      title: "nTank for Students",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at mollis ante, eget blandit nunc. Suspendisse maximus vel tellus eu sollicitudin.",
-      registrationLink: "#",
-    },
-    {
-      title: "Tech Bootcamp 2025",
-      description:
-        "Join our advanced hands-on bootcamp covering AI, ML, and web development. Open to all college students.",
-      registrationLink: "",
-    },
-    {
-      title: "Startup Connect",
-      description:
-        "An exclusive networking event for aspiring entrepreneurs and investors to connect and collaborate.",
-      registrationLink: "#",
-    },
-    {
-      title: "Designathon",
-      description:
-        "A 24-hour creative challenge for designers to solve real-world problems with innovation and aesthetics.",
-      registrationLink: "",
-    },
-    {
-      title: "Hack Infinity",
-      description:
-        "A thrilling hackathon experience with real challenges, mentors, and big prizes.",
-      registrationLink: "#",
-    },
-    {
-      title: "InnovateX",
-      description:
-        "Showcase your innovative projects and compete for exciting awards in front of industry experts.",
-      registrationLink: "",
-    },
-  ];
+  fetchEvents();
+}, []);
 
   const filteredEvents = events.filter(event =>
     event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||

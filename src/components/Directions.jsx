@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
+import LogoLoop from './LogoLoop';
+import { Train, Bus, Plane } from 'lucide-react';
 
 const Directions = () => {
   const [activeCollege, setActiveCollege] = useState('lbs');
@@ -151,19 +153,34 @@ const Directions = () => {
                 <button
                   key={mode}
                   onClick={() => setActiveTransport(mode)}
-                  className={`px-4 py-2 rounded-lg font-gilroy-medium text-sm transition-all ${
+                  className={`px-4 py-2 rounded-lg font-gilroy-medium text-sm transition-all flex items-center gap-2 ${
                     activeTransport === mode
                       ? 'bg-blue-500 text-white'
                       : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                   }`}
                 >
-                  {mode ===  'train' ? '🚂 Train': mode === 'bus' ? '🚌 Bus' : '✈️ Flight'}
+                  {mode === 'train' ? (
+                    <>
+                      <Train size={16} />
+                      Train
+                    </>
+                  ) : mode === 'bus' ? (
+                    <>
+                      <Bus size={16} />
+                      Bus
+                    </>
+                  ) : (
+                    <>
+                      <Plane size={16} />
+                      Flight
+                    </>
+                  )}
                 </button>
               ))}
             </div>
 
             {/* Content Display */}
-            <div className="space-y-4">
+            <div className="space-y-4 mb-[25vh] md:mb-[15vh]">
               {(() => {
                 const directions = activeCollege === 'lbs' ? lbsDirections : cukDirections;
                 const data = directions[activeTransport];
@@ -221,12 +238,35 @@ const Directions = () => {
       
       {/* Colored Blocks at Bottom */}
       <img 
-        src="/hero-blocks.png" 
-        alt="Decorative blocks" 
-        className="w-full h-20 sm:h-24 mt-5 -mb-16 object-cover"
-      />
+                src="/hero-blocks.png" 
+                alt="Decorative blocks" 
+                className="w-full h-20 sm:h-24 absolute bottom-20 left-0 object-cover"
+              />
+      
+      {/* Scrolling Text Loop */}
+      <div className="w-full absolute bottom-12 left-0 skew-y-2">
+                      <LogoLoop
+                        logos={[
+                          { text: 'IEDC SUMMIT 2025' },
+                          { text: 'IEDC SUMMIT 2025' },
+                          { text: 'IEDC SUMMIT 2025' },
+                          { text: 'IEDC SUMMIT 2025' },
+                          { text: 'IEDC SUMMIT 2025' },
+                          { text: 'IEDC SUMMIT 2025' },
+                          { text: 'IEDC SUMMIT 2025' },
+                          { text: 'IEDC SUMMIT 2025' },
+                        ]}
+                        speed={80}
+                        direction="right"
+                        logoHeight={20}
+                        gap={40}
+                        pauseOnHover={true}
+                        className=" font-gilroy-bold bg-blue-600 py-5 text-white"
+                        ariaLabel="IEDC Summit 2025"
+                      />
+                    </div>
     </section>
   );
 };
 
-export default Directions;
+export default Directions
