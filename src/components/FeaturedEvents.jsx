@@ -62,7 +62,7 @@ const FeaturedEvents = () => {
 
       <div className="max-w-7xl mx-auto px-5 md:px-8 relative z-10">
         {/* Header */}
-        <div className="w-full flex flex-col items-start gap-4 text-left relative z-20 -mb-[13vh]">
+        <div className="w-full flex flex-col items-start gap-4 text-left relative z-20 -mb-[10vh]">
           <h2 className="text-5xl md:text-7xl lg:text-8xl font-clash-display text-blue-500 leading-tight">
             Featured Events
           </h2>
@@ -107,7 +107,7 @@ const FeaturedEvents = () => {
                       }}
                       className="absolute w-full max-w-md"
                     >
-                      <div className="w-full max-w-[50vh] mx-auto h-[60vh] relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl">
+                      <div className="w-full max-w-[50vh] mx-auto h-110 md:h-120 relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl">
                         <div className="w-[75%] h-full left-0 top-0 absolute overflow-hidden p-6">
                           <h3 className="text-4xl md:text-5xl font-gilroy-medium text-black leading-tight mb-4 [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)] line-clamp-2">
                             {event.title}
