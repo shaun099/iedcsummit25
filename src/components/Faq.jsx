@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { ArrowDown } from "lucide-react";
 import LogoLoop from "./LogoLoop";
 
@@ -173,7 +173,7 @@ const Faq = () => {
                 <div className="font-normal font-clash-display text-lg md:text-2xl lg:text-3xl flex flex-row items-center gap-2 flex-1">
                   <ArrowDown
                     size={window.innerWidth >= 700 ? 30 : 20}
-                    className={`cursor-pointer transition-transform duration-300 flex-shrink-0 ${
+                    className={`cursor-pointer transition-transform duration-300 shrink-0 ${
                       expandedItems.includes(index)
                         ? "rotate-360"
                         : "rotate-315"
@@ -207,7 +207,7 @@ const Faq = () => {
             />
       
             {/* Scrolling Text Loop */}
-            <div className="w-full -mt-7 mb-10 -skew-y-2">
+            <div className="w-full -mt-7 mb-10 skew-y-2">
               <LogoLoop
                 logos={[
                   { text: 'IEDC SUMMIT 2025' },

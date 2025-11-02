@@ -244,27 +244,27 @@ const Directions = () => {
               />
       
       {/* Scrolling Text Loop */}
-      <div className="w-full absolute bottom-12 left-0 skew-y-2">
-                      <LogoLoop
-                        logos={[
-                          { text: 'IEDC SUMMIT 2025' },
-                          { text: 'IEDC SUMMIT 2025' },
-                          { text: 'IEDC SUMMIT 2025' },
-                          { text: 'IEDC SUMMIT 2025' },
-                          { text: 'IEDC SUMMIT 2025' },
-                          { text: 'IEDC SUMMIT 2025' },
-                          { text: 'IEDC SUMMIT 2025' },
-                          { text: 'IEDC SUMMIT 2025' },
-                        ]}
-                        speed={80}
-                        direction="right"
-                        logoHeight={20}
-                        gap={40}
-                        pauseOnHover={true}
-                        className=" font-gilroy-bold bg-blue-600 py-5 text-white"
-                        ariaLabel="IEDC Summit 2025"
-                      />
-                    </div>
+      <div className="w-full absolute bottom-12 left-0 -skew-y-2">
+        <LogoLoop
+          logos={[
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+          ]}
+          speed={80}
+          direction="right"
+          logoHeight={20}
+          gap={40}
+          pauseOnHover={true}
+          className=" font-gilroy-bold bg-blue-600 py-5 text-white"
+          ariaLabel="IEDC Summit 2025"
+        />
+      </div>
     </section>
   );
 };

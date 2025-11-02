@@ -12,9 +12,7 @@ const DynamicForm = ({
   fields, 
   submitButtonText = "Submit", 
   onSubmit,
-  logoSrc = "/iedc-summit-25-logo.png",
   successMessage = "Thank you! Your form has been submitted successfully.",
-  backToHome = true
 }) => {
   const [formData, setFormData] = useState(() => {
     const initialData = {};
@@ -294,7 +292,7 @@ const DynamicForm = ({
 
   return (
     <div className="w-full bg-white">
-      <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 py-12 px-4 relative overflow-hidden">
+      <div className="min-h-screen bg-linear-to-b from-white to-blue-50 py-12 px-4 relative overflow-hidden">
         {/* Decorative Circles */}
         <img src="/Ellipse2.svg" alt="Decorative circle" className="absolute top-20 left-0 w-1/3 opacity-20" />
         <img src="/Ellipse3.svg" alt="Decorative circle" className="absolute bottom-32 right-0 w-1/3 opacity-20" />
