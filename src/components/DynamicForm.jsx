@@ -306,24 +306,9 @@ const DynamicForm = ({
         <img src={block3} alt="Block 3" className="absolute bottom-1/4 left-10 w-28 h-28 opacity-20" />
         <img src={block4} alt="Block 4" className="absolute bottom-10 right-5 w-24 h-24 opacity-25" />
 
-        <div className="max-w-2xl mx-auto relative z-10">
-          {/* Back Button */}
-          {backToHome && (
-            <Link
-              to="/"
-              className="inline-block mb-8 text-blue-600 font-gilroy-bold text-lg hover:opacity-70 transition-opacity cursor-pointer"
-            >
-              ← Back to Home
-            </Link>
-          )}
-
+        <div className="max-w-2xl mx-auto mt-[5vh] relative z-10">
           {/* Form Header */}
           <div className="mb-12 text-center">
-            {logoSrc && (
-              <div className="flex justify-center mb-6">
-                <img src={logoSrc} alt="Logo" className="w-16 h-16" />
-              </div>
-            )}
             {title && (
               <h1 className="text-4xl lg:text-5xl font-bold font-clash-display text-blue-600 mb-2">
                 {title}

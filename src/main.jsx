@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./App.jsx";
 import ExternalFormRedirect from "./components/ExternalFormRedirect";
 import Schedule from "./components/Schedule.jsx";
+import Events from "./components/Events.jsx";
 import Footer from "./components/Footer.jsx";
 import Navbar from "./components/Navbar.jsx";
 import { SponsorForm } from './components/SponsorForm'
@@ -16,7 +17,6 @@ createRoot(document.getElementById("root")).render(
       <ScrollToTop>
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="/be-our-sponsor" element={<SponsorForm />} />
           <Route
             path="/schedule"
             element={
@@ -27,8 +27,26 @@ createRoot(document.getElementById("root")).render(
               </>
             }
           />
+          <Route 
+            path="/events"
+            element={
+              <>
+                <Navbar />
+                <Events />
+                <Footer />
+              </>
+            }
+          />
+          <Route 
+            path="/be-our-sponsor" 
+            element={<>
+              <Navbar />
+              <SponsorForm />
+              <Footer />
+            </>} />
           {/* Catch-all route for external form redirects - MUST be last */}
-          <Route path="/:formName" element={<ExternalFormRedirect />} />
+          <Route 
+            path="/:formName" element={<ExternalFormRedirect />} />
         </Routes>
       </ScrollToTop>
     </Router>

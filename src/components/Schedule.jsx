@@ -209,7 +209,7 @@ const Schedule = () => {
             </h3>
           </div>
         </div>
-        <div className="w-full md:w-[60%] max-h-[10vh] md:max-h-[30vh] flex gap-4 flex-nowrap overflow-x-auto overflow-y-hidden md:flex-wrap md:justify-center px-5 py-6">
+        <div className="w-full md:w-[60%] max-h-[10vh] md:max-h-[20vh] flex gap-4 flex-nowrap overflow-x-auto overflow-y-hidden md:flex-wrap md:justify-center px-5 py-6">
           {location.map((loc, index) => (
             <div
               key={index}
@@ -224,7 +224,7 @@ const Schedule = () => {
             </div>
           ))}
         </div>
-        <div className="w-full md:w-[70%] min-h-[20vh] mt-10 relative">
+        <div className="w-full md:w-[70%] min-h-[18vh] mt-10 relative">
           <div className="w-full relative mx-auto rounded-4xl h-1/2 bg-transparent"></div>
           {schedule.map((item, index) => (
             <div

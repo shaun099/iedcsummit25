@@ -136,11 +136,11 @@ const Faq = () => {
         style={{ minHeight: sectionHeight }}
       >
         <div className="w-full md:text-center">
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-light md:font-black text-blue-500 relative z-20">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-light font-gilroy-medium md:font-black text-blue-500 relative z-20">
             FAQ
           </h2>
           <div className="w-full px-0">
-            <h3 className="text-lg md:text-xl font-light">
+            <h3 className="text-lg md:text-xl font-light font-clash-display">
               Any Doubts...?!
             </h3>
           </div>
