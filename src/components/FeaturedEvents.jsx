@@ -208,7 +208,7 @@ const FeaturedEvents = () => {
         className="w-full h-20 sm:h-24 absolute bottom-20 left-0 object-cover"
       />
       {/* Scrolling Text Loop */}
-        <div className="w-full skew-y-2">
+        <div className="w-full -skew-y-2">
             <LogoLoop
                 logos={[
                 { text: 'IEDC SUMMIT 2025' },

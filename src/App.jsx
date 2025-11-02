@@ -19,11 +19,9 @@ function App() {
     <div className="App">
       <Navbar />
       <Hero />
-      <div id="about">
-        <About />
-      <Highlights />
-      </div>
+      <About />
       <FeaturedEvents />
+      <Highlights />
       <Directions />
       <Faq />
       <Gallery />
