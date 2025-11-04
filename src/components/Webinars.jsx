@@ -2,9 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import EventCard from './EventCard';
 
+const LoadingAnimation = () => (
+  <div className="flex items-center justify-center py-20">
+    <div className="flex gap-2">
+      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
+      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.15s' }}></div>
+      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.3s' }}></div>
+    </div>
+  </div>
+);
+
 export default function WebinarsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
       const fetchEvents = async () => {
         try {
@@ -37,6 +48,8 @@ export default function WebinarsPage() {
           setEvents(transformedEvents);
         } catch (error) {
           console.error("Error fetching events:", error);
+        } finally {
+          setIsLoading(false);
         }
       };
   
@@ -77,14 +90,18 @@ export default function WebinarsPage() {
 
         {/* Event cards grid - 3 per row */}
         <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-[10vh]">
-          {filteredEvents.length > 0 ? (
+          {isLoading ? (
+            <div className="col-span-full">
+              <LoadingAnimation />
+            </div>
+          ) : filteredEvents.length > 0 ? (
             filteredEvents.map((event, index) => (
               <EventCard key={index} event={event} isWebinar={true} />
             ))
           ) : (
             <div className="col-span-full text-center py-12">
               <p className="text-xl font-gilroy-light text-gray-500">
-                No webinars found matching "{searchQuery}"
+                No webinars found
               </p>
             </div>
           )}

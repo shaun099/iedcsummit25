@@ -5,9 +5,20 @@ import side_image from '../assets/side_image.png';
 import { Link } from 'react-router-dom';
 import LogoLoop from './LogoLoop';
 
+const LoadingAnimation = () => (
+  <div className="flex items-center justify-center py-20">
+    <div className="flex gap-2">
+      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
+      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.15s' }}></div>
+      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.3s' }}></div>
+    </div>
+  </div>
+);
+
 const FeaturedEvents = () => {
   const [events, setEvents] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -39,6 +50,8 @@ const FeaturedEvents = () => {
         setEvents(transformedEvents);
       } catch (error) {
         console.error("Error fetching events:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -68,7 +81,9 @@ const FeaturedEvents = () => {
         </div>
 
         {/* Carousel Container */}
-        {events.length > 0 ? (
+        {isLoading ? (
+          <LoadingAnimation />
+        ) : events.length > 0 ? (
           <div className="relative">
             {/* Cards Grid with Stacked Effect */}
             <div className="relative h-[600px] md:h-[700px] flex items-center justify-center">
