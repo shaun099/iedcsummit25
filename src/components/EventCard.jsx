@@ -81,6 +81,18 @@ export default function EventCard({ event, isWebinar = false }) {
               {event.title}
             </h3>
           </div>
+          
+          {isWebinar && event.startTime && (
+            <div className="text-xs font-gilroy-medium text-blue-600 mb-2">
+              {new Date(event.startTime).toLocaleString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: true
+              })}
+            </div>
+          )}
         
         <p className="text-sm font-gilroy-light text-black leading-5 mb-8 line-clamp-6 [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
           {event.description}
