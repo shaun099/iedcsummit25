@@ -6,6 +6,7 @@ import ellipse3 from '/Ellipse3.svg';
 import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
 const summits = [
   { year: '2023', title: 'IEDC Summit 2023', location: 'Rajagiri School of Engineering & Technology', videoId: 'w1Fr8mSf__8', type: 'youtube' },
+  { year: '2023', title: 'IEDC Summit 2023', location: 'College of Engineering, Trivandrum', videoId: 'C2-KdDvvUK3', type: 'instagram' },
   { year: '2022', title: 'IEDC Summit 2022', location: "St. Joseph's College of Engineering & Technology", videoId: 'fPmUPSigxrg', type: 'youtube' },
   { year: '2021', title: 'IEDC Summit 2021', location: 'Adi Shankara Institute of Engineering and Technology, Cochin', videoId: 'zxxGtCYnhD4', type: 'youtube' },
   { year: '2019', title: 'IEDC Summit 2019', location: 'Sahrdaya College of Engineering and Technology, Thrissur', videoId: 'UqKGvZuhsCU', type: 'youtube' },
