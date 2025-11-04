@@ -53,9 +53,9 @@ const Faq = () => {
     let bottomPadding;
     
     if (isMobile) {
-      bottomPadding = 40;
+      bottomPadding = 120;
     } else if (isTablet) {
-      bottomPadding = 100;
+      bottomPadding = 150;
     } else {
       bottomPadding = 200;
     }

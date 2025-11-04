@@ -196,7 +196,7 @@ const Schedule = () => {
       className="w-full overflow-y-hidden bg-white relative"
     >
       <div 
-        className="mb-8 md:mb-5 md:flex md:flex-col md:items-center relative py-10 px-5 mt-15 md:mt-10"
+        className="mb-8 md:mb-5 md:flex md:flex-col md:items-center relative py-10 px-5 mt-15 md:mt-20"
         style={{ minHeight: sectionHeight }}
       >
         <div className="w-full md:text-center">
@@ -209,6 +209,20 @@ const Schedule = () => {
             </h3>
           </div>
         </div>
+
+        {/* Coming Soon Section */}
+        <div className="w-full flex items-center justify-center py-20 md:py-32">
+          <div className="text-center">
+            <p className="text-4xl md:text-5xl font-clash-display text-blue-500 mb-4">
+              Coming Soon
+            </p>
+            <p className="text-lg md:text-2xl font-gilroy-light text-gray-600">
+              The detailed schedule will be announced shortly
+            </p>
+          </div>
+        </div>
+
+        {/*
         <div className="w-full md:w-[60%] max-h-[10vh] md:max-h-[20vh] flex gap-4 flex-nowrap overflow-x-auto overflow-y-hidden md:flex-wrap md:justify-center px-5 py-6">
           {location.map((loc, index) => (
             <div
@@ -301,7 +315,7 @@ const Schedule = () => {
               )}
             </div>
           ))}
-        </div>
+        </div>*/}
       </div>
 
       {/* Colored Blocks at Bottom */}

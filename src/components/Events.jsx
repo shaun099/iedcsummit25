@@ -46,7 +46,7 @@ export default function EventsPage() {
     <section className="w-full min-h-screen bg-white relative overflow-hidden">
 
       {/* Main content */}
-      <div className="relative py-[10vh] px-5 md:px-8">
+      <div className="relative py-[10vh] px-5 md:px-8 mt-7">
         {/* Header */}
         <div className="mb-[8vh] md:mb-[12vh] md:flex md:flex-col md:items-center">
           <div className="w-full md:text-center">
