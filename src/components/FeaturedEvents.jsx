@@ -37,7 +37,6 @@ const FeaturedEvents = () => {
         }
         
         setEvents(transformedEvents);
-        console.log("Featured Events:", transformedEvents);
       } catch (error) {
         console.error("Error fetching events:", error);
       }

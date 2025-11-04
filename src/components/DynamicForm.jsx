@@ -375,7 +375,7 @@ const DynamicForm = ({
                 <p className="text-center text-blue-400 text-sm mt-4 font-gilroy-medium">
                   We will review your application and contact you soon
                 </p>
-              </div>
+            </div>
             </div>
           </form>
         </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import EventCard from './EventCard';
 
-export default function EventsPage() {
+export default function WebinarsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [events, setEvents] = useState([]);
   useEffect(() => {
@@ -11,20 +11,22 @@ export default function EventsPage() {
           const fetchedEvents = await fetch("https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue");
           const eventsData = await fetchedEvents.json();
           
-          // Transform and filter for Featured events only
+          // Transform and filter for Webinar events only
           const transformedEvents = [];
           
           if (eventsData.agenda) {
             Object.values(eventsData.agenda).forEach(dateGroup => {
               Object.values(dateGroup).forEach(venueEvents => {
                 venueEvents.forEach(event => {
-                  // Check if the event has "Event" in its category
-                  if (event.category && event.category.includes("Event")) {
+                  // Check if the event has "Webinar" in its category
+                  if (event.category && event.category.includes("Webinar")) {
                     transformedEvents.push({
                       id: event.id || Math.random(),
                       title: event.name,
                       description: event.description,
                       registrationLink: event.link || "",
+                      startTime: event.start_time,
+                      endTime: event.end_time,
                     });
                   }
                 });
@@ -40,6 +42,7 @@ export default function EventsPage() {
   
       fetchEvents();
     }, []);
+  
 
   const filteredEvents = events.filter(event =>
     event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -55,7 +58,7 @@ export default function EventsPage() {
         <div className="mb-[8vh] md:mb-[12vh] md:flex md:flex-col md:items-center">
           <div className="w-full md:text-center">
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-clash-display md:font-black text-blue-500 relative z-20">
-              Events
+              Webinars
             </h2>
           </div>
           
@@ -76,12 +79,12 @@ export default function EventsPage() {
         <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-[10vh]">
           {filteredEvents.length > 0 ? (
             filteredEvents.map((event, index) => (
-              <EventCard key={index} event={event} />
+              <EventCard key={index} event={event} isWebinar={true} />
             ))
           ) : (
             <div className="col-span-full text-center py-12">
               <p className="text-xl font-gilroy-light text-gray-500">
-                No events found matching "{searchQuery}"
+                No webinars found matching "{searchQuery}"
               </p>
             </div>
           )}
@@ -96,4 +99,4 @@ export default function EventsPage() {
       />
     </section>
   );
-}
+}   

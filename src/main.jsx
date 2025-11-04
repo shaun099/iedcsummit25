@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import ExternalFormRedirect from "./components/ExternalFormRedirect";
 import Schedule from "./components/Schedule.jsx";
 import Events from "./components/Events.jsx";
+import Webinars from "./components/Webinars.jsx";
 import Footer from "./components/Footer.jsx";
 import Navbar from "./components/Navbar.jsx";
 import { SponsorForm } from './components/SponsorForm'
@@ -37,6 +38,13 @@ createRoot(document.getElementById("root")).render(
               </>
             }
           />
+          <Route 
+            path="/webinars" 
+            element={<>
+              <Navbar />
+              <Webinars />
+              <Footer />
+            </>} />
           <Route 
             path="/be-our-sponsor" 
             element={<>
