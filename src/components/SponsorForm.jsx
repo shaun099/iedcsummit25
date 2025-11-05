@@ -49,10 +49,10 @@ export const SponsorForm = () => {
       required: true,
       options: [
             { value: 'INNOVATION_PARTNER_OF_THE_YEAR', label: 'INNOVATION PARTNER OF THE YEAR : 26 LAKHS' },
-            { value: 'TECHNOLOGY_ENABLER', label: 'TECHNOLOGY TRAILBLAZERS : 10 LAKHS' },
+            // { value: 'TECHNOLOGY_ENABLER', label: 'TECHNOLOGY TRAILBLAZERS : 10 LAKHS' },
             { value: 'STARTUP_ENABLER', label: 'STARTUP ENABLER : 6 LAKHS' },
             { value: 'INNOVATION_SUPPORTER', label: 'INNOVATION SUPPORTER : 3 LAKHS' },
-            { value: 'EVENT_COLLABORATOR', label: 'EVENT COLLABORATOR : 2 LAKHS' },
+            // { value: 'EVENT_COLLABORATOR', label: 'EVENT COLLABORATOR : 2 LAKHS' },
             { value: 'OTHER', label: 'OTHER' },
       ]
     },
