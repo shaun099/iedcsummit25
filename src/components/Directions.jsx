@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
+import LogoLoop from './LogoLoop';
+import { Train, Bus, Plane } from 'lucide-react';
 
 const Directions = () => {
   const [activeCollege, setActiveCollege] = useState('lbs');
-  const [activeTransport, setActiveTransport] = useState('flight');
+  const [activeTransport, setActiveTransport] = useState('train');
   const [hasAnimated, setHasAnimated] = useState(false);
   const headerRef = React.useRef(null);
   const { ref: sectionRef, isVisible: sectionVisible } = useScrollFadeInUp();
@@ -16,14 +18,6 @@ const Directions = () => {
   }, [sectionVisible, hasAnimated]);
 
   const lbsDirections = {
-    flight: {
-      title: 'For those arriving by flight',
-      airports: [
-        { name: 'Mangaluru International Airport', distance: 'Approx 71km away' },
-        { name: 'Kannur International Airport', distance: 'Approx 115km away' },
-      ],
-      note: 'From the Airport choose train / bus / taxi'
-    },
     train: {
       title: 'For those arriving by train',
       stations: [
@@ -39,18 +33,18 @@ const Directions = () => {
         'From Kannur Bus Stand : Take a bus to Kasaragod via NH-LS & get down cherkala, then move to Povval Lbs Stop',
         'Povval > LBS College Entrance Gate, Just 500m away | Auto taxi fare of 40₹',
       ]
-    }
-  };
-
-  const cukDirections = {
+    },
     flight: {
       title: 'For those arriving by flight',
       airports: [
-        { name: 'Mangaluru International Airport', distance: 'Approx 83km away' },
-        { name: 'Kannur International Airport', distance: 'Approx 99km away' },
+        { name: 'Mangaluru International Airport', distance: 'Approx 71km away' },
+        { name: 'Kannur International Airport', distance: 'Approx 115km away' },
       ],
       note: 'From the Airport choose train / bus / taxi'
     },
+  };
+
+  const cukDirections = {
     train: {
       title: 'For those arriving by train',
       stations: [
@@ -63,7 +57,15 @@ const Directions = () => {
       routes: [
         'Bus information for CUK will be available soon. Please check back later or contact us for details.',
       ]
-    }
+    },
+    flight: {
+      title: 'For those arriving by flight',
+      airports: [
+        { name: 'Mangaluru International Airport', distance: 'Approx 83km away' },
+        { name: 'Kannur International Airport', distance: 'Approx 99km away' },
+      ],
+      note: 'From the Airport choose train / bus / taxi'
+    },
   };
 
   return (
@@ -147,23 +149,38 @@ const Directions = () => {
 
             {/* Transport Mode Tabs */}
             <div className="flex gap-2 mb-6 flex-wrap">
-              {['flight', 'train', 'bus'].map((mode) => (
+              {['train', 'bus', 'flight'].map((mode) => (
                 <button
                   key={mode}
                   onClick={() => setActiveTransport(mode)}
-                  className={`px-4 py-2 rounded-lg font-gilroy-medium text-sm transition-all ${
+                  className={`px-4 py-2 rounded-lg font-gilroy-medium text-sm transition-all flex items-center gap-2 ${
                     activeTransport === mode
                       ? 'bg-blue-500 text-white'
                       : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                   }`}
                 >
-                  {mode === 'flight' ? '✈️ Flight' : mode === 'train' ? '🚂 Train' : '🚌 Bus'}
+                  {mode === 'train' ? (
+                    <>
+                      <Train size={16} />
+                      Train
+                    </>
+                  ) : mode === 'bus' ? (
+                    <>
+                      <Bus size={16} />
+                      Bus
+                    </>
+                  ) : (
+                    <>
+                      <Plane size={16} />
+                      Flight
+                    </>
+                  )}
                 </button>
               ))}
             </div>
 
             {/* Content Display */}
-            <div className="space-y-4">
+            <div className="space-y-4 mb-[25vh] md:mb-[15vh]">
               {(() => {
                 const directions = activeCollege === 'lbs' ? lbsDirections : cukDirections;
                 const data = directions[activeTransport];
@@ -221,12 +238,35 @@ const Directions = () => {
       
       {/* Colored Blocks at Bottom */}
       <img 
-        src="/hero-blocks.png" 
-        alt="Decorative blocks" 
-        className="w-full h-20 sm:h-24 mt-5 -mb-16 object-cover"
-      />
+                src="/hero-blocks.png" 
+                alt="Decorative blocks" 
+                className="w-full h-20 sm:h-24 absolute bottom-20 left-0 object-cover"
+              />
+      
+      {/* Scrolling Text Loop */}
+      <div className="w-full absolute bottom-12 left-0 -skew-y-2">
+        <LogoLoop
+          logos={[
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+          ]}
+          speed={80}
+          direction="right"
+          logoHeight={20}
+          gap={40}
+          pauseOnHover={true}
+          className=" font-gilroy-bold bg-blue-600 py-5 text-white"
+          ariaLabel="IEDC Summit 2025"
+        />
+      </div>
     </section>
   );
 };
 
-export default Directions;
+export default Directions
