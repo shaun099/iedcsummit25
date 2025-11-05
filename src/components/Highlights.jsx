@@ -78,7 +78,7 @@ const Highlights = () => {
   };
 
   return (
-    <section id="highlights" className={`w-full bg-white overflow-hidden relative ${
+    <section id="about" className={`w-full bg-white overflow-hidden relative ${
       sectionVisible ? 'fade-in-up-visible' : 'fade-in-up-hidden'
     }`} ref={sectionRef}>
       {/* Header Section */}

@@ -3,19 +3,33 @@ import LogoLoop from './LogoLoop';
 import { useState, useEffect } from 'react';
 
 const Hero = () => {
-  const [DaysLeft, setDaysLeft] = useState(0);
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
 
   useEffect(() => {
-    const calculateDaysLeft = () => {
-      const eventDate = new Date('2025-12-22T00:00:00').getTime();
-      const today = new Date().getTime();
-      const timeLeft = eventDate - today;
-      const days = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
-      setDaysLeft(Math.max(days, 0));
+    const calculateTimeLeft = () => {
+      const eventDate = new Date('2025-12-22T09:00:00').getTime();
+      const now = new Date().getTime();
+      const difference = eventDate - now;
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000)
+        });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
     };
 
-    calculateDaysLeft();
-    const timer = setInterval(calculateDaysLeft, 1000); // Update every sec
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
     return () => clearInterval(timer);
   }, []);
 
@@ -88,16 +102,37 @@ const Hero = () => {
         />
 
         {/* Countdown Badge - Mobile */}
-        <div className="absolute bottom-30 left-5 animate-fade-in-up" style={{animationDelay: '0.9s'}}>
-          <div className="flex items-center gap-0">
-            {/* Days - First digit */}
-            <span className="text-blue-600 text-5xl font-bold font-gilroy-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>
-            {/* Days - Second digit */}
-            <span className="text-blue-600 text-5xl font-bold font-gilroy-bold">{String(DaysLeft).padStart(2, '0')[1]}</span>
-            {/* Label */}
-            <div className="flex flex-col items-start justify-center ml-0 gap-0">
-              <span className="text-blue-600 text-xl font-bold font-gilroy-bold leading-none">DAYS</span>
-              <span className="text-blue-600 text-xl font-gilroy-bold leading-none">TO GO</span>
+        <div className="absolute bottom-16 left-4 max-w-[320px] animate-fade-in-up" style={{animationDelay: '0.9s'}}>
+          <div className="bg-white/95 backdrop-blur-sm rounded-lg px-3 py-2.5 shadow-lg border-2 border-blue-200">
+            <div className="grid grid-cols-4 gap-1.5">
+              {/* Days */}
+              <div className="flex flex-col items-center">
+                <div className="text-blue-600 text-xl sm:text-2xl font-bold font-gilroy-bold leading-none">
+                  {String(timeLeft.days).padStart(2, '0')}
+                </div>
+                <div className="text-blue-400 text-[10px] sm:text-xs font-bold font-gilroy-bold mt-0.5">DAYS</div>
+              </div>
+              {/* Hours */}
+              <div className="flex flex-col items-center">
+                <div className="text-blue-600 text-xl sm:text-2xl font-bold font-gilroy-bold leading-none">
+                  {String(timeLeft.hours).padStart(2, '0')}
+                </div>
+                <div className="text-blue-400 text-[10px] sm:text-xs font-bold font-gilroy-bold mt-0.5">HRS</div>
+              </div>
+              {/* Minutes */}
+              <div className="flex flex-col items-center">
+                <div className="text-blue-600 text-xl sm:text-2xl font-bold font-gilroy-bold leading-none">
+                  {String(timeLeft.minutes).padStart(2, '0')}
+                </div>
+                <div className="text-blue-400 text-[10px] sm:text-xs font-bold font-gilroy-bold mt-0.5">MIN</div>
+              </div>
+              {/* Seconds */}
+              <div className="flex flex-col items-center">
+                <div className="text-blue-600 text-xl sm:text-2xl font-bold font-gilroy-bold leading-none">
+                  {String(timeLeft.seconds).padStart(2, '0')}
+                </div>
+                <div className="text-blue-400 text-[10px] sm:text-xs font-bold font-gilroy-bold mt-0.5">SEC</div>
+              </div>
             </div>
           </div>
         </div>
@@ -132,7 +167,7 @@ const Hero = () => {
         <img src="/Ellipse2.svg" alt="Decorative circle 1" className="w-1/2 absolute left-1/2 top-10 opacity-50 animate-fade-in-up" style={{animationDelay: '0.1s'}} />
         <img src="/Ellipse3.svg" alt="Decorative circle 2" className="w-2/5 absolute right-10 top-20 lg:top-30 animate-fade-in-up" style={{animationDelay: '0.2s'}} />
         <img src="/Ellipse3.svg" alt="Decorative circle 3" className="w-2/5 absolute -right-80 top-20 lg:top-30 opacity-25 animate-fade-in-up" style={{animationDelay: '0.3s'}} />
-        <img src="/Ellipse3.svg" alt="Decorative circle 4" className="w-1/3 absolute left-130 bottom-20 lg:bottom-30 opacity-25 animate-fade-in-up" style={{animationDelay: '0.4s'}} />
+        <img src="/Ellipse3.svg" alt="Decorative circle 4" className="w-1/3 absolute left-130 bottom-20 lg:bottom-30 opacity-5 animate-fade-in-up" style={{animationDelay: '0.4s'}} />
 
         {/* Main Content Container */}
         <div className="w-1/2 absolute top-[6vh] md:top-[25vh] lg:top-[13vh] xl:top-[25vh] left-[10%] flex flex-col gap-3 pb-40 animate-fade-in-down" style={{animationDelay: '0.5s'}}>
@@ -203,15 +238,36 @@ const Hero = () => {
 
         {/* Countdown Badge - Near Hero Image */}
         <div className="absolute bottom-[10vh] md:bottom-[15vh] lg:bottom-[23vh] right-[5%] md:right-[50%] lg:right-[40%] animate-fade-in-up" style={{animationDelay: '0.9s'}}>
-          <div className="flex items-center gap-0 lg:gap-1">
-            {/* Days - First digit */}
-            <span className="text-blue-600 text-[7vh] md:text-[10vh] lg:text-[12vh] font-bold font-gilroy-bold">{String(DaysLeft).padStart(2, '0')[0]}</span>
-            {/* Days - Second digit */}
-            <span className="text-blue-600 text-[7vh] md:text-[10vh] lg:text-[12vh] font-bold font-gilroy-bold">{String(DaysLeft).padStart(2, '0')[1]}</span>
-            {/* Label */}
-            <div className="flex flex-col items-start justify-center ml-0 lg:ml-0 gap-0">
-              <span className="text-blue-600 text-[1.5vh] md:text-[4vh] lg:text-[5vh] font-bold font-gilroy-bold leading-none">DAYS</span>
-              <span className="text-blue-600 text-[1.2vh] md:text-[4vh] lg:text-[4vh] font-bold font-gilroy-bold leading-none -mt-[0.5vh]">TO GO</span>
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-4 md:px-6 lg:px-8 py-3 md:py-4 lg:py-5 shadow-xl border-2 border-blue-200">
+            <div className="grid grid-cols-4 gap-2 md:gap-4 lg:gap-6">
+              {/* Days */}
+              <div className="flex flex-col items-center">
+                <div className="text-blue-600 text-[4vh] md:text-[6vh] lg:text-[8vh] font-bold font-gilroy-bold leading-none">
+                  {String(timeLeft.days).padStart(2, '0')}
+                </div>
+                <div className="text-blue-400 text-[1.2vh] md:text-[1.8vh] lg:text-[2.5vh] font-bold font-gilroy-bold mt-1">DAYS</div>
+              </div>
+              {/* Hours */}
+              <div className="flex flex-col items-center">
+                <div className="text-blue-600 text-[4vh] md:text-[6vh] lg:text-[8vh] font-bold font-gilroy-bold leading-none">
+                  {String(timeLeft.hours).padStart(2, '0')}
+                </div>
+                <div className="text-blue-400 text-[1.2vh] md:text-[1.8vh] lg:text-[2.5vh] font-bold font-gilroy-bold mt-1">HRS</div>
+              </div>
+              {/* Minutes */}
+              <div className="flex flex-col items-center">
+                <div className="text-blue-600 text-[4vh] md:text-[6vh] lg:text-[8vh] font-bold font-gilroy-bold leading-none">
+                  {String(timeLeft.minutes).padStart(2, '0')}
+                </div>
+                <div className="text-blue-400 text-[1.2vh] md:text-[1.8vh] lg:text-[2.5vh] font-bold font-gilroy-bold mt-1">MIN</div>
+              </div>
+              {/* Seconds */}
+              <div className="flex flex-col items-center">
+                <div className="text-blue-600 text-[4vh] md:text-[6vh] lg:text-[8vh] font-bold font-gilroy-bold leading-none">
+                  {String(timeLeft.seconds).padStart(2, '0')}
+                </div>
+                <div className="text-blue-400 text-[1.2vh] md:text-[1.8vh] lg:text-[2.5vh] font-bold font-gilroy-bold mt-1">SEC</div>
+              </div>
             </div>
           </div>
         </div>
