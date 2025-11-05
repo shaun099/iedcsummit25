@@ -74,7 +74,7 @@ export default function EventCard({ event, isWebinar = false }) {
   return (
     <>
       <style>{MARQUEE_STYLES}</style>
-      <div className="w-full max-w-80 mx-auto h-[40vh] relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl cursor-pointer">
+      <div className="w-full max-w-80 mx-auto h-[375px] relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl cursor-pointer">
         <div className="w-[75%] h-full left-0 top-0 absolute overflow-hidden p-6">
           <div ref={titleRef} className={isMarqueeActive ? 'marquee-container mb-3 h-10 flex items-center' : 'mb-3'}>
             <h3 className={`${isMarqueeActive ? 'marquee-text' : ''} text-3xl font-gilroy-medium text-black leading-tight [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]`}>
