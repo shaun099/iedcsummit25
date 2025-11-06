@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
 import ExternalFormRedirect from "./components/ExternalFormRedirect";
+import SessionRedirect from "./components/SessionRedirect";
 import Schedule from "./components/Schedule.jsx";
 import Events from "./components/Events.jsx";
 import Webinars from "./components/Webinars.jsx";
@@ -52,6 +53,10 @@ createRoot(document.getElementById("root")).render(
               <SponsorForm />
               <Footer />
             </>} />
+          {/* Session redirect route - /r/sessionId */}
+          <Route 
+            path="/r/:sessionId" 
+            element={<SessionRedirect />} />
           {/* Catch-all route for external form redirects - MUST be last */}
           <Route 
             path="/:formName" element={<ExternalFormRedirect />} />
