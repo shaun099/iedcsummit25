@@ -86,7 +86,7 @@ const FeaturedEvents = () => {
         ) : events.length > 0 ? (
           <div className="relative">
             {/* Cards Grid with Stacked Effect */}
-            <div className="relative h-[600px] md:h-[700px] flex items-center justify-center">
+            <div className="relative h-[450px] md:h-[600px] lg:h-[700px] flex items-center justify-center">
               {/* Previous Button - Large screens only, left side */}
               <button
                 onClick={handlePrev}
@@ -109,7 +109,7 @@ const FeaturedEvents = () => {
                       animate={{
                         opacity: 1 - offset * 0.25,
                         scale: 1 - offset * 0.05,
-                        x: offset * 30,
+                        x: offset * 20,
                         zIndex: 10 - offset,
                         rotateZ: offset === 0 ? 0 : 4,
                       }}
@@ -119,15 +119,15 @@ const FeaturedEvents = () => {
                         stiffness: 260,
                         damping: 20,
                       }}
-                      className="absolute w-full max-w-md"
+                      className="absolute w-full max-w-xs md:max-w-md"
                     >
-                      <div className="w-full max-w-[50vh] mx-auto h-110 md:h-120 relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl">
-                        <div className="w-[75%] h-full left-0 top-0 absolute overflow-hidden p-6">
-                          <h3 className="text-4xl md:text-5xl font-gilroy-medium text-black leading-tight mb-4 [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)] line-clamp-2">
+                      <div className="w-full max-w-[35vh] md:max-w-[50vh] mx-auto h-80 md:h-110 lg:h-120 relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl">
+                        <div className="w-[75%] h-full left-0 top-0 absolute overflow-hidden p-4 md:p-6">
+                          <h3 className="text-2xl md:text-4xl lg:text-5xl font-gilroy-medium text-black leading-tight mb-3 md:mb-4 [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)] line-clamp-2">
                             {event.title}
                           </h3>
                           
-                          <p className="text-base md:text-lg font-gilroy-light text-black leading-6 mb-8 line-clamp-5 [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
+                          <p className="text-sm md:text-base lg:text-lg font-gilroy-light text-black leading-5 md:leading-6 mb-6 md:mb-8 line-clamp-4 md:line-clamp-5 [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
                             {event.description}
                           </p>
                           
@@ -136,15 +136,15 @@ const FeaturedEvents = () => {
                               href={event.registrationLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="absolute bottom-6 left-6 w-36 h-10 bg-black rounded-lg flex items-center justify-center hover:opacity-80 opacity-90 transition"
+                              className="absolute bottom-4 md:bottom-6 left-4 md:left-6 w-28 h-9 md:w-36 md:h-10 bg-black rounded-lg flex items-center justify-center hover:opacity-80 opacity-90 transition"
                             >
-                              <span className="text-white text-sm md:text-base font-medium font-clash-display tracking-tight">
+                              <span className="text-white text-xs md:text-sm lg:text-base font-medium font-clash-display tracking-tight">
                                 REGISTER NOW
                               </span>
                             </a>
                           ) : (
-                            <div className="absolute bottom-6 left-6 w-36 h-10 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
-                              <span className="text-white text-sm md:text-base font-medium font-clash-display tracking-tight">
+                            <div className="absolute bottom-4 md:bottom-6 left-4 md:left-6 w-28 h-9 md:w-36 md:h-10 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
+                              <span className="text-white text-xs md:text-sm lg:text-base font-medium font-clash-display tracking-tight">
                                 COMING SOON
                               </span>
                             </div>
@@ -155,7 +155,7 @@ const FeaturedEvents = () => {
                         <img
                             src={side_image}
                             alt="side decorations"
-                            className="absolute right-0 top-0 w-20 h-auto"
+                            className="absolute right-0 top-0 w-12 md:w-20 h-auto"
                         />
                       </div>
                     </motion.div>
