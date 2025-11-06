@@ -22,8 +22,8 @@ function App() {
       <Hero />
       <About />
       <FeaturedEvents />
-      <Highlights />
       <Partners />
+      <Highlights />
       <Directions />
       <Faq />
       <Gallery />
