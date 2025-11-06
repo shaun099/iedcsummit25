@@ -58,23 +58,6 @@ const Partners = () => {
         </div>
       </div>
 
-      {/* Ecosystem Partners Section */}
-      <div className="px-5 md:px-8 lg:px-12 pb-8 md:pb-12">
-        <h3 className="text-2xl md:text-3xl lg:text-4xl font-light font-clash-display text-black mb-4 md:mb-6">
-          Ecosystem Partners
-        </h3>
-        <LogoLoop
-          logos={ecosystemPartners}
-          speed={60}
-          direction="left"
-          logoHeight={40}
-          gap={40}
-          pauseOnHover={true}
-          scaleOnHover={true}
-          ariaLabel="Ecosystem partner logos"
-        />
-      </div>
-
       {/* Startup Enablers Section */}
       <div className="px-5 md:px-8 lg:px-12 pb-8 md:pb-12">
         <h3 className="text-2xl md:text-3xl lg:text-4xl font-light font-clash-display text-black mb-4 md:mb-6">
@@ -92,6 +75,23 @@ const Partners = () => {
         />
       </div>
 
+      {/* Ecosystem Partners Section */} 
+      <div className="px-5 md:px-8 lg:px-12 pb-8 md:pb-12">
+        <h3 className="text-2xl md:text-3xl lg:text-4xl font-light font-clash-display text-black mb-4 md:mb-6">
+          Ecosystem Partners
+        </h3>
+        <LogoLoop
+          logos={ecosystemPartners}
+          speed={60}
+          direction="left"
+          logoHeight={40}
+          gap={40}
+          pauseOnHover={true}
+          scaleOnHover={true}
+          ariaLabel="Ecosystem partner logos"
+        />
+      </div>
+      
       {/* Colored Blocks at Bottom */}
       <img 
         src="/hero-blocks.png" 
