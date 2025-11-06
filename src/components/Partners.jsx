@@ -12,16 +12,20 @@ const Partners = () => {
       ariaLabel: "TIE"
     },
     {
-      node: <img src="/kasaracode-logo.png" alt="Kasaracode" className="h-6 md:h-15 object-contain" />,
+      node: <img src="/kasaracode-logo.png" alt="Kasaracode" className="h-6 md:h-13 object-contain" />,
       ariaLabel: "Kasaracode"
     },
     {
-      node: <img src="/tinkerhub-logo.png" alt="Tinkerhub" className="h-6 md:h-15 object-contain" />,
+      node: <img src="/tinkerhub-logo.png" alt="Tinkerhub" className="h-6 md:h-13 object-contain" />,
       ariaLabel: "Tinkerhub"
     },
     {
       node: <img src="/cpcri-logo.png" alt="CPCRI" className="h-13 md:h-30 object-contain" />,
       ariaLabel: "CPCRI"
+    },
+    {
+      node: <img src="/nammude-ksd-logo.png" alt="Nammude KSD" className="h-14 md:h-30 object-contain" />,
+      ariaLabel: "Nammude KSD"
     },
   ];
 
@@ -91,7 +95,7 @@ const Partners = () => {
           ariaLabel="Ecosystem partner logos"
         />
       </div>
-      
+
       {/* Colored Blocks at Bottom */}
       <img 
         src="/hero-blocks.png" 
