@@ -45,7 +45,15 @@ export default function WebinarsPage() {
             });
           }
           
-          setEvents(transformedEvents);
+          // Separate finished and active/upcoming events, keep finished ones at back
+          const now = new Date();
+          const activeEvents = transformedEvents.filter(event => new Date(event.endTime) >= now);
+          const finishedEvents = transformedEvents.filter(event => new Date(event.endTime) < now);
+          
+          // Combine: active/upcoming first, finished at back
+          const sortedEvents = [...activeEvents, ...finishedEvents];
+          
+          setEvents(sortedEvents);
         } catch (error) {
           console.error("Error fetching events:", error);
         } finally {

@@ -27,6 +27,7 @@ const MARQUEE_STYLES = `
 export default function EventCard({ event, isWebinar = false }) {
   const [isEventLive, setIsEventLive] = useState(false);
   const [isMarqueeActive, setIsMarqueeActive] = useState(false);
+  const [canRegister, setCanRegister] = useState(true);
   const titleRef = useRef(null);
 
   useEffect(() => {
@@ -36,7 +37,14 @@ export default function EventCard({ event, isWebinar = false }) {
       const now = new Date();
       const eventStart = new Date(event.startTime);
       const eventEnd = new Date(event.endTime);
+      
+      // Check if event is live
       setIsEventLive(now >= eventStart && now <= eventEnd);
+      
+      // Check if we're within 30 minutes before start time
+      const thirtyMinutesBefore = new Date(eventStart.getTime() - 30 * 60000);
+      const canReg = now < thirtyMinutesBefore;
+      setCanRegister(canReg);
     };
 
     checkEventLive();
@@ -100,63 +108,61 @@ export default function EventCard({ event, isWebinar = false }) {
         
         {isWebinar ? (
           // Webinar: Two buttons separated by comma
-          <div className="absolute bottom-6 left-6 flex items-center gap-2">
-            {webinarLinks.registration ? (
-              <a
-                href={webinarLinks.registration}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-28 h-7 bg-black rounded-lg flex items-center justify-center hover:opacity-100 opacity-90 transition"
+          <div className="absolute bottom-6 left-6 flex items-center gap-2 z-10">
+            {webinarLinks.registration && canRegister ? (
+              <button
+                onClick={() => {
+                  window.open(webinarLinks.registration, '_blank', 'noopener,noreferrer');
+                }}
+                className="w-27 h-7 bg-black rounded-lg flex items-center justify-center hover:opacity-100 opacity-90 transition"
+                type="button"
               >
                 <span className="text-white text-xs font-medium font-clash-display tracking-tight">
                   REGISTER NOW
                 </span>
-              </a>
+              </button>
             ) : (
-              <div className="w-28 h-7 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
+              <div className="w-40 h-7 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
                 <span className="text-white text-xs font-medium font-clash-display tracking-tight">
-                  REGISTER SOON
+                  {canRegister ? 'REGISTER SOON' : 'REGISTRATIONS CLOSED'}
                 </span>
               </div>
             )}
             
-            {webinarLinks.meet ? (
-              <a
-                href={webinarLinks.meet}
-                target="_blank"
-                rel="noopener noreferrer"
+            {webinarLinks.meet && (canRegister || isEventLive) ? (
+              <button
+                onClick={() => {
+                  window.open(webinarLinks.meet, '_blank', 'noopener,noreferrer');
+                }}
                 className={`w-24 h-7 rounded-lg flex items-center justify-center transition ${
                   isEventLive
                     ? 'bg-green-600 hover:opacity-100 opacity-90'
                     : 'bg-gray-300 cursor-not-allowed'
                 }`}
+                type="button"
+                disabled={!isEventLive}
               >
                 <span className="text-white text-xs font-medium font-clash-display tracking-tight">
                   {isEventLive ? 'JOIN NOW' : 'JOIN SOON'}
                 </span>
-              </a>
-            ) : (
-              <div className="w-24 h-7 bg-gray-300 rounded-lg flex items-center justify-center cursor-not-allowed">
-                <span className="text-white text-xs font-medium font-clash-display tracking-tight">
-                  JOIN SOON
-                </span>
-              </div>
-            )}
+              </button>
+            ) : null}
           </div>
         ) : (
           // Regular event: Single register button
           <>
             {event.registrationLink ? (
-              <a
-                href={event.registrationLink}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => {
+                  window.open(event.registrationLink, '_blank', 'noopener,noreferrer');
+                }}
                 className="absolute bottom-6 left-6 w-28 h-7 bg-black rounded-lg flex items-center justify-center hover:opacity-100 opacity-90 transition"
+                type="button"
               >
                 <span className="text-white text-xs font-medium font-clash-display tracking-tight">
                   REGISTER NOW
                 </span>
-              </a>
+              </button>
             ) : (
               <div className="absolute bottom-6 left-6 w-28 h-7 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
                 <span className="text-white text-xs font-medium font-clash-display tracking-tight">
