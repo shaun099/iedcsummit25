@@ -4,9 +4,18 @@ import LogoLoop from "./LogoLoop";
 const LoadingAnimation = () => (
   <div className="flex items-center justify-center py-20">
     <div className="flex gap-2">
-      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
-      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.15s' }}></div>
-      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.3s' }}></div>
+      <div
+        className="w-3 h-3 bg-blue-600 rounded-full animate-bounce"
+        style={{ animationDelay: "0s" }}
+      ></div>
+      <div
+        className="w-3 h-3 bg-blue-600 rounded-full animate-bounce"
+        style={{ animationDelay: "0.15s" }}
+      ></div>
+      <div
+        className="w-3 h-3 bg-blue-600 rounded-full animate-bounce"
+        style={{ animationDelay: "0.3s" }}
+      ></div>
     </div>
   </div>
 );
@@ -27,12 +36,14 @@ export default function FeaturedSpeakers() {
   useEffect(() => {
     const fetchSpeakers = async () => {
       try {
-        const response = await fetch("https://events.startupmission.in/api/event/iedc-summit-2025/speakers");
+        const response = await fetch(
+          "https://events.startupmission.in/api/event/iedc-summit-2025/speakers"
+        );
         const data = await response.json();
-        
+
         // Get featured speakers and sort by order
         const featuredSpeakers = data.Featured || [];
-        
+
         if (featuredSpeakers.length === 0) {
           setError("No featured speakers available");
         } else {
@@ -67,7 +78,7 @@ export default function FeaturedSpeakers() {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto justify-center">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto justify-center mb-30">
           {speakers.map((speaker, index) => (
             <div
               key={speaker.id}
@@ -81,9 +92,9 @@ export default function FeaturedSpeakers() {
               />
 
               {/* Star decoration - asterisk with color */}
-              <div 
+              <div
                 className="absolute -bottom-8 left-2 md:-bottom-23 md:left-4 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-clash-display font-semibold pointer-events-none leading-none scale-400 md:scale-300"
-                style={{ 
+                style={{
                   color: starColors[index % starColors.length],
                 }}
               >
@@ -104,24 +115,24 @@ export default function FeaturedSpeakers() {
       )}
 
       {/* Colored Blocks at Bottom */}
-      <img 
-        src="/hero-blocks.png" 
-        alt="Decorative blocks" 
+      <img
+        src="/hero-blocks.png"
+        alt="Decorative blocks"
         className="w-full h-20 sm:h-24 absolute bottom-20 left-0 object-cover"
       />
-      
+
       {/* Scrolling Text Loop */}
       <div className="w-full absolute bottom-12 left-0 -skew-y-2">
         <LogoLoop
           logos={[
-            { text: 'IEDC SUMMIT 2025' },
-            { text: 'IEDC SUMMIT 2025' },
-            { text: 'IEDC SUMMIT 2025' },
-            { text: 'IEDC SUMMIT 2025' },
-            { text: 'IEDC SUMMIT 2025' },
-            { text: 'IEDC SUMMIT 2025' },
-            { text: 'IEDC SUMMIT 2025' },
-            { text: 'IEDC SUMMIT 2025' },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
           ]}
           speed={80}
           direction="right"
