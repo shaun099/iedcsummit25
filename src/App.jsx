@@ -22,8 +22,8 @@ function App() {
       <Navbar />
       <Hero />
       <About />
-      <FeaturedEvents />
       <FeaturedSpeaker />
+      <FeaturedEvents />
       <Partners />
       <Highlights />
       <Directions />

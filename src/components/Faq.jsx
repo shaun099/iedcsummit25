@@ -210,7 +210,7 @@ const Faq = () => {
             />
       
             {/* Scrolling Text Loop */}
-            <div className="w-full -mt-7 mb-10 -skew-y-2">
+            <div className="w-full -mt-7 mb-10 skew-y-2">
               <LogoLoop
                 logos={[
                   { text: 'IEDC SUMMIT 2025' },

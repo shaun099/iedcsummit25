@@ -1,95 +1,136 @@
-import React from "react";
-import star from "../assets/star.svg";
+import React, { useState, useEffect } from "react";
+import LogoLoop from "./LogoLoop";
 
-const speakers = [
-  {
-    name: "Deepak Ravindran",
-    designation: "CEO, Kiranoppo",
-    photo: "./anoop-ambika-ceo.jpg",
-  },
-  {
-    name: "Anjali Menon",
-    designation: "Founder, GreenHive",
-    photo: "./anoop-ambika-ceo.jpg",
-  },
-  {
-    name: "Ravi Kumar",
-    designation: "Investor, StartupHub",
-    photo: "./anoop-ambika-ceo.jpg",
-  },
-  {
-    name: "Priya Nair",
-    designation: "Founder, Tech4Change",
-    photo: "./anoop-ambika-ceo.jpg",
-  },
-  {
-    name: "Arjun Nambiar",
-    designation: "CTO, NexaLabs",
-    photo: "./anoop-ambika-ceo.webp",
-  },
-  {
-    name: "Dr. Maya Krishnan",
-    designation: "AI Researcher, Google Research",
-    photo: "./anoop-ambika-ceo.webp",
-  },
-  {
-    name: "Haris",
-    designation: "Founder, Haris&Co.",
-    photo: "./anoop-ambika-ceo.webp",
-  },
-  {
-    name: "Neha Varghese",
-    designation: "Product Manager, UrbanGro",
-    photo: "./anoop-ambika-ceo.webp",
-  },
-];
+const LoadingAnimation = () => (
+  <div className="flex items-center justify-center py-20">
+    <div className="flex gap-2">
+      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
+      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.15s' }}></div>
+      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.3s' }}></div>
+    </div>
+  </div>
+);
 
-const colors = [
-  "bg-[#F8D247]",
-  "bg-[#4D84F7]",
-  "bg-[#E371E3]",
-  "bg-[#45BBA1]",
-  "bg-[#F8D247]",
-  "bg-[#4D84F7]",
-  "bg-[#E371E3]",
-  "bg-[#45BBA1]",
+const starColors = [
+  "#F8D247", // Yellow
+  "#4D84F7", // Blue
+  "#E371E3", // Pink
+  "#F4BB40", // Orange-Yellow
+  "#45BBA1", // Teal
 ];
 
 export default function FeaturedSpeakers() {
+  const [speakers, setSpeakers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchSpeakers = async () => {
+      try {
+        const response = await fetch("https://events.startupmission.in/api/event/iedc-summit-2025/speakers");
+        const data = await response.json();
+        
+        // Get featured speakers and sort by order
+        const featuredSpeakers = data.Featured || [];
+        
+        if (featuredSpeakers.length === 0) {
+          setError("No featured speakers available");
+        } else {
+          featuredSpeakers.sort((a, b) => a.order - b.order);
+          setSpeakers(featuredSpeakers);
+        }
+      } catch (error) {
+        console.error("Error fetching speakers:", error);
+        setError("Failed to load speakers. Please try again later.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchSpeakers();
+  }, []);
+
   return (
-    <section className="w-full min-h-screen bg-white px-4 py-10">
+    <section className="w-full min-h-screen bg-white px-4 py-16 md:py-20 relative overflow-hidden">
       {/* Section Title */}
-      <h2 className="text-3xl md:text-5xl font-bold text-center text-blue-500 mb-10">
+      <h2 className="text-4xl md:text-6xl lg:text-7xl text-center text-blue-500 mb-12 font-clash-display">
         Featured Speakers
       </h2>
 
       {/* Responsive Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-[85vw] mx-auto">
-        {speakers.map((speaker, index) => (
-          <div
-            key={index}
-            className="relative aspect-square overflow-hidden group shadow-sm w-[20vw] h-[60vh]  grayscale-0"
-          >
-            {/* Speaker Image */}
-            <img
-              src={speaker.photo}
-              alt={speaker.name}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 "
-            />
+      {isLoading ? (
+        <LoadingAnimation />
+      ) : error ? (
+        <div className="text-center py-12">
+          <p className="text-xl md:text-2xl font-gilroy-light text-gray-500">
+            {error}
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          {speakers.map((speaker, index) => (
+            <div
+              key={speaker.id}
+              className="relative w-full aspect-square overflow-hidden"
+            >
+              {/* Speaker Image */}
+              <img
+                src={speaker.photo}
+                alt={speaker.name}
+                className="w-full h-full object-cover"
+              />
 
-            <div className="absolute bottom-0 left-0 w-full transition-transform duration-300">
-              <img src={star} alt="star" className="w-[1/3]" />
-              <div className="absolute inset-0 flex flex-col justify-center items-start text-center px-4">
-                <p className="text-lg md:text-xl font-semibold font-clash-display leading-tight text-black">
+              {/* Star decoration - asterisk with color */}
+              <div 
+                className="absolute -bottom-8 left-2 md:-bottom-23 md:left-4 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-clash-display font-semibold pointer-events-none leading-none scale-400 md:scale-300"
+                style={{ 
+                  color: starColors[index % starColors.length],
+                }}
+              >
+                *
+              </div>
+              {/* Info - Always Visible */}
+              <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/20 to-black/80 flex flex-col justify-end p-4">
+                <p className="text-[13px] md:text-sm font-medium font-clash-display leading-tight text-white">
                   {speaker.name}
                 </p>
-                <p className="text-xs md:text-sm font-light font-clash-display opacity-90 text-black">
+                <p className="text-[10px] sm:text-xs md:text-sm font-light font-gilroy-light text-white mt-1">
                   {speaker.designation}
                 </p>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+      )}
+
+      {/* Colored Blocks at Bottom */}
+      <img 
+        src="/hero-blocks.png" 
+        alt="Decorative blocks" 
+        className="w-full h-20 sm:h-24 absolute bottom-20 left-0 object-cover"
+      />
+      
+      {/* Scrolling Text Loop */}
+      <div className="w-full absolute bottom-12 left-0 -skew-y-2">
+        <LogoLoop
+          logos={[
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+            { text: 'IEDC SUMMIT 2025' },
+          ]}
+          speed={80}
+          direction="right"
+          logoHeight={20}
+          gap={40}
+          pauseOnHover={true}
+          className="font-gilroy-bold bg-blue-600 py-5 text-white"
+          ariaLabel="IEDC Summit 2025"
+        />
       </div>
     </section>
   );
