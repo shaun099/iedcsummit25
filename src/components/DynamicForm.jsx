@@ -12,9 +12,7 @@ const DynamicForm = ({
   fields, 
   submitButtonText = "Submit", 
   onSubmit,
-  logoSrc = "/iedc-summit-25-logo.png",
   successMessage = "Thank you! Your form has been submitted successfully.",
-  backToHome = true
 }) => {
   const [formData, setFormData] = useState(() => {
     const initialData = {};
@@ -26,9 +24,6 @@ const DynamicForm = ({
 
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
-  const [showConfirmation, setShowConfirmation] = useState(false);
-  const [submittedData, setSubmittedData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const validateForm = () => {
     const newErrors = {};
@@ -118,16 +113,10 @@ const DynamicForm = ({
       return;
     }
 
-    setIsLoading(true);
-
     try {
       if (onSubmit) {
         await onSubmit(formData);
       }
-
-      // Store the submitted data for the confirmation modal
-      setSubmittedData(formData);
-      setShowConfirmation(true);
       setSubmitted(true);
       
       // Reset form after successful submission
@@ -138,12 +127,9 @@ const DynamicForm = ({
         });
         setFormData(resetData);
         setSubmitted(false);
-      }, 5000);
+      }, 3000);
     } catch (error) {
       console.error('Error submitting form:', error);
-      alert('Error submitting form. Please try again.');
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -306,7 +292,7 @@ const DynamicForm = ({
 
   return (
     <div className="w-full bg-white">
-      <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 py-12 px-4 relative overflow-hidden">
+      <div className="min-h-screen bg-linear-to-b from-white to-blue-50 py-12 px-4 relative overflow-hidden">
         {/* Decorative Circles */}
         <img src="/Ellipse2.svg" alt="Decorative circle" className="absolute top-20 left-0 w-1/3 opacity-20" />
         <img src="/Ellipse3.svg" alt="Decorative circle" className="absolute bottom-32 right-0 w-1/3 opacity-20" />
@@ -318,24 +304,9 @@ const DynamicForm = ({
         <img src={block3} alt="Block 3" className="absolute bottom-1/4 left-10 w-28 h-28 opacity-20" />
         <img src={block4} alt="Block 4" className="absolute bottom-10 right-5 w-24 h-24 opacity-25" />
 
-        <div className="max-w-2xl mx-auto relative z-10">
-          {/* Back Button */}
-          {backToHome && (
-            <Link
-              to="/"
-              className="inline-block mb-8 text-blue-600 font-gilroy-bold text-lg hover:opacity-70 transition-opacity cursor-pointer"
-            >
-              ← Back to Home
-            </Link>
-          )}
-
+        <div className="max-w-2xl mx-auto mt-[5vh] relative z-10">
           {/* Form Header */}
           <div className="mb-12 text-center">
-            {logoSrc && (
-              <div className="flex justify-center mb-6">
-                <img src={logoSrc} alt="Logo" className="w-16 h-16" />
-              </div>
-            )}
             {title && (
               <h1 className="text-4xl lg:text-5xl font-bold font-clash-display text-blue-600 mb-2">
                 {title}
@@ -397,22 +368,14 @@ const DynamicForm = ({
               <div className="pt-8">
                 <button
                   type="submit"
-                  disabled={isLoading}
-                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-clash-display font-bold text-lg py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 disabled:scale-100 disabled:cursor-not-allowed"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-clash-display font-bold text-lg py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
-                  {isLoading ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <span className="inline-block animate-spin">⏳</span>
-                      Submitting...
-                    </span>
-                  ) : (
-                    submitButtonText
-                  )}
+                  {submitButtonText}
                 </button>
                 <p className="text-center text-blue-400 text-sm mt-4 font-gilroy-medium">
                   We will review your application and contact you soon
                 </p>
-              </div>
+            </div>
             </div>
           </form>
         </div>
