@@ -9,6 +9,7 @@ import Directions from "./components/Directions";
 import Faq from "./components/Faq";
 import Gallery from "./components/Gallery";
 import Footer from "./components/Footer";
+import FeaturedSpeaker from "./components/FeaturedSpeakers";
 
 import "./fonts/ClashDisplay-Variable.ttf";
 import "./fonts/Gilroy-Light.otf";
@@ -21,6 +22,7 @@ function App() {
       <Navbar />
       <Hero />
       <About />
+      <FeaturedSpeaker />
       <FeaturedEvents />
       <Partners />
       <Highlights />

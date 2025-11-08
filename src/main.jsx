@@ -10,8 +10,9 @@ import Events from "./components/Events.jsx";
 import Webinars from "./components/Webinars.jsx";
 import Footer from "./components/Footer.jsx";
 import Navbar from "./components/Navbar.jsx";
-import { SponsorForm } from './components/SponsorForm'
-import { ScrollToTop } from './components/ScrollToTop';
+import Speaker from "./components/Speaker.jsx";
+import { SponsorForm } from "./components/SponsorForm";
+import { ScrollToTop } from "./components/ScrollToTop";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -29,7 +30,7 @@ createRoot(document.getElementById("root")).render(
               </>
             }
           />
-          <Route 
+          <Route
             path="/events"
             element={
               <>
@@ -39,27 +40,40 @@ createRoot(document.getElementById("root")).render(
               </>
             }
           />
-          <Route 
-            path="/webinars" 
-            element={<>
-              <Navbar />
-              <Webinars />
-              <Footer />
-            </>} />
-          <Route 
-            path="/be-our-sponsor" 
-            element={<>
-              <Navbar />
-              <SponsorForm />
-              <Footer />
-            </>} />
+          <Route
+            path="/webinars"
+            element={
+              <>
+                <Navbar />
+                <Webinars />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/be-our-sponsor"
+            element={
+              <>
+                <Navbar />
+                <SponsorForm />
+                <Footer />
+              </>
+            }
+          />
+          {/* <Route
+            path="/speakers"
+            element={
+              <>
+                <Navbar />
+                <Speaker />
+                <Footer />
+              </>
+            }
+          /> */}
           {/* Session redirect route - /r/sessionId */}
-          <Route 
-            path="/r/:sessionId" 
-            element={<SessionRedirect />} />
+          <Route path="/r/:sessionId" element={<SessionRedirect />} />
           {/* Catch-all route for external form redirects - MUST be last */}
-          <Route 
-            path="/:formName" element={<ExternalFormRedirect />} />
+          <Route path="/:formName" element={<ExternalFormRedirect />} />
         </Routes>
       </ScrollToTop>
     </Router>
