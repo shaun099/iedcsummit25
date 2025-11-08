@@ -67,11 +67,11 @@ export default function FeaturedSpeakers() {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto justify-center">
           {speakers.map((speaker, index) => (
             <div
               key={speaker.id}
-              className="relative w-full aspect-square overflow-hidden"
+              className="relative w-full max-w-xs aspect-3/4 overflow-hidden"
             >
               {/* Speaker Image */}
               <img
@@ -90,8 +90,8 @@ export default function FeaturedSpeakers() {
                 *
               </div>
               {/* Info - Always Visible */}
-              <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/20 to-black/80 flex flex-col justify-end p-4">
-                <p className="text-[13px] md:text-sm font-medium font-clash-display leading-tight text-white">
+              <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/1 to-black/30 flex flex-col justify-end p-4">
+                <p className="text-[13px] md:text-lg font-medium font-clash-display leading-tight text-white">
                   {speaker.name}
                 </p>
                 <p className="text-[10px] sm:text-xs md:text-sm font-light font-gilroy-light text-white mt-1">

@@ -148,13 +148,6 @@ export default function SpeakersPage() {
                           >
                             {designation}
                           </p>
-                          <p
-                            className={`text-xs md:text-sm opacity-80 font-gilroy-regular mt-1 ${
-                              isEvenRow ? "text-left" : "text-right"
-                            }`}
-                          >
-                            {organisation}
-                          </p>
                         </div>
                       )}
                     </div>
