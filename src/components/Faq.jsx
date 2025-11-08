@@ -131,10 +131,12 @@ const Faq = () => {
       id="faq"
       className="w-full overflow-y-hidden bg-white relative"
     >
+
       <div 
         className="mb-8 md:mb-5 md:flex md:flex-col md:items-center relative py-10 px-5"
         style={{ minHeight: sectionHeight }}
       >
+
         <div className="w-full md:text-center">
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-light font-gilroy-medium md:font-black text-blue-500 relative z-20">
             FAQ
@@ -199,6 +201,7 @@ const Faq = () => {
           ))}
         </div>
       </div>
+
       {/* Colored Blocks at Bottom */}
             <img 
               src="/hero-blocks.png" 
