@@ -22,20 +22,35 @@ export default function EventsPage() {
           const fetchedEvents = await fetch("https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue");
           const eventsData = await fetchedEvents.json();
           
-          // Transform and filter for Featured events only
+          // Transform and filter for Event category
           const transformedEvents = [];
           
           if (eventsData.agenda) {
             Object.values(eventsData.agenda).forEach(dateGroup => {
               Object.values(dateGroup).forEach(venueEvents => {
                 venueEvents.forEach(event => {
-                  // Check if the event has "Event" in its category
-                  if (event.category && event.category.includes("Event")) {
+                  // Get all categories
+                  const categories = event.category || [];
+                  let eventType = '';
+                  
+                  if (categories.includes('Featured')) {
+                    eventType = 'Featured';
+                  } else if (categories.includes('Pre-Event')) {
+                    eventType = 'Pre-Event';
+                  } else if (categories.includes('Event')) {
+                    eventType = 'Summit Day';
+                  }
+                  
+                  // Only add if it has a valid event type
+                  if (eventType) {
                     transformedEvents.push({
                       id: event.id || Math.random(),
                       title: event.name,
                       description: event.description,
                       registrationLink: event.link || "",
+                      eventType: eventType,
+                      startTime: event.start_time,
+                      endTime: event.end_time,
                     });
                   }
                 });
@@ -43,7 +58,39 @@ export default function EventsPage() {
             });
           }
           
-          setEvents(transformedEvents);
+          // Sort events - active registrations first, then upcoming, then past
+          const now = new Date();
+          const sortedEvents = transformedEvents.sort((a, b) => {
+            const aStart = new Date(a.startTime);
+            const aEnd = new Date(a.endTime);
+            const bStart = new Date(b.startTime);
+            const bEnd = new Date(b.endTime);
+            
+            // Check registration status
+            const aRegistrationActive = now >= aStart && now <= aEnd; // Registration open
+            const bRegistrationActive = now >= bStart && now <= bEnd;
+            const aRegistrationEnded = now > aEnd;
+            const bRegistrationEnded = now > bEnd;
+            const aRegistrationNotStarted = now < aStart;
+            const bRegistrationNotStarted = now < bStart;
+            
+            // Priority 1: Active registrations first
+            if (aRegistrationActive && !bRegistrationActive) return -1;
+            if (!aRegistrationActive && bRegistrationActive) return 1;
+            
+            // Priority 2: Upcoming registrations (not started yet)
+            if (aRegistrationNotStarted && !bRegistrationNotStarted) return -1;
+            if (!aRegistrationNotStarted && bRegistrationNotStarted) return 1;
+            
+            // Priority 3: Past registrations
+            if (aRegistrationEnded && !bRegistrationEnded) return 1;
+            if (!aRegistrationEnded && bRegistrationEnded) return -1;
+            
+            // Within same priority - sort by start time (earliest first)
+            return aStart - bStart;
+          });
+          
+          setEvents(sortedEvents);
         } catch (error) {
           console.error("Error fetching events:", error);
         } finally {
