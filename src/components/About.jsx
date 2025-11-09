@@ -38,16 +38,20 @@ const About = () => {
                       Decade of Innovation
                     </div>
                     <div className="w-full opacity-75 text-left text-black text-sm font-light font-gilroy-light leading-5">
-                      Asia's largest summit for aspiring<br />entrepreneurs
+                      Asia's largest summit for aspiring
+                      <br />
+                      entrepreneurs
                     </div>
                   </div>
                   <p className="text-black text-sm md:text-2xl font-light font-gilroy-light leading-5 md:leading-7">
                     The IEDC Summit 2025, organised by Kerala Startup Mission
-                    and jointly hosted by L.B.S. College of Engineering, Kasaragod and Central University of Kerala,
-                    marks the 10th anniversary edition of this flagship event,
-                    celebrating a decade of fostering innovation,
-                    entrepreneurship, and technological excellence. This two-day
-                    summit invites students, aspiring entrepreneurs, innovators, faculty and staff to participate in a vibrant festival of ideas,
+                    and jointly hosted by L.B.S. College of Engineering,
+                    Kasaragod and Central University of Kerala, marks the 10th
+                    anniversary edition of this flagship event, celebrating a
+                    decade of fostering innovation, entrepreneurship, and
+                    technological excellence. This two-day summit invites
+                    students, aspiring entrepreneurs, innovators, faculty and
+                    staff to participate in a vibrant festival of ideas,
                     collaboration, and learning.
                   </p>
                 </div>
@@ -75,42 +79,42 @@ const About = () => {
           </div>
         </div>
       </section>
-       {/* Colored Blocks at Bottom */}
-       <div
-         ref={bottomRef}
-         className={`${
-           bottomVisible ? "fade-in-up-visible" : "fade-in-up-hidden"
-         }`}
-       >
-         <img 
-           src="/hero-blocks.png" 
-           alt="Decorative blocks" 
-           className="w-full h-20 sm:h-24 object-cover"
-         />
-      
-         {/* Scrolling Text Loop */}
-         <div className="w-full -mt-7 mb-10 skew-y-2">
-           <LogoLoop
-             logos={[
-               { text: 'IEDC SUMMIT 2025' },
-               { text: 'IEDC SUMMIT 2025' },
-               { text: 'IEDC SUMMIT 2025' },
-               { text: 'IEDC SUMMIT 2025' },
-               { text: 'IEDC SUMMIT 2025' },
-               { text: 'IEDC SUMMIT 2025' },
-               { text: 'IEDC SUMMIT 2025' },
-               { text: 'IEDC SUMMIT 2025' },
-             ]}
-             speed={80}
-             direction="left"
-             logoHeight={20}
-             gap={40}
-             pauseOnHover={true}
-             className="font-gilroy-bold bg-blue-600 py-5  text-white"
-             ariaLabel="IEDC Summit 2025"
-           />
-         </div>
-       </div>
+      {/* Colored Blocks at Bottom */}
+      <div
+        ref={bottomRef}
+        className={`${
+          bottomVisible ? "fade-in-up-visible" : "fade-in-up-hidden"
+        }`}
+      >
+        <img
+          src="/hero-blocks.png"
+          alt="Decorative blocks"
+          className="w-full h-20 sm:h-24 object-cover"
+        />
+
+        {/* Scrolling Text Loop */}
+        <div className="w-full -mt-7 mb-10 skew-y-2">
+          <LogoLoop
+            logos={[
+              { text: "IEDC SUMMIT 2025" },
+              { text: "IEDC SUMMIT 2025" },
+              { text: "IEDC SUMMIT 2025" },
+              { text: "IEDC SUMMIT 2025" },
+              { text: "IEDC SUMMIT 2025" },
+              { text: "IEDC SUMMIT 2025" },
+              { text: "IEDC SUMMIT 2025" },
+              { text: "IEDC SUMMIT 2025" },
+            ]}
+            speed={80}
+            direction="right"
+            logoHeight={20}
+            gap={40}
+            pauseOnHover={true}
+            className="font-gilroy-bold bg-blue-600 py-5  text-white"
+            ariaLabel="IEDC Summit 2025"
+          />
+        </div>
+      </div>
     </>
   );
 };

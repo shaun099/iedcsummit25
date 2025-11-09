@@ -21,11 +21,11 @@ function App() {
     <div className="App">
       <Navbar />
       <Hero />
-      <About />
       <FeaturedSpeaker />
       <FeaturedEvents />
-      <Partners />
       <Highlights />
+      <About />
+      <Partners />
       <Directions />
       <Faq />
       <Gallery />

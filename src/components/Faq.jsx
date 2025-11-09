@@ -36,10 +36,10 @@ const Faq = () => {
     const screenWidth = window.innerWidth;
     const isMobile = screenWidth < 768;
     const isTablet = screenWidth >= 768 && screenWidth < 1024;
-    
+
     const baseSpacing = isMobile ? 60 : 70;
     let calculatedHeight = 15; // Initial top margin
-    
+
     faqs.forEach((_, index) => {
       if (expandedItems.includes(index) && cardHeights[index]) {
         calculatedHeight += cardHeights[index] + 15;
@@ -47,11 +47,11 @@ const Faq = () => {
         calculatedHeight += baseSpacing;
       }
     });
-    
+
     // Add header height and bottom padding (different for mobile, tablet, and desktop)
     const headerHeight = isMobile ? 140 : 160;
     let bottomPadding;
-    
+
     if (isMobile) {
       bottomPadding = 120;
     } else if (isTablet) {
@@ -59,11 +59,11 @@ const Faq = () => {
     } else {
       bottomPadding = 200;
     }
-    
+
     calculatedHeight += headerHeight + bottomPadding;
-    
+
     const calculatedVh = `${calculatedHeight}px`;
-    
+
     setSectionHeight(calculatedVh);
   }, [expandedItems, cardHeights]);
 
@@ -127,16 +127,11 @@ const Faq = () => {
   ];
 
   return (
-    <section
-      id="faq"
-      className="w-full overflow-y-hidden bg-white relative"
-    >
-
-      <div 
+    <section id="faq" className="w-full overflow-y-hidden bg-white relative">
+      <div
         className="mb-8 md:mb-5 md:flex md:flex-col md:items-center relative py-10 px-5"
         style={{ minHeight: sectionHeight }}
       >
-
         <div className="w-full md:text-center">
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-light font-gilroy-medium md:font-black text-blue-500 relative z-20">
             FAQ
@@ -168,7 +163,10 @@ const Faq = () => {
               }`}
               style={{
                 top: `${calculateTopPosition(index)}px`,
-                height: expandedItems.includes(index) || index === faqs.length - 1 ? "auto" : "100%",
+                height:
+                  expandedItems.includes(index) || index === faqs.length - 1
+                    ? "auto"
+                    : "100%",
               }}
             >
               <div className="w-full h-auto flex flex-row justify-between items-center">
@@ -203,34 +201,34 @@ const Faq = () => {
       </div>
 
       {/* Colored Blocks at Bottom */}
-            <img 
-              src="/hero-blocks.png" 
-              alt="Decorative blocks" 
-              className="w-full h-20 sm:h-24 object-cover"
-            />
-      
-            {/* Scrolling Text Loop */}
-            <div className="w-full -mt-7 mb-10 skew-y-2">
-              <LogoLoop
-                logos={[
-                  { text: 'IEDC SUMMIT 2025' },
-                  { text: 'IEDC SUMMIT 2025' },
-                  { text: 'IEDC SUMMIT 2025' },
-                  { text: 'IEDC SUMMIT 2025' },
-                  { text: 'IEDC SUMMIT 2025' },
-                  { text: 'IEDC SUMMIT 2025' },
-                  { text: 'IEDC SUMMIT 2025' },
-                  { text: 'IEDC SUMMIT 2025' },
-                ]}
-                speed={80}
-                direction="left"
-                logoHeight={20}
-                gap={40}
-                pauseOnHover={true}
-                className="font-gilroy-bold bg-blue-600 py-5  text-white"
-                ariaLabel="IEDC Summit 2025"
-              />
-            </div>
+      <img
+        src="/hero-blocks.png"
+        alt="Decorative blocks"
+        className="w-full h-20 sm:h-24 object-cover"
+      />
+
+      {/* Scrolling Text Loop */}
+      <div className="w-full -mt-7 mb-10 -skew-y-2">
+        <LogoLoop
+          logos={[
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+          ]}
+          speed={80}
+          direction="left"
+          logoHeight={20}
+          gap={40}
+          pauseOnHover={true}
+          className="font-gilroy-bold bg-blue-600 py-5  text-white"
+          ariaLabel="IEDC Summit 2025"
+        />
+      </div>
     </section>
   );
 };

@@ -64,11 +64,11 @@ export default function FeaturedSpeakers() {
   }, []);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className={`w-full min-h-screen bg-white px-4 py-16 md:py-20 relative overflow-hidden transition-all duration-1000 ${
-        sectionVisible 
-          ? "opacity-100 translate-y-0" 
+        sectionVisible
+          ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-10"
       }`}
     >
@@ -76,61 +76,63 @@ export default function FeaturedSpeakers() {
         Featured Speakers
       </h2>
 
-      {/* Responsive Grid */}
-      {isLoading ? (
-        <LoadingAnimation />
-      ) : error ? (
-        <div className="text-center py-12">
-          <p className="text-xl md:text-2xl font-gilroy-light text-gray-500">
-            {error}
-          </p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto justify-center mb-[15vh] lg:mb-[2vh]">
-          {speakers.map((speaker, index) => (
-            <div
-              key={speaker.id}
-              className="relative w-full max-w-xs aspect-3/4 overflow-hidden"
-            >
-              {/* Speaker Image */}
-              <img
-                src={speaker.photo}
-                alt={speaker.name}
-                className="w-full h-full object-cover"
-              />
-
-              {/* Star decoration - asterisk with color */}
+      <div className="w-full md:mb-30">
+        {/* Responsive Grid */}
+        {isLoading ? (
+          <LoadingAnimation />
+        ) : error ? (
+          <div className="text-center py-12">
+            <p className="text-xl md:text-2xl font-gilroy-light text-gray-500">
+              {error}
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto justify-center mb-[15vh]  lg:mb-[2vh]">
+            {speakers.map((speaker, index) => (
               <div
-                className="absolute -bottom-8 left-2 md:-bottom-23 md:left-4 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-clash-display font-semibold pointer-events-none leading-none scale-400 md:scale-300"
-                style={{
-                  color: starColors[index % starColors.length],
-                }}
+                key={speaker.id}
+                className="relative w-full max-w-xs aspect-3/4 overflow-hidden"
               >
-                *
+                {/* Speaker Image */}
+                <img
+                  src={speaker.photo}
+                  alt={speaker.name}
+                  className="w-full h-full object-cover"
+                />
+
+                {/* Star decoration - asterisk with color */}
+                <div
+                  className="absolute -bottom-8 left-2 md:-bottom-23 md:left-4 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-clash-display font-semibold pointer-events-none leading-none scale-400 md:scale-300"
+                  style={{
+                    color: starColors[index % starColors.length],
+                  }}
+                >
+                  *
+                </div>
+                {/* Info - Always Visible */}
+                <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/1 to-black/30 flex flex-col justify-end p-4">
+                  <p className="text-[13px] md:text-lg font-medium font-clash-display leading-tight text-white">
+                    {speaker.name}
+                  </p>
+                  <p className="text-[10px] sm:text-xs md:text-sm font-light font-gilroy-light text-white mt-1">
+                    {speaker.designation}
+                  </p>
+                </div>
               </div>
-              {/* Info - Always Visible */}
-              <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/1 to-black/30 flex flex-col justify-end p-4">
-                <p className="text-[13px] md:text-lg font-medium font-clash-display leading-tight text-white">
-                  {speaker.name}
-                </p>
-                <p className="text-[10px] sm:text-xs md:text-sm font-light font-gilroy-light text-white mt-1">
-                  {speaker.designation}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* Colored Blocks at Bottom */}
       <img
         src="/hero-blocks.png"
         alt="Decorative blocks"
-        className="w-full h-20 sm:h-24 absolute bottom-20 left-0 object-cover"
+        className="w-full h-20 sm:h-24 absolute bottom-15 left-0 object-cover"
       />
 
       {/* Scrolling Text Loop */}
-      <div className="w-full absolute bottom-12 left-0 -skew-y-2">
+      <div className="w-full absolute bottom-8 left-0 -skew-y-2">
         <LogoLoop
           logos={[
             { text: "IEDC SUMMIT 2025" },
@@ -143,7 +145,7 @@ export default function FeaturedSpeakers() {
             { text: "IEDC SUMMIT 2025" },
           ]}
           speed={80}
-          direction="right"
+          direction="left"
           logoHeight={20}
           gap={40}
           pauseOnHover={true}
