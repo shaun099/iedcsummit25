@@ -57,6 +57,16 @@ const Partners = () => {
       ),
       ariaLabel: "Nammude KSD",
     },
+    {
+      node: (
+        <img
+          src="/trest.png"
+          alt="TrEST"
+          className="h-10 md:h-20 object-contain"
+        />
+      ),
+      ariaLabel: "TrEST",
+    }
   ];
 
   // Startup Enablers

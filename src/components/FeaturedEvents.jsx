@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, ChevronLeft } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Play } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import side_image from '../assets/side_image.png';
 import { Link } from 'react-router-dom';
@@ -162,25 +162,42 @@ const FeaturedEvents = () => {
                               ))}
                             </div>
                           )}
-                          
-                          {event.registrationLink ? (
-                            <a
-                              href={event.registrationLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="mt-auto w-full h-9 md:h-10 lg:h-11 bg-black rounded-lg flex items-center justify-center hover:opacity-80 opacity-90 transition"
+
+                          {/* Buttons Container */}
+                          <div className="flex gap-2 mt-auto pt-4">
+                            {event.registrationLink ? (
+                              <a
+                                href={event.registrationLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-1 h-9 md:h-10 lg:h-11 bg-black rounded-lg flex items-center justify-center hover:opacity-80 opacity-90 transition"
+                              >
+                                <span className="text-white text-xs md:text-sm lg:text-base font-medium font-clash-display tracking-tight">
+                                  REGISTER NOW
+                                </span>
+                              </a>
+                            ) : (
+                              <div className="flex-1 h-9 md:h-10 lg:h-11 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
+                                <span className="text-white text-xs md:text-sm lg:text-base font-medium font-clash-display tracking-tight">
+                                  COMING SOON
+                                </span>
+                              </div>
+                            )}
+                            
+                            {/* Promo Video Button */}
+                            <button
+                              onClick={() => {
+                                window.open('https://www.linkedin.com/posts/iedcsummit_iedcsummit2025-daretodisrupt-keralastartupmission-activity-7392572580018311168-3nxw', '_blank', 'noopener,noreferrer');
+                              }}
+                              className="h-9 md:h-10 lg:h-11 px-3 md:px-4 lg:px-5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center gap-2 transition shrink-0"
+                              aria-label="Watch promo video"
                             >
-                              <span className="text-white text-xs md:text-sm lg:text-base font-medium font-clash-display tracking-tight">
-                                REGISTER NOW
+                              <Play size={16} fill="currentColor" />
+                              <span className="text-white text-xs md:text-sm font-medium font-clash-display tracking-tight hidden sm:inline">
+                                PROMO
                               </span>
-                            </a>
-                          ) : (
-                            <div className="mt-auto w-full h-9 md:h-10 lg:h-11 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
-                              <span className="text-white text-xs md:text-sm lg:text-base font-medium font-clash-display tracking-tight">
-                                COMING SOON
-                              </span>
-                            </div>
-                          )}
+                            </button>
+                          </div>
                         </div>
                         
                         {/* Colored Decorative Blocks */}
