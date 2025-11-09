@@ -20,42 +20,58 @@ const FeaturedEvents = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const fetchedEvents = await fetch("https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue");
-        const eventsData = await fetchedEvents.json();
-        
-        // Transform and filter for Featured events only
-        const transformedEvents = [];
-        
-        if (eventsData.agenda) {
-          Object.values(eventsData.agenda).forEach(dateGroup => {
-            Object.values(dateGroup).forEach(venueEvents => {
-              venueEvents.forEach(event => {
-                // Check if the event has "Featured" in its category
-                if (event.category && event.category.includes("Featured")) {
-                  transformedEvents.push({
-                    id: event.id || Math.random(),
-                    title: event.name,
-                    description: event.description,
-                    registrationLink: event.link || "",
-                  });
-                }
-              });
-            });
-          });
-        }
-        
-        setEvents(transformedEvents);
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  // Test data with sponsor logos
+  const testEvents = [
+    {
+      id: 1,
+      title: "1Tank for Students",
+      description: "🚀 Seize Your Opportunity to Go Global! 🔥\n\n1Pitch, Infinite Opportunities\n\nPitch your startup idea on the IEDC Summit 2025 stage and stand a chance to:\n\n🏆 Secure Funding\n🎓 Win a Fully Funded* 1-Year Entrepreneurship Training in the UAE\n\nApplication Deadline: November 3, 2025",
+      registrationLink: "https://www.iedcsummit.in/1tank",
+      sponsors: ["/tiib-logo.png", "/1trepreneur-logo.png"]
+    }
+  ];
 
-    fetchEvents();
+  useEffect(() => {
+    // Comment out API fetching for testing
+    // const fetchEvents = async () => {
+    //   try {
+    //     const fetchedEvents = await fetch("https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue");
+    //     const eventsData = await fetchedEvents.json();
+    //     
+    //     // Transform and filter for Featured events only
+    //     const transformedEvents = [];
+    //     
+    //     if (eventsData.agenda) {
+    //       Object.values(eventsData.agenda).forEach(dateGroup => {
+    //         Object.values(dateGroup).forEach(venueEvents => {
+    //           venueEvents.forEach(event => {
+    //             // Check if the event has "Featured" in its category
+    //             if (event.category && event.category.includes("Featured")) {
+    //               transformedEvents.push({
+    //                 id: event.id || Math.random(),
+    //                 title: event.name,
+    //                 description: event.description,
+    //                 registrationLink: event.link || "",
+    //               });
+    //             }
+    //           });
+    //         });
+    //       });
+    //     }
+    //     
+    //     setEvents(transformedEvents);
+    //   } catch (error) {
+    //     console.error("Error fetching events:", error);
+    //   } finally {
+    //     setIsLoading(false);
+    //   }
+    // };
+
+    // fetchEvents();
+    
+    // Use test data instead
+    setEvents(testEvents);
+    setIsLoading(false);
   }, []);
 
   const handleNext = () => {
@@ -86,15 +102,17 @@ const FeaturedEvents = () => {
         ) : events.length > 0 ? (
           <div className="relative">
             {/* Cards Grid with Stacked Effect */}
-            <div className="relative h-[450px] md:h-[600px] lg:h-[700px] flex items-center justify-center">
+            <div className="relative h-80 sm:h-96 md:h-[550px] lg:h-[700px] flex items-center justify-center mt-[12vh] mb-[5vh] md:mt-[3vh]">
               {/* Previous Button - Large screens only, left side */}
-              <button
-                onClick={handlePrev}
-                className="hidden lg:flex absolute left-0 w-16 h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg z-20"
-                aria-label="Previous event"
-              >
-                <ChevronLeft size={32} />
-              </button>
+              {events.length > 1 && (
+                <button
+                  onClick={handlePrev}
+                  className="hidden lg:flex absolute left-0 w-16 h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg z-20"
+                  aria-label="Previous event"
+                >
+                  <ChevronLeft size={32} />
+                </button>
+              )}
 
               <AnimatePresence mode="popLayout">
                 {/* Display 3 cards in a stacked fashion */}
@@ -121,29 +139,43 @@ const FeaturedEvents = () => {
                       }}
                       className="absolute w-full max-w-xs md:max-w-md"
                     >
-                      <div className="w-full max-w-[35vh] md:max-w-[50vh] mx-auto h-80 md:h-110 lg:h-120 relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl">
-                        <div className="w-[75%] h-full left-0 top-0 absolute overflow-hidden p-4 md:p-6">
-                          <h3 className="text-2xl md:text-4xl lg:text-5xl font-gilroy-medium text-black leading-tight mb-3 md:mb-4 [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)] line-clamp-2">
+                      <div className="w-full max-w-[80vw] md:max-w-[46vw] lg:max-w-4xl mx-auto aspect-4/5 relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl">
+                        <div className="w-[70%] h-full left-0 top-0 absolute overflow-y-auto p-4 md:p-6 lg:p-8 flex flex-col gap-3 md:gap-4">
+                          <h3 className="text-xl md:text-3xl lg:text-4xl font-gilroy-medium text-black leading-tight [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
                             {event.title}
                           </h3>
                           
-                          <p className="text-sm md:text-base lg:text-lg font-gilroy-light text-black leading-5 md:leading-6 mb-6 md:mb-8 line-clamp-4 md:line-clamp-5 [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
+                          <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black leading-relaxed [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
                             {event.description}
                           </p>
+
+                          {/* Sponsor Logos */}
+                          {event.sponsors && event.sponsors.length > 0 && (
+                            <div className="flex items-center gap-2 md:gap-3 mt-auto pt-4">
+                              {event.sponsors.map((sponsor, idx) => (
+                                <img 
+                                  key={idx}
+                                  src={sponsor} 
+                                  alt="sponsor" 
+                                  className="h-5 md:h-7 lg:h-8 object-contain"
+                                />
+                              ))}
+                            </div>
+                          )}
                           
                           {event.registrationLink ? (
                             <a
                               href={event.registrationLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="absolute bottom-4 md:bottom-6 left-4 md:left-6 w-28 h-9 md:w-36 md:h-10 bg-black rounded-lg flex items-center justify-center hover:opacity-80 opacity-90 transition"
+                              className="mt-auto w-full h-9 md:h-10 lg:h-11 bg-black rounded-lg flex items-center justify-center hover:opacity-80 opacity-90 transition"
                             >
                               <span className="text-white text-xs md:text-sm lg:text-base font-medium font-clash-display tracking-tight">
                                 REGISTER NOW
                               </span>
                             </a>
                           ) : (
-                            <div className="absolute bottom-4 md:bottom-6 left-4 md:left-6 w-28 h-9 md:w-36 md:h-10 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
+                            <div className="mt-auto w-full h-9 md:h-10 lg:h-11 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
                               <span className="text-white text-xs md:text-sm lg:text-base font-medium font-clash-display tracking-tight">
                                 COMING SOON
                               </span>
@@ -164,40 +196,53 @@ const FeaturedEvents = () => {
               </AnimatePresence>
 
               {/* Next Button - Large screens only, right side */}
-              <button
-                onClick={handleNext}
-                className="hidden lg:flex absolute right-0 w-16 h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg z-20"
-                aria-label="Next event"
-              >
-                <ChevronRight size={32} />
-              </button>
+              {events.length > 1 && (
+                <button
+                  onClick={handleNext}
+                  className="hidden lg:flex absolute right-0 w-16 h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg z-20"
+                  aria-label="Next event"
+                >
+                  <ChevronRight size={32} />
+                </button>
+              )}
             </div>
 
             {/* Navigation Controls and View All - Mobile and Tablet only */}
-            <div className="lg:hidden flex items-center justify-between gap-4 mb-[10vh]">
-              {/* Previous Button */}
-              <button
-                onClick={handlePrev}
-                className="w-14 h-14 md:w-16 md:h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg shrink-0"
-                aria-label="Previous event"
-              >
-                <ChevronLeft size={32} />
-              </button>
+            {events.length > 1 && (
+              <div className="lg:hidden flex items-center justify-between gap-4 mb-[10vh]">
+                {/* Previous Button */}
+                <button
+                  onClick={handlePrev}
+                  className="w-14 h-14 md:w-16 md:h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg shrink-0"
+                  aria-label="Previous event"
+                >
+                  <ChevronLeft size={32} />
+                </button>
 
-              {/* View All Link - Center on mobile */}
-              <Link to="/events" className="flex-1 text-center text-blue-600 text-base md:text-lg font-gilroy-medium cursor-pointer hover:opacity-70 transition-opacity">
-                View all events...
-              </Link>
+                {/* View All Link - Center on mobile */}
+                <Link to="/events" className="flex-1 text-center text-blue-600 text-base md:text-lg font-gilroy-medium cursor-pointer hover:opacity-70 transition-opacity">
+                  View all events...
+                </Link>
 
-              {/* Next Button */}
-              <button
-                onClick={handleNext}
-                className="w-14 h-14 md:w-16 md:h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg shrink-0"
-                aria-label="Next event"
-              >
-                <ChevronRight size={32} />
-              </button>
-            </div>
+                {/* Next Button */}
+                <button
+                  onClick={handleNext}
+                  className="w-14 h-14 md:w-16 md:h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg shrink-0"
+                  aria-label="Next event"
+                >
+                  <ChevronRight size={32} />
+                </button>
+              </div>
+            )}
+            
+            {/* View All Link - Mobile only when single event */}
+            {events.length <= 1 && (
+              <div className="lg:hidden text-center py-8">
+                <Link to="/events" className="text-blue-600 text-base md:text-lg font-gilroy-medium cursor-pointer hover:opacity-70 transition-opacity">
+                  View all events...
+                </Link>
+              </div>
+            )}
 
             {/* View All Link - Desktop only */}
             <div className="hidden lg:block text-center pb-12">
@@ -219,10 +264,10 @@ const FeaturedEvents = () => {
       <img
         src="/hero-blocks.png"
         alt="Decorative blocks"
-        className="w-full h-20 sm:h-24 absolute bottom-20 left-0 object-cover"
+        className="w-full h-20 sm:h-24 absolute bottom-[8vh] left-0 object-cover"
       />
       {/* Scrolling Text Loop */}
-        <div className="w-full skew-y-2">
+        <div className="w-full skew-y-2 lg:skew-y-1">
             <LogoLoop
                 logos={[
                 { text: 'IEDC SUMMIT 2025' },
@@ -239,7 +284,7 @@ const FeaturedEvents = () => {
                 logoHeight={20}
                 gap={40}
                 pauseOnHover={true}
-                className="font-gilroy-bold bg-blue-600 py-5 -bottom-10 text-white"
+                className="font-gilroy-bold bg-blue-600 py-5 -bottom-[6vh] md:-bottom-[7vh] lg:-bottom-[4vh] text-white"
                 ariaLabel="IEDC Summit 2025"
             />  
         </div>

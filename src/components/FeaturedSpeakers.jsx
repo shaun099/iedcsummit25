@@ -86,7 +86,7 @@ export default function FeaturedSpeakers() {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto justify-center mb-30">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto justify-center mb-[15vh] lg:mb-[2vh]">
           {speakers.map((speaker, index) => (
             <div
               key={speaker.id}
