@@ -1,5 +1,5 @@
-import React from 'react';
-import LogoLoop from './LogoLoop';
+import React from "react";
+import LogoLoop from "./LogoLoop";
 import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
 
 const Partners = () => {
@@ -8,80 +8,140 @@ const Partners = () => {
   // Ecosystem Partners
   const ecosystemPartners = [
     {
-      node: <img src="/tie-logo.png" alt="TIE" className="h-10 md:h-25 object-contain" />,
-      ariaLabel: "TIE"
+      node: (
+        <img
+          src="/tie-logo.png"
+          alt="TIE"
+          className="h-10 md:h-25 object-contain"
+        />
+      ),
+      ariaLabel: "TIE",
     },
     {
-      node: <img src="/kasaracode-logo.png" alt="Kasaracode" className="h-6 md:h-13 object-contain" />,
-      ariaLabel: "Kasaracode"
+      node: (
+        <img
+          src="/kasaracode-logo.png"
+          alt="Kasaracode"
+          className="h-6 md:h-13 object-contain"
+        />
+      ),
+      ariaLabel: "Kasaracode",
     },
     {
-      node: <img src="/tinkerhub-logo.png" alt="Tinkerhub" className="h-6 md:h-13 object-contain" />,
-      ariaLabel: "Tinkerhub"
+      node: (
+        <img
+          src="/tinkerhub-logo.png"
+          alt="Tinkerhub"
+          className="h-6 md:h-13 object-contain"
+        />
+      ),
+      ariaLabel: "Tinkerhub",
     },
     {
-      node: <img src="/cpcri-logo.png" alt="CPCRI" className="h-13 md:h-30 object-contain" />,
-      ariaLabel: "CPCRI"
+      node: (
+        <img
+          src="/cpcri-logo.png"
+          alt="CPCRI"
+          className="h-13 md:h-30 object-contain"
+        />
+      ),
+      ariaLabel: "CPCRI",
     },
     {
-      node: <img src="/nammude-ksd-logo.png" alt="Nammude KSD" className="h-14 md:h-30 object-contain" />,
-      ariaLabel: "Nammude KSD"
+      node: (
+        <img
+          src="/nammude-ksd-logo.png"
+          alt="Nammude KSD"
+          className="h-14 md:h-30 object-contain"
+        />
+      ),
+      ariaLabel: "Nammude KSD",
     },
   ];
 
   // Startup Enablers
   const startupEnablers = [
     {
-      node: <img src="/tiib-logo.png" alt="TIIB" className="h-10 md:h-20 object-contain" />,
-      ariaLabel: "TIIB"
+      node: (
+        <img
+          src="/tiib-logo.png"
+          alt="TIIB"
+          className="h-10 md:h-20 object-contain"
+        />
+      ),
+      ariaLabel: "TIIB",
     },
     {
-      node: <img src="/campusfund-logo.png" alt="Campus Fund" className="h-10 md:h-20 object-contain" />,
-      ariaLabel: "Campus Fund"
+      node: (
+        <img
+          src="/campusfund-logo.png"
+          alt="Campus Fund"
+          className="h-10 md:h-20 object-contain"
+        />
+      ),
+      ariaLabel: "Campus Fund",
     },
     {
-      node: <img src="/1trepreneur-logo.png" alt="1trepreneur" className="h-10 md:h-20 object-contain" />,
-      ariaLabel: "1trepreneur"
+      node: (
+        <img
+          src="/1trepreneur-logo.png"
+          alt="1trepreneur"
+          className="h-10 md:h-20 object-contain"
+        />
+      ),
+      ariaLabel: "1trepreneur",
     },
   ];
 
   return (
-    <section id="partners" className={`w-full bg-white overflow-hidden relative ${
-      sectionVisible ? 'fade-in-up-visible' : 'fade-in-up-hidden'
-    }`} ref={sectionRef}>
+    <section
+      id="partners"
+      className={`w-full bg-white overflow-hidden relative ${
+        sectionVisible ? "fade-in-up-visible" : "fade-in-up-hidden"
+      }`}
+      ref={sectionRef}
+    >
       {/* Powered By & Hosted By Section */}
-      <div className="px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
+      <div className="px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20 h-[45vh]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 max-w-6xl mx-auto">
           {/* Powered By */}
-          <div>
+          <div className="flex flex-col items-center">
             <h3 className="text-xl md:text-2xl lg:text-3xl font-light font-clash-display text-black mb-6 md:mb-8">
               Powered by
             </h3>
             <div className="flex items-start gap-8 md:gap-12">
               {/* KSUM */}
-              <a 
-                href="https://www.startupmission.kerala.gov.in" 
-                target="_blank" 
+              <a
+                href="https://www.startupmission.kerala.gov.in"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="flex flex-col items-center group cursor-pointer"
               >
                 <div className="transition-transform duration-300 hover:scale-110 mb-3">
-                  <img src="/ksum-logo-black.png" alt="KSUM" className="h-16 md:h-24 lg:h-32 object-contain" />
+                  <img
+                    src="/ksum-logo-black.png"
+                    alt="KSUM"
+                    className="h-16 md:h-24 lg:h-32 object-contain"
+                  />
                 </div>
                 <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300">
                   Kerala Startup Mission
                 </p>
               </a>
-              
+
               {/* IEDC */}
-              <a 
-                href="https://iedc.startupmission.in/" 
-                target="_blank" 
+              <a
+                href="https://iedc.startupmission.in/"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="flex flex-col items-center group cursor-pointer"
               >
                 <div className="transition-transform duration-300 hover:scale-110 mb-3">
-                  <img src="/iedc-logo-color.png" alt="IEDC" className="h-16 md:h-24 lg:h-32 object-contain" />
+                  <img
+                    src="/iedc-logo-color.png"
+                    alt="IEDC"
+                    className="h-16 md:h-24 lg:h-32 object-contain"
+                  />
                 </div>
                 <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300">
                   IEDC Kerala
@@ -91,35 +151,43 @@ const Partners = () => {
           </div>
 
           {/* Hosted By */}
-          <div>
+          <div className="flex flex-col items-center">
             <h3 className="text-xl md:text-2xl lg:text-3xl font-light font-clash-display text-black mb-6 md:mb-8">
               Hosted by
             </h3>
             <div className="flex items-start gap-8 md:gap-12">
               {/* LBS Institute */}
-              <a 
-                href="https://www.lbscek.ac.in" 
-                target="_blank" 
+              <a
+                href="https://www.lbscek.ac.in"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="flex flex-col items-center group cursor-pointer"
               >
                 <div className="transition-transform duration-300 hover:scale-110 mb-3">
-                  <img src="/lbscek-logo-black.png" alt="LBS Institute" className="h-16 md:h-24 lg:h-32 object-contain" />
+                  <img
+                    src="/lbscek-logo-black.png"
+                    alt="LBS Institute"
+                    className="h-16 md:h-24 lg:h-32 object-contain"
+                  />
                 </div>
                 <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300">
                   LBS College of Engineering, Kasaragod
                 </p>
               </a>
-              
+
               {/* CUK */}
-              <a 
-                href="https://www.cukerala.ac.in" 
-                target="_blank" 
+              <a
+                href="https://www.cukerala.ac.in"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="flex flex-col items-center group cursor-pointer"
               >
                 <div className="transition-transform duration-300 hover:scale-110 mb-3">
-                  <img src="/cuk-logo.svg" alt="CUK" className="h-16 md:h-24 lg:h-32 object-contain" />
+                  <img
+                    src="/cuk-logo.svg"
+                    alt="CUK"
+                    className="h-16 md:h-24 lg:h-32 object-contain"
+                  />
                 </div>
                 <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300">
                   Central University of Kerala
@@ -131,28 +199,29 @@ const Partners = () => {
       </div>
 
       {/* Header Section */}
-      <div className="px-5 md:px-8 lg:px-12 pt-8 md:pt-12 pb-8 md:pb-16">
+      <div className="px-5 md:px-8 lg:px-12 pt-8 md:pt-12 pb-8 md:pb-16 ">
         {/* Left Content */}
-        <div className="flex-1 w-full">
-          <h2 className="text-4xl md:text-6xl lg:text-8xl font-light font-clash-display text-blue-500 mb-3 md:mb-6 lg:mb-8 leading-tight">
-            Our<br />Partners
+        <div className="flex-1 w-full text-center flex flex-col items-center">
+          <h2 className="text-4xl md:text-6xl lg:text-8xl font-light font-clash-display text-blue-500 mb-3 md:mb-6 lg:mb-8 leading-tight ">
+            Our Partners
           </h2>
-          <p className="text-xs md:text-lg lg:text-2xl text-black font-normal font-gilroy-light max-w-md leading-relaxed">
-            Grateful to our partners who make IEDC Summit 2025 possible through their unwavering support and commitment to innovation.
+          <p className="text-xs md:text-lg lg:text-2xl text-black font-light font-gilroy-light w-full leading-relaxed">
+            Grateful to our partners who make IEDC Summit 2025 possible through
+            their unwavering support and commitment to innovation.
           </p>
         </div>
       </div>
 
       {/* Startup Enablers Section */}
-      <div className="px-5 md:px-8 lg:px-12 pb-8 md:pb-12">
-        <h3 className="text-2xl md:text-3xl lg:text-4xl font-light font-clash-display text-black mb-4 md:mb-6">
+      <div className="px-5 md:px-8 lg:px-12 pb-8 md:pb-12 ">
+        <h3 className="text-2xl md:text-3xl lg:text-4xl font-light font-clash-display text-black mb-4 md:mb-6 text-center">
           Startup Enablers
         </h3>
         <LogoLoop
           logos={startupEnablers}
           speed={60}
           direction="left"
-          logoHeight={40}
+          logoHeight={1}
           gap={40}
           pauseOnHover={true}
           scaleOnHover={true}
@@ -160,16 +229,16 @@ const Partners = () => {
         />
       </div>
 
-      {/* Ecosystem Partners Section */} 
+      {/* Ecosystem Partners Section */}
       <div className="px-5 md:px-8 lg:px-12 pb-8 md:pb-12">
-        <h3 className="text-2xl md:text-3xl lg:text-4xl font-light font-clash-display text-black mb-4 md:mb-6">
+        <h3 className="text-2xl md:text-3xl lg:text-4xl font-light font-clash-display text-black mb-4 md:mb-6 text-center">
           Ecosystem Partners
         </h3>
         <LogoLoop
           logos={ecosystemPartners}
           speed={60}
-          direction="left"
-          logoHeight={40}
+          direction="right"
+          logoHeight={10}
           gap={40}
           pauseOnHover={true}
           scaleOnHover={true}
@@ -178,9 +247,9 @@ const Partners = () => {
       </div>
 
       {/* Colored Blocks at Bottom */}
-      <img 
-        src="/hero-blocks.png" 
-        alt="Decorative blocks" 
+      <img
+        src="/hero-blocks.png"
+        alt="Decorative blocks"
         className="w-full h-20 sm:h-24 object-cover"
       />
 
@@ -188,14 +257,14 @@ const Partners = () => {
       <div className="w-full -mt-7 mb-10 -skew-y-2">
         <LogoLoop
           logos={[
-            { text: 'IEDC SUMMIT 2025' },
-            { text: 'IEDC SUMMIT 2025' },
-            { text: 'IEDC SUMMIT 2025' },
-            { text: 'IEDC SUMMIT 2025' },
-            { text: 'IEDC SUMMIT 2025' },
-            { text: 'IEDC SUMMIT 2025' },
-            { text: 'IEDC SUMMIT 2025' },
-            { text: 'IEDC SUMMIT 2025' },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
           ]}
           speed={80}
           direction="left"
@@ -211,5 +280,3 @@ const Partners = () => {
 };
 
 export default Partners;
-
-
