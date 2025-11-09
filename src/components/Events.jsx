@@ -51,6 +51,7 @@ export default function EventsPage() {
                       eventType: eventType,
                       startTime: event.start_time,
                       endTime: event.end_time,
+                      is1Tank: event.name && event.name.includes("1Tank"),
                     });
                   }
                 });
