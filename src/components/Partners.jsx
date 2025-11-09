@@ -49,6 +49,87 @@ const Partners = () => {
     <section id="partners" className={`w-full bg-white overflow-hidden relative ${
       sectionVisible ? 'fade-in-up-visible' : 'fade-in-up-hidden'
     }`} ref={sectionRef}>
+      {/* Powered By & Hosted By Section */}
+      <div className="px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 max-w-6xl mx-auto">
+          {/* Powered By */}
+          <div>
+            <h3 className="text-xl md:text-2xl lg:text-3xl font-light font-clash-display text-black mb-6 md:mb-8">
+              Powered by
+            </h3>
+            <div className="flex items-start gap-8 md:gap-12">
+              {/* KSUM */}
+              <a 
+                href="https://www.startupmission.kerala.gov.in" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex flex-col items-center group cursor-pointer"
+              >
+                <div className="transition-transform duration-300 hover:scale-110 mb-3">
+                  <img src="/ksum-logo-black.png" alt="KSUM" className="h-16 md:h-24 lg:h-32 object-contain" />
+                </div>
+                <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300">
+                  Kerala Startup Mission
+                </p>
+              </a>
+              
+              {/* IEDC */}
+              <a 
+                href="https://iedc.startupmission.in/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex flex-col items-center group cursor-pointer"
+              >
+                <div className="transition-transform duration-300 hover:scale-110 mb-3">
+                  <img src="/iedc-logo-color.png" alt="IEDC" className="h-16 md:h-24 lg:h-32 object-contain" />
+                </div>
+                <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300">
+                  IEDC Kerala
+                </p>
+              </a>
+            </div>
+          </div>
+
+          {/* Hosted By */}
+          <div>
+            <h3 className="text-xl md:text-2xl lg:text-3xl font-light font-clash-display text-black mb-6 md:mb-8">
+              Hosted by
+            </h3>
+            <div className="flex items-start gap-8 md:gap-12">
+              {/* LBS Institute */}
+              <a 
+                href="https://www.lbscek.ac.in" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex flex-col items-center group cursor-pointer"
+              >
+                <div className="transition-transform duration-300 hover:scale-110 mb-3">
+                  <img src="/lbscek-logo-black.png" alt="LBS Institute" className="h-16 md:h-24 lg:h-32 object-contain" />
+                </div>
+                <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300">
+                  LBS College of Engineering, Kasaragod
+                </p>
+              </a>
+              
+              {/* CUK */}
+              <a 
+                href="https://www.cukerala.ac.in" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex flex-col items-center group cursor-pointer"
+              >
+                <div className="transition-transform duration-300 hover:scale-110 mb-3">
+                  <img src="/cuk-logo.svg" alt="CUK" className="h-16 md:h-24 lg:h-32 object-contain" />
+                </div>
+                <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300">
+                  Central University of Kerala
+                </p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Header Section */}
       <div className="px-5 md:px-8 lg:px-12 pt-8 md:pt-12 pb-8 md:pb-16">
         {/* Left Content */}
