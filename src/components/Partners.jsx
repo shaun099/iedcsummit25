@@ -124,7 +124,7 @@ const Partners = () => {
                     className="h-16 md:h-24 lg:h-32 object-contain"
                   />
                 </div>
-                <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300">
+                <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300 text-center">
                   Kerala Startup Mission
                 </p>
               </a>
@@ -143,7 +143,7 @@ const Partners = () => {
                     className="h-16 md:h-24 lg:h-32 object-contain"
                   />
                 </div>
-                <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300">
+                <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300 text-center">
                   IEDC Kerala
                 </p>
               </a>
@@ -170,7 +170,7 @@ const Partners = () => {
                     className="h-16 md:h-24 lg:h-32 object-contain"
                   />
                 </div>
-                <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300">
+                <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300 text-center">
                   LBS College of Engineering, Kasaragod
                 </p>
               </a>
@@ -189,7 +189,7 @@ const Partners = () => {
                     className="h-16 md:h-24 lg:h-32 object-contain"
                   />
                 </div>
-                <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300">
+                <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300 text-center">
                   Central University of Kerala
                 </p>
               </a>
