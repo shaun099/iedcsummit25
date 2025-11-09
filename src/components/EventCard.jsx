@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import side_image from '../assets/side_image.png';
+import { Play } from 'lucide-react';
 
 const MARQUEE_STYLES = `
   @keyframes marquee {
@@ -96,7 +97,7 @@ export default function EventCard({ event, isWebinar = false }) {
           </div>
         )}
         
-        <div className="w-[70%] h-full left-0 top-0 absolute overflow-y-auto p-4 md:p-6 flex flex-col gap-3">
+        <div className="w-[75%] h-full left-0 top-0 absolute overflow-y-auto p-4 md:p-6 flex flex-col gap-3">
           <div ref={titleRef} className={isMarqueeActive ? 'marquee-container' : ''}>
             <h3 className={`${isMarqueeActive ? 'marquee-text' : ''} text-lg md:text-2xl font-gilroy-medium text-black leading-tight [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]`}>
               {event.title}
@@ -194,21 +195,39 @@ export default function EventCard({ event, isWebinar = false }) {
             // Regular event: Single register button
             <>
               {event.registrationLink ? (
-                <button
-                  onClick={() => {
-                    window.open(event.registrationLink, '_blank', 'noopener,noreferrer');
-                  }}
-                  className={`mt-auto w-full h-8 md:h-9 rounded-lg flex items-center justify-center transition ${
-                    !isEventEnded
-                      ? 'bg-black hover:opacity-100 opacity-90'
-                      : 'bg-gray-400 cursor-not-allowed'
-                  }`}
-                  disabled={isEventEnded}
-                >
-                  <span className="text-white text-xs font-medium font-clash-display tracking-tight">
-                    {isEventEnded ? 'REGISTRATION CLOSED' : 'REGISTER NOW'}
-                  </span>
-                </button>
+                <div className="mt-auto w-full flex gap-2">
+                  <button
+                    onClick={() => {
+                      window.open(event.registrationLink, '_blank', 'noopener,noreferrer');
+                    }}
+                    className={`flex-1 h-8 md:h-9 rounded-lg flex items-center justify-center transition ${
+                      !isEventEnded
+                        ? 'bg-black hover:opacity-100 opacity-90'
+                        : 'bg-gray-400 cursor-not-allowed'
+                    }`}
+                    disabled={isEventEnded}
+                  >
+                    <span className="text-white text-xs font-medium font-clash-display tracking-tight">
+                      {isEventEnded ? 'REGISTRATION CLOSED' : 'REGISTER NOW'}
+                    </span>
+                  </button>
+                  
+                  {/* Promo button for 1Tank events */}
+                  {event.is1Tank && (
+                    <button
+                      onClick={() => {
+                        window.open('https://www.linkedin.com/posts/iedcsummit_iedcsummit2025-daretodisrupt-keralastartupmission-activity-7392572580018311168-3nxw', '_blank', 'noopener,noreferrer');
+                      }}
+                      className="h-8 md:h-9 px-3 md:px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center gap-2 transition shrink-0"
+                      aria-label="Watch promo video"
+                    >
+                      <Play size={14} fill="currentColor" />
+                      <span className="text-white text-xs font-medium font-clash-display tracking-tight hidden sm:inline">
+                        PROMO
+                      </span>
+                    </button>
+                  )}
+                </div>
               ) : (
                 <div className="mt-auto w-full h-8 md:h-9 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
                   <span className="text-white text-xs font-medium font-clash-display tracking-tight">
