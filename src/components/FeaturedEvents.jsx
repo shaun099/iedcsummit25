@@ -27,7 +27,7 @@ const FeaturedEvents = () => {
       title: "1Tank for Students",
       description: "🚀 Seize Your Opportunity to Go Global! 🔥\n\n1Pitch, Infinite Opportunities\n\nPitch your startup idea on the IEDC Summit 2025 stage and stand a chance to:\n\n🏆 Secure Funding\n🎓 Win a Fully Funded* 1-Year Entrepreneurship Training in the UAE\n\nApplication Deadline: November 10, 2025",
       registrationLink: "https://www.iedcsummit.in/1tank",
-      sponsors: ["/tiib-logo.png", "/1trepreneur-logo.png"]
+      sponsors: ["/tiib-logo.png", "/1trepreneur-logo.png", "/campusfund-logo.png", "/tie-logo.png"]
     }
   ];
 
@@ -140,7 +140,7 @@ const FeaturedEvents = () => {
                       className="absolute w-full max-w-xs md:max-w-md"
                     >
                       <div className="w-full max-w-[80vw] md:max-w-[46vw] lg:max-w-4xl mx-auto aspect-4/5 relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl">
-                        <div className="w-[70%] h-full left-0 top-0 absolute overflow-y-auto p-4 md:p-6 lg:p-8 flex flex-col gap-3 md:gap-4">
+                        <div className="w-[85%] h-full left-0 top-0 absolute overflow-y-auto p-4 md:p-6 lg:p-8 flex flex-col gap-3 md:gap-4">
                           <h3 className="text-xl md:text-3xl lg:text-4xl font-gilroy-medium text-black leading-tight [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
                             {event.title}
                           </h3>
@@ -151,13 +151,13 @@ const FeaturedEvents = () => {
 
                           {/* Sponsor Logos */}
                           {event.sponsors && event.sponsors.length > 0 && (
-                            <div className="flex items-center gap-2 md:gap-3 mt-auto pt-4">
+                            <div className="flex items-center gap-2 md:gap-3 flex-wrap mt-auto pt-4">
                               {event.sponsors.map((sponsor, idx) => (
                                 <img 
                                   key={idx}
                                   src={sponsor} 
                                   alt="sponsor" 
-                                  className="h-5 md:h-7 lg:h-8 object-contain"
+                                  className="h-6 md:h-8 lg:h-9 object-contain"
                                 />
                               ))}
                             </div>

@@ -52,6 +52,9 @@ export default function EventsPage() {
                       startTime: event.start_time,
                       endTime: event.end_time,
                       is1Tank: event.name && event.name.includes("1Tank"),
+                      sponsors: event.name && event.name.includes("1Tank") 
+                        ? ["/tiib-logo.png", "/1trepreneur-logo.png", "/campusfund-logo.png", "/tie-logo.png"]
+                        : [],
                     });
                   }
                 });
