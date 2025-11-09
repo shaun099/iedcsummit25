@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import LogoLoop from "./LogoLoop";
+import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
 
 const LoadingAnimation = () => (
   <div className="flex items-center justify-center py-20">
@@ -32,6 +33,7 @@ export default function FeaturedSpeakers() {
   const [speakers, setSpeakers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { ref: sectionRef, isVisible: sectionVisible } = useScrollFadeInUp();
 
   useEffect(() => {
     const fetchSpeakers = async () => {
@@ -62,8 +64,14 @@ export default function FeaturedSpeakers() {
   }, []);
 
   return (
-    <section className="w-full min-h-screen bg-white px-4 py-16 md:py-20 relative overflow-hidden">
-      {/* Section Title */}
+    <section 
+      ref={sectionRef}
+      className={`w-full min-h-screen bg-white px-4 py-16 md:py-20 relative overflow-hidden transition-all duration-1000 ${
+        sectionVisible 
+          ? "opacity-100 translate-y-0" 
+          : "opacity-0 translate-y-10"
+      }`}
+    >
       <h2 className="text-4xl md:text-6xl lg:text-7xl text-center text-blue-500 mb-12 font-clash-display">
         Featured Speakers
       </h2>
@@ -78,7 +86,7 @@ export default function FeaturedSpeakers() {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto justify-center mb-30">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto justify-center mb-[15vh] lg:mb-[2vh]">
           {speakers.map((speaker, index) => (
             <div
               key={speaker.id}
