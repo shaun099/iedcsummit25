@@ -28,23 +28,29 @@ export default function EventCard({ event, isWebinar = false }) {
   const [isEventLive, setIsEventLive] = useState(false);
   const [isMarqueeActive, setIsMarqueeActive] = useState(false);
   const [canRegister, setCanRegister] = useState(true);
+  const [isEventEnded, setIsEventEnded] = useState(false);
   const titleRef = useRef(null);
 
   useEffect(() => {
-    if (!isWebinar || !event.startTime) return;
+    if (!event.startTime || !event.endTime) return;
 
     const checkEventLive = () => {
       const now = new Date();
       const eventStart = new Date(event.startTime);
       const eventEnd = new Date(event.endTime);
       
-      // Check if event is live
+      // Check if event is live (for webinars)
       setIsEventLive(now >= eventStart && now <= eventEnd);
       
-      // Check if we're within 30 minutes before start time
-      const thirtyMinutesBefore = new Date(eventStart.getTime() - 30 * 60000);
-      const canReg = now < thirtyMinutesBefore;
-      setCanRegister(canReg);
+      // Check if event has ended (for all events)
+      setIsEventEnded(now > eventEnd);
+      
+      // Check if we're within 30 minutes before start time (for webinars)
+      if (isWebinar) {
+        const thirtyMinutesBefore = new Date(eventStart.getTime() - 30 * 60000);
+        const canReg = now < thirtyMinutesBefore;
+        setCanRegister(canReg);
+      }
     };
 
     checkEventLive();
@@ -82,16 +88,48 @@ export default function EventCard({ event, isWebinar = false }) {
   return (
     <>
       <style>{MARQUEE_STYLES}</style>
-      <div className="w-full max-w-80 mx-auto h-[375px] relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl cursor-pointer">
-        <div className="w-[75%] h-full left-0 top-0 absolute overflow-hidden p-6">
-          <div ref={titleRef} className={isMarqueeActive ? 'marquee-container mb-3 h-10 flex items-center' : 'mb-3'}>
-            <h3 className={`${isMarqueeActive ? 'marquee-text' : ''} text-3xl font-gilroy-medium text-black leading-tight [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]`}>
+      <div className="w-full max-w-80 mx-auto aspect-4/5 relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl cursor-pointer">
+        {/* Event Type Badge */}
+        {event.eventType && (
+          <div className="absolute top-3 right-3 z-10 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-gilroy-medium">
+            {event.eventType}
+          </div>
+        )}
+        
+        <div className="w-[70%] h-full left-0 top-0 absolute overflow-y-auto p-4 md:p-6 flex flex-col gap-3">
+          <div ref={titleRef} className={isMarqueeActive ? 'marquee-container' : ''}>
+            <h3 className={`${isMarqueeActive ? 'marquee-text' : ''} text-lg md:text-2xl font-gilroy-medium text-black leading-tight [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]`}>
               {event.title}
             </h3>
           </div>
           
+          {/* Speaker details for webinars - below title */}
+          {isWebinar && event.speakers && event.speakers.length > 0 && (
+            <div className="space-y-2">
+              {event.speakers.map((speaker, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  {speaker.photo && (
+                    <img 
+                      src={speaker.photo} 
+                      alt={speaker.name}
+                      className="w-14 h-14 rounded-full object-cover shrink-0 mt-1"
+                    />
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-gilroy-medium text-black wrap-break-word">
+                      {speaker.name}
+                    </p>
+                    <p className="text-xs font-gilroy-light text-gray-700 wrap-break-word">
+                      {speaker.designation}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          
           {isWebinar && event.startTime && (
-            <div className="text-xs font-gilroy-medium text-blue-600 mb-2">
+            <div className="text-xs font-gilroy-medium text-blue-600">
               {new Date(event.startTime).toLocaleString('en-US', { 
                 month: 'short', 
                 day: 'numeric', 
@@ -102,85 +140,93 @@ export default function EventCard({ event, isWebinar = false }) {
             </div>
           )}
         
-        <p className="text-sm font-gilroy-light text-black leading-5 mb-8 line-clamp-6 [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
-          {event.description}
-        </p>
+          <p className="text-xs md:text-sm font-gilroy-light text-black leading-relaxed [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
+            {event.description}
+          </p>
         
-        {isWebinar ? (
-          // Webinar: Two buttons separated by comma
-          <div className="absolute bottom-6 left-6 flex items-center gap-2 z-10">
-            {webinarLinks.registration && canRegister ? (
-              <button
-                onClick={() => {
-                  window.open(webinarLinks.registration, '_blank', 'noopener,noreferrer');
-                }}
-                className="w-27 h-7 bg-black rounded-lg flex items-center justify-center hover:opacity-100 opacity-90 transition"
-                type="button"
-              >
-                <span className="text-white text-xs font-medium font-clash-display tracking-tight">
-                  REGISTER NOW
-                </span>
-              </button>
-            ) : (
-              <div className="w-40 h-7 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
-                <span className="text-white text-xs font-medium font-clash-display tracking-tight">
-                  {canRegister ? 'REGISTER SOON' : 'REGISTRATIONS CLOSED'}
-                </span>
-              </div>
-            )}
-            
-            {webinarLinks.meet && (canRegister || isEventLive) ? (
-              <button
-                onClick={() => {
-                  window.open(webinarLinks.meet, '_blank', 'noopener,noreferrer');
-                }}
-                className={`w-24 h-7 rounded-lg flex items-center justify-center transition ${
-                  isEventLive
-                    ? 'bg-green-600 hover:opacity-100 opacity-90'
-                    : 'bg-gray-300 cursor-not-allowed'
-                }`}
-                type="button"
-                disabled={!isEventLive}
-              >
-                <span className="text-white text-xs font-medium font-clash-display tracking-tight">
-                  {isEventLive ? 'JOIN NOW' : 'JOIN SOON'}
-                </span>
-              </button>
-            ) : null}
-          </div>
-        ) : (
-          // Regular event: Single register button
-          <>
-            {event.registrationLink ? (
-              <button
-                onClick={() => {
-                  window.open(event.registrationLink, '_blank', 'noopener,noreferrer');
-                }}
-                className="absolute bottom-6 left-6 w-28 h-7 bg-black rounded-lg flex items-center justify-center hover:opacity-100 opacity-90 transition"
-                type="button"
-              >
-                <span className="text-white text-xs font-medium font-clash-display tracking-tight">
-                  REGISTER NOW
-                </span>
-              </button>
-            ) : (
-              <div className="absolute bottom-6 left-6 w-28 h-7 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
-                <span className="text-white text-xs font-medium font-clash-display tracking-tight">
-                  COMING SOON
-                </span>
-              </div>
-            )}
-          </>
-        )}
+          {isWebinar ? (
+            // Webinar: Two buttons separated by comma
+            <div className="mt-auto flex items-center gap-2 pt-4">
+              {event.registrationLink ? (
+                <button
+                  onClick={() => {
+                    window.open(webinarLinks.registration || event.registrationLink, '_blank', 'noopener,noreferrer');
+                  }}
+                  className={`flex-1 h-8 md:h-9 rounded-lg flex items-center justify-center text-center transition ${
+                    canRegister && !isEventEnded
+                      ? 'bg-black hover:opacity-100 opacity-90 cursor-pointer'
+                      : 'bg-gray-400 cursor-not-allowed'
+                  }`}
+                  disabled={!canRegister || isEventEnded}
+                >
+                  <span className="text-white text-xs font-medium font-clash-display tracking-tight">
+                    {isEventEnded ? 'CLOSED' : (canRegister ? 'REGISTER' : 'CLOSED')}
+                  </span>
+                </button>
+              ) : (
+                <div className="flex-1 h-8 md:h-9 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
+                  <span className="text-white text-xs font-medium font-clash-display tracking-tight">
+                    {isEventEnded ? 'CLOSED' : 'COMING SOON'}
+                  </span>
+                </div>
+              )}
+              
+              {webinarLinks.meet && (canRegister || isEventLive) && !isEventEnded ? (
+                <button
+                  onClick={() => {
+                    window.open(webinarLinks.meet, '_blank', 'noopener,noreferrer');
+                  }}
+                  className={`flex-1 h-8 md:h-9 rounded-lg flex items-center justify-center text-center transition ${
+                    isEventLive
+                      ? 'bg-green-600 hover:opacity-100 opacity-90'
+                      : 'bg-gray-300 cursor-not-allowed'
+                  }`}
+                  type="button"
+                  disabled={!isEventLive}
+                >
+                  <span className="text-white text-xs font-medium font-clash-display tracking-tight">
+                    {isEventLive ? 'JOIN' : 'JOIN SOON'}
+                  </span>
+                </button>
+              ) : null}
+            </div>
+          ) : (
+            // Regular event: Single register button
+            <>
+              {event.registrationLink ? (
+                <button
+                  onClick={() => {
+                    window.open(event.registrationLink, '_blank', 'noopener,noreferrer');
+                  }}
+                  className={`mt-auto w-full h-8 md:h-9 rounded-lg flex items-center justify-center transition ${
+                    !isEventEnded
+                      ? 'bg-black hover:opacity-100 opacity-90'
+                      : 'bg-gray-400 cursor-not-allowed'
+                  }`}
+                  disabled={isEventEnded}
+                >
+                  <span className="text-white text-xs font-medium font-clash-display tracking-tight">
+                    {isEventEnded ? 'REGISTRATION CLOSED' : 'REGISTER NOW'}
+                  </span>
+                </button>
+              ) : (
+                <div className="mt-auto w-full h-8 md:h-9 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
+                  <span className="text-white text-xs font-medium font-clash-display tracking-tight">
+                    {isEventEnded ? 'REGISTRATION CLOSED' : 'COMING SOON'}
+                  </span>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+
+        {/* Figma Colored Decorations */}
+        <img
+          src={side_image}
+          alt="side decorations"
+          className="absolute right-0 top-0 w-20 h-auto"
+        />
       </div>
-      
-      {/* Figma Colored Decorations */}
-      <img
-        src={side_image}
-        alt="side decorations"
-        className="absolute right-0 top-0 w-20 h-auto"
-      />
-    </div>
     </>
   );
 }

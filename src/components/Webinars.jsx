@@ -31,13 +31,22 @@ export default function WebinarsPage() {
                 venueEvents.forEach(event => {
                   // Check if the event has "Webinar" in its category
                   if (event.category && event.category.includes("Webinar")) {
+                    // Extract speaker details
+                    let speakers = [];
+                    if (event.speakers && event.speakers.speaker) {
+                      speakers = Array.isArray(event.speakers.speaker) 
+                        ? event.speakers.speaker 
+                        : [event.speakers.speaker];
+                    }
+                    
                     transformedEvents.push({
                       id: event.id || Math.random(),
-                      title: event.name,
-                      description: event.description,
+                      title: event.description,
+                      description: event.name,
                       registrationLink: event.link || "",
                       startTime: event.start_time,
                       endTime: event.end_time,
+                      speakers: speakers,
                     });
                   }
                 });
