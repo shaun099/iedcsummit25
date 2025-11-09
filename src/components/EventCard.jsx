@@ -103,6 +103,31 @@ export default function EventCard({ event, isWebinar = false }) {
             </h3>
           </div>
           
+          {/* Speaker details for webinars - below title */}
+          {isWebinar && event.speakers && event.speakers.length > 0 && (
+            <div className="space-y-2">
+              {event.speakers.map((speaker, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  {speaker.photo && (
+                    <img 
+                      src={speaker.photo} 
+                      alt={speaker.name}
+                      className="w-14 h-14 rounded-full object-cover shrink-0 mt-1"
+                    />
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-gilroy-medium text-black wrap-break-word">
+                      {speaker.name}
+                    </p>
+                    <p className="text-xs font-gilroy-light text-gray-700 wrap-break-word">
+                      {speaker.designation}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          
           {isWebinar && event.startTime && (
             <div className="text-xs font-gilroy-medium text-blue-600">
               {new Date(event.startTime).toLocaleString('en-US', { 
