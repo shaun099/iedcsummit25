@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import side_image from '../assets/side_image.png';
 import { Play } from 'lucide-react';
+import LogoLoop from './LogoLoop';
 
 const MARQUEE_STYLES = `
   @keyframes marquee {
@@ -97,7 +98,7 @@ export default function EventCard({ event, isWebinar = false }) {
           </div>
         )}
         
-        <div className="w-[75%] h-full left-0 top-0 absolute overflow-y-auto p-4 md:p-6 flex flex-col gap-3">
+        <div className="w-[80%] h-full left-0 top-0 absolute overflow-y-auto p-4 md:p-6 flex flex-col gap-3">
           <div ref={titleRef} className={isMarqueeActive ? 'marquee-container' : ''}>
             <h3 className={`${isMarqueeActive ? 'marquee-text' : ''} text-lg md:text-2xl font-gilroy-medium text-black leading-tight [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]`}>
               {event.title}
@@ -144,6 +145,20 @@ export default function EventCard({ event, isWebinar = false }) {
           <p className="text-xs md:text-sm font-gilroy-light text-black leading-relaxed [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
             {event.description}
           </p>
+
+          {/* Sponsor Logos Grid for 1Tank */}
+          {event.sponsors && event.sponsors.length > 0 && (
+            <div className="md:-mb-auto my-0 md:-mt-5 grid grid-cols-2 md:grid-cols-4 gap-2">
+              {event.sponsors.map((sponsor, index) => (
+                <img
+                  key={index}
+                  src={sponsor}
+                  alt="sponsor"
+                  className="h-10 w-full object-contain"
+                />
+              ))}
+            </div>
+          )}
         
           {isWebinar ? (
             // Webinar: Two buttons separated by comma
@@ -195,7 +210,7 @@ export default function EventCard({ event, isWebinar = false }) {
             // Regular event: Single register button
             <>
               {event.registrationLink ? (
-                <div className="mt-auto w-full flex gap-2">
+                <div className=" mt-auto md:-mt-2 w-full flex gap-2">
                   <button
                     onClick={() => {
                       window.open(event.registrationLink, '_blank', 'noopener,noreferrer');
@@ -218,7 +233,7 @@ export default function EventCard({ event, isWebinar = false }) {
                       onClick={() => {
                         window.open('https://www.linkedin.com/posts/iedcsummit_iedcsummit2025-daretodisrupt-keralastartupmission-activity-7392572580018311168-3nxw', '_blank', 'noopener,noreferrer');
                       }}
-                      className="h-8 md:h-9 px-3 md:px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center gap-2 transition shrink-0"
+                      className="h-8 md:h-9 px-3 md:px-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center gap-2 transition shrink-0"
                       aria-label="Watch promo video"
                     >
                       <Play size={14} fill="currentColor" />

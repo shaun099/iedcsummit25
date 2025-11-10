@@ -12,7 +12,7 @@ const Partners = () => {
         <img
           src="/tie-logo.png"
           alt="TIE"
-          className="h-10 md:h-25 object-contain"
+          className="h-10 md:h-23 object-contain"
         />
       ),
       ariaLabel: "TIE",
@@ -22,7 +22,7 @@ const Partners = () => {
         <img
           src="/kasaracode-logo.png"
           alt="Kasaracode"
-          className="h-6 md:h-13 object-contain"
+          className="h-6 md:h-11 object-contain"
         />
       ),
       ariaLabel: "Kasaracode",
@@ -32,7 +32,7 @@ const Partners = () => {
         <img
           src="/tinkerhub-logo.png"
           alt="Tinkerhub"
-          className="h-6 md:h-13 object-contain"
+          className="h-6 md:h-11 object-contain"
         />
       ),
       ariaLabel: "Tinkerhub",
@@ -42,7 +42,7 @@ const Partners = () => {
         <img
           src="/cpcri-logo.png"
           alt="CPCRI"
-          className="h-13 md:h-30 object-contain"
+          className="h-13 md:h-23 object-contain"
         />
       ),
       ariaLabel: "CPCRI",
@@ -52,7 +52,7 @@ const Partners = () => {
         <img
           src="/nammude-ksd-logo.png"
           alt="Nammude KSD"
-          className="h-14 md:h-30 object-contain"
+          className="h-14 md:h-22 object-contain"
         />
       ),
       ariaLabel: "Nammude KSD",
@@ -62,7 +62,7 @@ const Partners = () => {
         <img
           src="/trest.png"
           alt="TrEST"
-          className="h-10 md:h-20 object-contain"
+          className="h-10 md:h-22 object-contain"
         />
       ),
       ariaLabel: "TrEST",
@@ -76,7 +76,7 @@ const Partners = () => {
         <img
           src="/tiib-logo.png"
           alt="TIIB"
-          className="h-10 md:h-20 object-contain"
+          className="h-10 md:h-17 object-contain"
         />
       ),
       ariaLabel: "TIIB",
@@ -86,7 +86,7 @@ const Partners = () => {
         <img
           src="/campusfund-logo.png"
           alt="Campus Fund"
-          className="h-10 md:h-20 object-contain"
+          className="h-10 md:h-17 object-contain"
         />
       ),
       ariaLabel: "Campus Fund",
@@ -96,7 +96,7 @@ const Partners = () => {
         <img
           src="/1trepreneur-logo.png"
           alt="1trepreneur"
-          className="h-10 md:h-20 object-contain"
+          className="h-10 md:h-14 object-contain"
         />
       ),
       ariaLabel: "1trepreneur",
@@ -112,7 +112,7 @@ const Partners = () => {
       ref={sectionRef}
     >
       {/* Powered By & Hosted By Section */}
-      <div className="px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20 h-[45vh]">
+      <div className="px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20 min-h-auto md:h-[45vh]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 max-w-6xl mx-auto">
           {/* Powered By */}
           <div className="flex flex-col items-center">
@@ -209,7 +209,7 @@ const Partners = () => {
       </div>
 
       {/* Header Section */}
-      <div className="px-5 md:px-8 lg:px-12 pt-8 md:pt-12 pb-8 md:pb-16 ">
+      <div className="px-5 md:px-8 lg:px-12 pt-12 md:pt-16 lg:pt-20 pb-8 md:pb-16 ">
         {/* Left Content */}
         <div className="flex-1 w-full text-center flex flex-col items-center">
           <h2 className="text-4xl md:text-6xl lg:text-8xl font-light font-clash-display text-blue-500 mb-3 md:mb-6 lg:mb-8 leading-tight ">
@@ -231,7 +231,7 @@ const Partners = () => {
           logos={startupEnablers}
           speed={60}
           direction="left"
-          logoHeight={10}
+          logoHeight={75}
           gap={40}
           pauseOnHover={true}
           scaleOnHover={true}
@@ -249,7 +249,7 @@ const Partners = () => {
           logos={ecosystemPartners}
           speed={60}
           direction="right"
-          logoHeight={10}
+          logoHeight={75}
           gap={40}
           pauseOnHover={true}
           scaleOnHover={true}
