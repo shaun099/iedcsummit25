@@ -38,6 +38,68 @@ export default function FeaturedSpeakers() {
   useEffect(() => {
     const fetchSpeakers = async () => {
       try {
+        // // Test data - uncomment to use API
+        // const data = {
+        //   "Featured": [
+        //     {
+        //       "name": "Anoop Ambika",
+        //       "designation": "CEO, Kerala Startup Mission",
+        //       "organisation": "Kerala Startup Mission",
+        //       "photo": "https://storage.startupmission.in/events/speakers/iedc-summit-2025/98G4V0KAEMhs1zSqKR1syqNjiLhJNCyzjQlHSxGs.jpg",
+        //       "linkedin": null,
+        //       "external_id": null,
+        //       "order": 0,
+        //       "category": "Featured",
+        //       "id": "w0o5a"
+        //     },
+        //     {
+        //       "name": "Mohammed Hisamuddin",
+        //       "designation": "Founder & CEO, Entri App",
+        //       "organisation": null,
+        //       "photo": "https://storage.startupmission.in/events/speakers/iedc-summit-2025/wUW3MTy0lox1NHsZNueIb35zMeg091Q9QZirwuWF.jpg",
+        //       "linkedin": null,
+        //       "external_id": null,
+        //       "order": 1,
+        //       "category": "Featured",
+        //       "id": "4xJZL"
+        //     },
+        //     {
+        //       "name": "Ramees Ali",
+        //       "designation": "Founder & CEO, Interval",
+        //       "organisation": null,
+        //       "photo": "https://storage.startupmission.in/events/speakers/iedc-summit-2025/kmgAuvjOgEyvRyn8gKix1Y0QAd5XUoLVHkaHCxwH.jpg",
+        //       "linkedin": null,
+        //       "external_id": null,
+        //       "order": 2,
+        //       "category": "Featured",
+        //       "id": "4Goeg"
+        //     },
+        //     {
+        //       "name": "Mehar MP",
+        //       "designation": "Co-Founder, TinkerHub Foundation",
+        //       "organisation": null,
+        //       "photo": "https://storage.startupmission.in/events/speakers/iedc-summit-2025/DIfb4sIA9CGTUQULIkTpJdAxA9OkYWNEXsiIErUH.jpg",
+        //       "linkedin": null,
+        //       "external_id": null,
+        //       "order": 3,
+        //       "category": "Featured",
+        //       "id": "Dd8Zq"
+        //     },
+        //     {
+        //       "name": "Deepak Ravindran",
+        //       "designation": "CEO, KiranaPro",
+        //       "organisation": null,
+        //       "photo": "https://storage.startupmission.in/events/speakers/iedc-summit-2025/aVBymddCepqNwYnZwTqKyyWaV2xjbr8VxF7D9cXB.jpg",
+        //       "linkedin": null,
+        //       "external_id": null,
+        //       "order": 4,
+        //       "category": "Featured",
+        //       "id": "wrz5d"
+        //     }
+        //   ]
+        // };
+
+        
         const response = await fetch(
           "https://events.startupmission.in/api/event/iedc-summit-2025/speakers"
         );
@@ -72,7 +134,7 @@ export default function FeaturedSpeakers() {
           : "opacity-0 translate-y-10"
       }`}
     >
-      <h2 className="text-4xl md:text-6xl lg:text-7xl text-center text-blue-500 mb-12 font-clash-display">
+      <h2 className="text-4xl md:text-6xl lg:text-7xl text-center text-blue-500 mb-16 md:mb-20 font-clash-display">
         Featured Speakers
       </h2>
 
@@ -86,12 +148,13 @@ export default function FeaturedSpeakers() {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto justify-center mb-[15vh] lg:mb-[2vh]">
-          {speakers.map((speaker, index) => (
-            <div
-              key={speaker.id}
-              className="relative w-full max-w-xs aspect-3/4 overflow-hidden"
-            >
+        <div className="flex justify-center">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl justify-center mb-32">
+            {speakers.map((speaker, index) => (
+              <div
+                key={speaker.id}
+                className="relative w-full max-w-xs aspect-3/4 overflow-hidden mx-auto"
+              >
               {/* Speaker Image */}
               <img
                 src={speaker.photo}
@@ -119,6 +182,7 @@ export default function FeaturedSpeakers() {
               </div>
             </div>
           ))}
+          </div>
         </div>
       )}
 
