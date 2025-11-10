@@ -60,7 +60,7 @@ createRoot(document.getElementById("root")).render(
               </>
             }
           />
-          {/* <Route
+          <Route
             path="/speakers"
             element={
               <>
@@ -69,7 +69,7 @@ createRoot(document.getElementById("root")).render(
                 <Footer />
               </>
             }
-          /> */}
+          />
           {/* Session redirect route - /r/sessionId */}
           <Route path="/r/:sessionId" element={<SessionRedirect />} />
           {/* Catch-all route for external form redirects - MUST be last */}

@@ -23,9 +23,9 @@ function App() {
       <Hero />
       <FeaturedSpeaker />
       <FeaturedEvents />
-      <Highlights />
       <About />
       <Partners />
+      <Highlights />
       <Directions />
       <Faq />
       <Gallery />
