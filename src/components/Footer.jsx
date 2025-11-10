@@ -363,6 +363,13 @@ const Footer = () => {
         <div className="mt-12 pt-6 border-t border-gray-800">
           <div className="flex flex-wrap items-center justify-center gap-5 text-sm mb-6">
             <a 
+              href="/Tender_IEDC_Summit_2025.pdf" 
+              download="Tender_IEDC_Summit_2025.pdf"
+              className="text-gray-500 hover:text-blue-400 transition-colors font-gilroy-light font-semibold"
+            >
+              Tender Form
+            </a>
+            <a 
               target="_blank" 
               href="https://policy.ksum.in/privacy_policy.html" 
               className="text-gray-500 hover:text-blue-400 transition-colors font-gilroy-light"

@@ -21,9 +21,9 @@ function App() {
     <div className="App">
       <Navbar />
       <Hero />
-      <About />
       <FeaturedSpeaker />
       <FeaturedEvents />
+      <About />
       <Partners />
       <Highlights />
       <Directions />

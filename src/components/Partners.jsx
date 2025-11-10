@@ -66,7 +66,7 @@ const Partners = () => {
         />
       ),
       ariaLabel: "TrEST",
-    }
+    },
   ];
 
   // Startup Enablers
@@ -223,7 +223,7 @@ const Partners = () => {
       </div>
 
       {/* Startup Enablers Section */}
-      <div className="px-5 md:px-8 lg:px-12 pb-8 md:pb-12 ">
+      <div className="px-5 md:px-8 lg:px-12 pb-8 md:pb-12 overflow-y-hiiden">
         <h3 className="text-2xl md:text-3xl lg:text-4xl font-light font-clash-display text-black mb-4 md:mb-6 text-center">
           Startup Enablers
         </h3>
@@ -236,11 +236,12 @@ const Partners = () => {
           pauseOnHover={true}
           scaleOnHover={true}
           ariaLabel="Startup enabler logos"
+          className="overflow-y-hidden"
         />
       </div>
 
       {/* Ecosystem Partners Section */}
-      <div className="px-5 md:px-8 lg:px-12 pb-8 md:pb-12">
+      <div className="px-5 md:px-8 lg:px-12 pb-8 md:pb-12 overflow-y-hidden">
         <h3 className="text-2xl md:text-3xl lg:text-4xl font-light font-clash-display text-black mb-4 md:mb-6 text-center">
           Ecosystem Partners
         </h3>
@@ -253,6 +254,7 @@ const Partners = () => {
           pauseOnHover={true}
           scaleOnHover={true}
           ariaLabel="Ecosystem partner logos"
+          className="overflow-y-hidden"
         />
       </div>
 

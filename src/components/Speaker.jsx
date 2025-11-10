@@ -40,7 +40,12 @@ export default function SpeakersPage() {
         );
         if (!res.ok) throw new Error("Fetch failed");
         const data = await res.json();
-        setSpeakers(Object.values(data).flat());
+        // Get all speakers except "startup talks"
+        const allSpeakers = Object.values(data).flat();
+        const filteredSpeakers = allSpeakers.filter(
+          speaker => speaker.category !== "startup talks"
+        );
+        setSpeakers(filteredSpeakers);
       } catch (err) {
         console.error(err);
         setSpeakers([]);
@@ -54,8 +59,9 @@ export default function SpeakersPage() {
   const colors = [
     "bg-[#F8D247] text-black",
     "bg-[#4D84F7] text-black",
-    "bg-[#45BBA1] text-black",
     "bg-[#E371E3] text-black",
+    "bg-[#F4BB40] text-black",
+    "bg-[#45BBA1] text-black",
   ];
 
   const getSafePhoto = (photo) =>
@@ -92,10 +98,9 @@ export default function SpeakersPage() {
 
                   if (!speaker) continue;
 
-                  const color = colors[(speakerIndex + c) % colors.length];
+                  const color = colors[speakerIndex % colors.length];
                   const name = speaker.name || "Unnamed Speaker";
                   const designation = speaker.designation || "";
-                  const organisation = speaker.organisation || "";
                   const photo = getSafePhoto(speaker.photo);
 
                   // determine whether this cell is photo or text

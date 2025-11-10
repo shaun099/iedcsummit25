@@ -1,16 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronRight, ChevronLeft, Play } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-import side_image from '../assets/side_image.png';
-import { Link } from 'react-router-dom';
-import LogoLoop from './LogoLoop';
+import React, { useState, useEffect } from "react";
+import { ChevronRight, ChevronLeft, Play } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import side_image from "../assets/side_image.png";
+import { Link } from "react-router-dom";
+import LogoLoop from "./LogoLoop";
 
 const LoadingAnimation = () => (
   <div className="flex items-center justify-center py-20">
     <div className="flex gap-2">
-      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
-      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.15s' }}></div>
-      <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.3s' }}></div>
+      <div
+        className="w-3 h-3 bg-blue-600 rounded-full animate-bounce"
+        style={{ animationDelay: "0s" }}
+      ></div>
+      <div
+        className="w-3 h-3 bg-blue-600 rounded-full animate-bounce"
+        style={{ animationDelay: "0.15s" }}
+      ></div>
+      <div
+        className="w-3 h-3 bg-blue-600 rounded-full animate-bounce"
+        style={{ animationDelay: "0.3s" }}
+      ></div>
     </div>
   </div>
 );
@@ -25,7 +34,8 @@ const FeaturedEvents = () => {
     {
       id: 1,
       title: "1Tank for Students",
-      description: "🚀 Seize Your Opportunity to Go Global! 🔥\n\n1Pitch, Infinite Opportunities\n\nPitch your startup idea on the IEDC Summit 2025 stage and stand a chance to:\n\n🏆 Secure Funding\n🎓 Win a Fully Funded* 1-Year Entrepreneurship Training in the UAE\n\nApplication Deadline: November 10, 2025",
+      description:
+        "🚀 Seize Your Opportunity to Go Global! 🔥\n\n1Pitch, Infinite Opportunities\n\nPitch your startup idea on the IEDC Summit 2025 stage and stand a chance to:\n\n🏆 Secure Funding\n🎓 Win a Fully Funded* 1-Year Entrepreneurship Training in the UAE\n\nApplication Deadline: November 10, 2025",
       registrationLink: "https://www.iedcsummit.in/1tank",
       sponsors: ["/tiib-logo.png", "/1trepreneur-logo.png", "/campusfund-logo.png", "/tie-logo.png"]
     }
@@ -37,10 +47,10 @@ const FeaturedEvents = () => {
     //   try {
     //     const fetchedEvents = await fetch("https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue");
     //     const eventsData = await fetchedEvents.json();
-    //     
+    //
     //     // Transform and filter for Featured events only
     //     const transformedEvents = [];
-    //     
+    //
     //     if (eventsData.agenda) {
     //       Object.values(eventsData.agenda).forEach(dateGroup => {
     //         Object.values(dateGroup).forEach(venueEvents => {
@@ -58,7 +68,7 @@ const FeaturedEvents = () => {
     //         });
     //       });
     //     }
-    //     
+    //
     //     setEvents(transformedEvents);
     //   } catch (error) {
     //     console.error("Error fetching events:", error);
@@ -68,7 +78,7 @@ const FeaturedEvents = () => {
     // };
 
     // fetchEvents();
-    
+
     // Use test data instead
     setEvents(testEvents);
     setIsLoading(false);
@@ -79,16 +89,22 @@ const FeaturedEvents = () => {
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + Math.max(events.length, 1)) % Math.max(events.length, 1));
+    setCurrentIndex(
+      (prev) =>
+        (prev - 1 + Math.max(events.length, 1)) % Math.max(events.length, 1)
+    );
   };
 
   return (
-    <section id="featured-events" className="w-full py-16 md:py-24 bg-white relative overflow-hidden">
+    <section
+      id="featured-events"
+      className="w-full py-16 md:py-24 bg-white relative overflow-hidden"
+    >
       {/* Decorative circles */}
       <div className="w-96 h-96 left-32 top-1/3 absolute opacity-50 rounded-full border border-blue-600"></div>
       <div className="w-96 h-96 left-0 top-1/2 absolute opacity-30 rounded-full border border-blue-600"></div>
 
-      <div className="max-w-7xl mx-auto px-5 md:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-5 md:px-8 relative z-10 mb-20">
         {/* Header */}
         <div className="w-full flex flex-col items-start gap-4 text-left relative z-20 -mb-[10vh]">
           <h2 className="text-5xl md:text-7xl lg:text-8xl font-clash-display text-blue-500 leading-tight">
@@ -119,7 +135,7 @@ const FeaturedEvents = () => {
                 {[0, 1, 2].map((offset) => {
                   const cardIndex = (currentIndex + offset) % events.length;
                   const event = events[cardIndex];
-                  
+
                   return (
                     <motion.div
                       key={event.id}
@@ -133,7 +149,7 @@ const FeaturedEvents = () => {
                       }}
                       exit={{ opacity: 0, scale: 0.8, y: -20 }}
                       transition={{
-                        type: 'spring',
+                        type: "spring",
                         stiffness: 260,
                         damping: 20,
                       }}
@@ -144,7 +160,7 @@ const FeaturedEvents = () => {
                           <h3 className="text-xl md:text-3xl lg:text-4xl font-gilroy-medium text-black leading-tight [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
                             {event.title}
                           </h3>
-                          
+
                           <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black leading-relaxed [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
                             {event.description}
                           </p>
@@ -153,7 +169,7 @@ const FeaturedEvents = () => {
                           {event.sponsors && event.sponsors.length > 0 && (
                             <div className="flex items-center gap-2 md:gap-3 flex-wrap mt-auto pt-4">
                               {event.sponsors.map((sponsor, idx) => (
-                                <img 
+                                <img
                                   key={idx}
                                   src={sponsor} 
                                   alt="sponsor" 
@@ -183,11 +199,15 @@ const FeaturedEvents = () => {
                                 </span>
                               </div>
                             )}
-                            
+
                             {/* Promo Video Button */}
                             <button
                               onClick={() => {
-                                window.open('https://www.linkedin.com/posts/iedcsummit_iedcsummit2025-daretodisrupt-keralastartupmission-activity-7392572580018311168-3nxw', '_blank', 'noopener,noreferrer');
+                                window.open(
+                                  "https://www.linkedin.com/posts/iedcsummit_iedcsummit2025-daretodisrupt-keralastartupmission-activity-7392572580018311168-3nxw",
+                                  "_blank",
+                                  "noopener,noreferrer"
+                                );
                               }}
                               className="h-9 md:h-10 lg:h-11 px-3 md:px-4 lg:px-5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center gap-2 transition shrink-0"
                               aria-label="Watch promo video"
@@ -199,12 +219,12 @@ const FeaturedEvents = () => {
                             </button>
                           </div>
                         </div>
-                        
+
                         {/* Colored Decorative Blocks */}
                         <img
-                            src={side_image}
-                            alt="side decorations"
-                            className="absolute right-0 top-0 w-12 md:w-20 h-auto"
+                          src={side_image}
+                          alt="side decorations"
+                          className="absolute right-0 top-0 w-12 md:w-20 h-auto"
                         />
                       </div>
                     </motion.div>
@@ -237,7 +257,10 @@ const FeaturedEvents = () => {
                 </button>
 
                 {/* View All Link - Center on mobile */}
-                <Link to="/events" className="flex-1 text-center text-blue-600 text-base md:text-lg font-gilroy-medium cursor-pointer hover:opacity-70 transition-opacity">
+                <Link
+                  to="/events"
+                  className="flex-1 text-center text-blue-600 text-base md:text-lg font-gilroy-medium cursor-pointer hover:opacity-70 transition-opacity"
+                >
                   View all events...
                 </Link>
 
@@ -251,11 +274,14 @@ const FeaturedEvents = () => {
                 </button>
               </div>
             )}
-            
+
             {/* View All Link - Mobile only when single event */}
             {events.length <= 1 && (
               <div className="lg:hidden text-center py-8">
-                <Link to="/events" className="text-blue-600 text-base md:text-lg font-gilroy-medium cursor-pointer hover:opacity-70 transition-opacity">
+                <Link
+                  to="/events"
+                  className="text-blue-600 text-base md:text-lg font-gilroy-medium cursor-pointer hover:opacity-70 transition-opacity"
+                >
                   View all events...
                 </Link>
               </div>
@@ -263,7 +289,10 @@ const FeaturedEvents = () => {
 
             {/* View All Link - Desktop only */}
             <div className="hidden lg:block text-center pb-12">
-              <Link to="/events" className="text-blue-600 text-lg md:text-xl font-gilroy-medium cursor-pointer hover:opacity-70 transition-opacity">
+              <Link
+                to="/events"
+                className="text-blue-600 text-lg md:text-xl font-gilroy-medium cursor-pointer hover:opacity-70 transition-opacity"
+              >
                 View all events...
               </Link>
             </div>
@@ -281,30 +310,31 @@ const FeaturedEvents = () => {
       <img
         src="/hero-blocks.png"
         alt="Decorative blocks"
-        className="w-full h-20 sm:h-24 absolute bottom-[8vh] left-0 object-cover"
+        className="w-full h-20 sm:h-24 absolute bottom-20 left-0 object-cover"
       />
+
       {/* Scrolling Text Loop */}
-        <div className="w-full skew-y-2 lg:skew-y-1">
-            <LogoLoop
-                logos={[
-                { text: 'IEDC SUMMIT 2025' },
-                { text: 'IEDC SUMMIT 2025' },
-                { text: 'IEDC SUMMIT 2025' },
-                { text: 'IEDC SUMMIT 2025' },
-                { text: 'IEDC SUMMIT 2025' },
-                { text: 'IEDC SUMMIT 2025' },
-                { text: 'IEDC SUMMIT 2025' },
-                { text: 'IEDC SUMMIT 2025' },
-                ]}
-                speed={80}
-                direction="left"
-                logoHeight={20}
-                gap={40}
-                pauseOnHover={true}
-                className="font-gilroy-bold bg-blue-600 py-5 -bottom-[6vh] md:-bottom-[7vh] lg:-bottom-[4vh] text-white"
-                ariaLabel="IEDC Summit 2025"
-            />  
-        </div>
+      <div className="w-full absolute bottom-12 left-0 skew-y-2">
+        <LogoLoop
+          logos={[
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+            { text: "IEDC SUMMIT 2025" },
+          ]}
+          speed={80}
+          direction="right"
+          logoHeight={20}
+          gap={40}
+          pauseOnHover={true}
+          className="font-gilroy-bold bg-blue-600 py-5 text-white"
+          ariaLabel="IEDC Summit 2025"
+        />
+      </div>
     </section>
   );
 };
