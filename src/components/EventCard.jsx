@@ -90,7 +90,7 @@ export default function EventCard({ event, isWebinar = false }) {
   return (
     <>
       <style>{MARQUEE_STYLES}</style>
-      <div className="w-full max-w-80 mx-auto aspect-4/5 relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl cursor-pointer">
+      <div className="w-full max-w-80 mx-auto aspect-4/5 relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl">
         {/* Event Type Badge */}
         {event.eventType && (
           <div className="absolute top-3 right-3 z-10 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-gilroy-medium">
@@ -194,7 +194,7 @@ export default function EventCard({ event, isWebinar = false }) {
                   }}
                   className={`flex-1 h-8 md:h-9 rounded-lg flex items-center justify-center text-center transition ${
                     isEventLive
-                      ? 'bg-green-600 hover:opacity-100 opacity-90'
+                      ? 'bg-green-600 hover:opacity-100 opacity-90 cursor-pointer'
                       : 'bg-gray-300 cursor-not-allowed'
                   }`}
                   type="button"
@@ -217,7 +217,7 @@ export default function EventCard({ event, isWebinar = false }) {
                     }}
                     className={`flex-1 h-8 md:h-9 rounded-lg flex items-center justify-center transition ${
                       !isEventEnded
-                        ? 'bg-black hover:opacity-100 opacity-90'
+                        ? 'bg-black hover:opacity-100 opacity-90 cursor-pointer'
                         : 'bg-gray-400 cursor-not-allowed'
                     }`}
                     disabled={isEventEnded}
@@ -233,7 +233,7 @@ export default function EventCard({ event, isWebinar = false }) {
                       onClick={() => {
                         window.open('https://www.linkedin.com/posts/iedcsummit_iedcsummit2025-daretodisrupt-keralastartupmission-activity-7392572580018311168-3nxw', '_blank', 'noopener,noreferrer');
                       }}
-                      className="h-8 md:h-9 px-3 md:px-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center gap-2 transition shrink-0"
+                      className="h-8 md:h-9 px-3 md:px-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center gap-2 transition shrink-0 cursor-pointer"
                       aria-label="Watch promo video"
                     >
                       <Play size={14} fill="currentColor" />
@@ -244,7 +244,7 @@ export default function EventCard({ event, isWebinar = false }) {
                   )}
                 </div>
               ) : (
-                <div className="mt-auto w-full h-8 md:h-9 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed pt-4">
+                <div className="mt-auto w-full h-8 md:h-9 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
                   <span className="text-white text-xs font-medium font-clash-display tracking-tight">
                     {isEventEnded ? 'REGISTRATION CLOSED' : 'COMING SOON'}
                   </span>
