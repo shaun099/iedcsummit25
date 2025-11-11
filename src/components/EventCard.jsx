@@ -98,7 +98,7 @@ export default function EventCard({ event, isWebinar = false }) {
           </div>
         )}
         
-        <div className="w-[80%] h-full left-0 top-0 absolute overflow-y-auto p-4 md:p-6 flex flex-col gap-3">
+        <div className="w-[75%] md:w-[80%] h-full left-0 top-0 absolute overflow-y-auto p-4 md:p-6 flex flex-col gap-3">
           <div ref={titleRef} className={isMarqueeActive ? 'marquee-container' : ''}>
             <h3 className={`${isMarqueeActive ? 'marquee-text' : ''} text-lg md:text-2xl font-gilroy-medium text-black leading-tight [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]`}>
               {event.title}
@@ -148,7 +148,7 @@ export default function EventCard({ event, isWebinar = false }) {
 
           {/* Sponsor Logos Grid for 1Tank */}
           {event.sponsors && event.sponsors.length > 0 && (
-            <div className="md:-mb-auto my-0 md:-mt-5 grid grid-cols-2 md:grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 md:grid-cols-4 md:gap-2 -my-3">
               {event.sponsors.map((sponsor, index) => (
                 <img
                   key={index}
@@ -210,7 +210,7 @@ export default function EventCard({ event, isWebinar = false }) {
             // Regular event: Single register button
             <>
               {event.registrationLink ? (
-                <div className=" mt-auto md:-mt-2 w-full flex gap-2">
+                <div className="mt-auto w-full flex gap-2">
                   <button
                     onClick={() => {
                       window.open(event.registrationLink, '_blank', 'noopener,noreferrer');
@@ -244,7 +244,7 @@ export default function EventCard({ event, isWebinar = false }) {
                   )}
                 </div>
               ) : (
-                <div className="mt-auto w-full h-8 md:h-9 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
+                <div className="mt-auto w-full h-8 md:h-9 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed pt-4">
                   <span className="text-white text-xs font-medium font-clash-display tracking-tight">
                     {isEventEnded ? 'REGISTRATION CLOSED' : 'COMING SOON'}
                   </span>
