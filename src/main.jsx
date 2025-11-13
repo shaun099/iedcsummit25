@@ -11,6 +11,7 @@ import Webinars from "./components/Webinars.jsx";
 import Footer from "./components/Footer.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Speaker from "./components/Speaker.jsx";
+import Leaderboard from "./components/Leaderboard.jsx";
 import { SponsorForm } from "./components/SponsorForm";
 import { ScrollToTop } from "./components/ScrollToTop";
 
@@ -66,6 +67,16 @@ createRoot(document.getElementById("root")).render(
               <>
                 <Navbar />
                 <Speaker />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/leaderboard"
+            element={
+              <>
+                <Navbar />
+                <Leaderboard />
                 <Footer />
               </>
             }
