@@ -35,7 +35,7 @@ const FeaturedEvents = () => {
       id: 1,
       title: "1Tank for Students",
       description:
-        "🚀 Seize Your Opportunity to Go Global! 🔥\n\n1Pitch, Infinite Opportunities\n\nPitch your startup idea on the IEDC Summit 2025 stage and stand a chance to:\n\n🏆 Secure Funding\n🎓 Win a Fully Funded* 1-Year Entrepreneurship Training in the UAE\n\nApplication Deadline: November 10, 2025",
+        "🚀 Seize Your Opportunity to Go Global! 🔥\n\n1Pitch, Infinite Opportunities\n\nPitch your startup idea on the IEDC Summit 2025 stage and stand a chance to:\n\n🏆 Secure Funding\n🎓 Win a Fully Funded* 1-Year Entrepreneurship Training in the UAE\n\nApplication Deadline: November 15, 2025",
       registrationLink: "https://www.iedcsummit.in/1tank",
       sponsors: ["/tiib-logo.png", "/1trepreneur-logo.png", "/campusfund-logo.png", "/tie-logo.png"]
     }

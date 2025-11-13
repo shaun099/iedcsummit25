@@ -10,6 +10,7 @@ import Faq from "./components/Faq";
 import Gallery from "./components/Gallery";
 import Footer from "./components/Footer";
 import FeaturedSpeaker from "./components/FeaturedSpeakers";
+import RegisterCTA from "./components/RegisterCTA";
 
 import "./fonts/ClashDisplay-Variable.ttf";
 import "./fonts/Gilroy-Light.otf";
@@ -23,9 +24,10 @@ function App() {
       <Hero />
       <FeaturedSpeaker />
       <FeaturedEvents />
+      <Highlights />
+      <RegisterCTA />
       <About />
       <Partners />
-      <Highlights />
       <Directions />
       <Faq />
       <Gallery />

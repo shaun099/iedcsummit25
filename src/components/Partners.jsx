@@ -112,7 +112,7 @@ const Partners = () => {
       ref={sectionRef}
     >
       {/* Powered By & Hosted By Section */}
-      <div className="px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20 min-h-auto md:h-[45vh]">
+      <div className="px-5 md:px-8 lg:px-12 py-8 md:py-12 lg:py-16 min-h-auto md:h-[35vh]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 max-w-6xl mx-auto">
           {/* Powered By */}
           <div className="flex flex-col items-center">
