@@ -6,10 +6,10 @@ import ellipse1 from '/Ellipse1.svg';
 const navItems = [
   { label: 'Home', href: '/' },
   // { label: 'About', href: '#about' },
-  { label: 'Schedule', href: '/schedule' },
-  { label: 'Events', href: '/events' },
-  { label: 'Webinars', href: '/webinars' },
   { label: 'Speakers', href: '/speakers' },
+  { label: 'Events', href: '/events' },
+  //{ label: 'Schedule', href: '/schedule' },
+  { label: 'Webinars', href: '/webinars' },
   // { label: 'FAQ', href: '#faq' },
   // { label: 'Gallery', href: '#gallery' },
   { label: 'Be Our Sponsor', href: '/be-our-sponsor' },

@@ -113,7 +113,7 @@ const Directions = () => {
           <div className="w-20 h-0.5 md:w-24 md:h-1 bg-blue-500 mx-auto"></div>
         </div>
 
-        {/* College Selection Tabs */}
+        {/* College Selection Tabs
         <div className="flex justify-center gap-4 mb-8 flex-wrap">
           <button
             onClick={() => setActiveCollege("lbs")}
@@ -135,7 +135,7 @@ const Directions = () => {
           >
             Central University of Kerala
           </button>
-        </div>
+        </div> */}
 
         <div className="grid grid-cols-1 gap-8">
           {/* Left Column - Content */}

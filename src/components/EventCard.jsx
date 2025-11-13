@@ -90,7 +90,7 @@ export default function EventCard({ event, isWebinar = false }) {
   return (
     <>
       <style>{MARQUEE_STYLES}</style>
-      <div className="w-full max-w-80 mx-auto aspect-4/5 relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl cursor-pointer">
+      <div className="w-full max-w-80 mx-auto aspect-4/5 relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl">
         {/* Event Type Badge */}
         {event.eventType && (
           <div className="absolute top-3 right-3 z-10 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-gilroy-medium">
@@ -98,7 +98,7 @@ export default function EventCard({ event, isWebinar = false }) {
           </div>
         )}
         
-        <div className="w-[80%] h-full left-0 top-0 absolute overflow-y-auto p-4 md:p-6 flex flex-col gap-3">
+        <div className="w-[75%] md:w-[80%] h-full left-0 top-0 absolute overflow-y-auto p-4 md:p-6 flex flex-col gap-3">
           <div ref={titleRef} className={isMarqueeActive ? 'marquee-container' : ''}>
             <h3 className={`${isMarqueeActive ? 'marquee-text' : ''} text-lg md:text-2xl font-gilroy-medium text-black leading-tight [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]`}>
               {event.title}
@@ -148,7 +148,7 @@ export default function EventCard({ event, isWebinar = false }) {
 
           {/* Sponsor Logos Grid for 1Tank */}
           {event.sponsors && event.sponsors.length > 0 && (
-            <div className="md:-mb-auto my-0 md:-mt-5 grid grid-cols-2 md:grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 md:grid-cols-4 md:gap-2 -my-3">
               {event.sponsors.map((sponsor, index) => (
                 <img
                   key={index}
@@ -194,7 +194,7 @@ export default function EventCard({ event, isWebinar = false }) {
                   }}
                   className={`flex-1 h-8 md:h-9 rounded-lg flex items-center justify-center text-center transition ${
                     isEventLive
-                      ? 'bg-green-600 hover:opacity-100 opacity-90'
+                      ? 'bg-green-600 hover:opacity-100 opacity-90 cursor-pointer'
                       : 'bg-gray-300 cursor-not-allowed'
                   }`}
                   type="button"
@@ -210,14 +210,14 @@ export default function EventCard({ event, isWebinar = false }) {
             // Regular event: Single register button
             <>
               {event.registrationLink ? (
-                <div className=" mt-auto md:-mt-2 w-full flex gap-2">
+                <div className="mt-auto w-full flex gap-2">
                   <button
                     onClick={() => {
                       window.open(event.registrationLink, '_blank', 'noopener,noreferrer');
                     }}
                     className={`flex-1 h-8 md:h-9 rounded-lg flex items-center justify-center transition ${
                       !isEventEnded
-                        ? 'bg-black hover:opacity-100 opacity-90'
+                        ? 'bg-black hover:opacity-100 opacity-90 cursor-pointer'
                         : 'bg-gray-400 cursor-not-allowed'
                     }`}
                     disabled={isEventEnded}
@@ -233,7 +233,7 @@ export default function EventCard({ event, isWebinar = false }) {
                       onClick={() => {
                         window.open('https://www.linkedin.com/posts/iedcsummit_iedcsummit2025-daretodisrupt-keralastartupmission-activity-7392572580018311168-3nxw', '_blank', 'noopener,noreferrer');
                       }}
-                      className="h-8 md:h-9 px-3 md:px-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center gap-2 transition shrink-0"
+                      className="h-8 md:h-9 px-3 md:px-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center gap-2 transition shrink-0 cursor-pointer"
                       aria-label="Watch promo video"
                     >
                       <Play size={14} fill="currentColor" />
