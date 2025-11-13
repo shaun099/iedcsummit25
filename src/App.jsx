@@ -10,7 +10,7 @@ import Faq from "./components/Faq";
 import Gallery from "./components/Gallery";
 import Footer from "./components/Footer";
 import FeaturedSpeaker from "./components/FeaturedSpeakers";
-import RegisterCTA from "./components/RegisterCTA";
+// import RegisterCTA from "./components/RegisterCTA";
 
 import "./fonts/ClashDisplay-Variable.ttf";
 import "./fonts/Gilroy-Light.otf";
@@ -25,7 +25,7 @@ function App() {
       <FeaturedSpeaker />
       <FeaturedEvents />
       <Highlights />
-      <RegisterCTA />
+      {/* <RegisterCTA /> */}
       <About />
       <Partners />
       <Directions />

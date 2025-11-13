@@ -32,7 +32,7 @@ const Leaderboard = () => {
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 container mx-auto px-4 py-8">
+      <div className="relative z-10 container mx-auto px-4 py-8 mt-16">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-6xl font-bold text-blue-500 font-clash-display">
@@ -86,6 +86,11 @@ const Leaderboard = () => {
           </div>
         </div>
       </div>
+      <img
+        src="/hero-blocks.png"
+        alt="Decorative blocks"
+        className="w-full h-20 sm:h-24 bottom-0 left-0 object-cover"
+      />
     </div>
   )
 }
