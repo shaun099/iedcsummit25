@@ -50,16 +50,19 @@ const Leaderboard = () => {
             {leaderboardData.slice(0, 3).map((item, index) => (
               <div
                 key={item.rank}
-                className={`${item.bgColor} ${item.width} mx-auto rounded-3xl md:rounded-4xl shadow-lg p-6 flex items-center justify-between transition-all duration-500 animate-fade-in-up`}
+                className={`${item.bgColor} ${item.width} mx-auto rounded-3xl md:rounded-4xl shadow-lg p-6 flex items-center justify-between transition-all duration-500 animate-fade-in-up relative`}
                 style={{ animationDelay: `${index * 0.2}s`, zIndex: 15 - index }}
               >
-                <div className="flex items-center space-x-6">
+                <div className="flex items-center space-x-6 flex-1">
                   <div className={`${item.textSize} font-bold text-black font-gilroy-bold min-w-8`}>
                     {item.rank}
                   </div>
                   <div className="text-xl md:text-3xl font-medium text-black font-clash-display">
                     {item.district}
                   </div>
+                </div>
+                <div className={`${item.textSize} font-bold text-black font-gilroy-bold absolute right-6 top-1/2 transform -translate-y-1/2`}>
+                  {item.count}
                 </div>
               </div>
             ))}
@@ -70,10 +73,10 @@ const Leaderboard = () => {
             {leaderboardData.slice(3).map((item, index) => (
               <div
                 key={item.rank}
-                className={`${item.width} mx-auto bg-white rounded-3xl md:rounded-4xl shadow-md border-2 border-blue-600 p-4 flex items-center justify-between transition-all duration-500 animate-fade-in-up`}
+                className={`${item.width} mx-auto bg-white rounded-3xl md:rounded-4xl shadow-md border-2 border-blue-600 p-4 flex items-center justify-between transition-all duration-500 animate-fade-in-up relative`}
                 style={{ animationDelay: `${(index + 3) * 0.1}s`, zIndex: 12 - index }}
               >
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-4 flex-1">
                   <div className={`${item.textSize} font-bold text-black font-gilroy-bold min-w-8`}>
                     {item.rank}
                   </div>
@@ -81,11 +84,14 @@ const Leaderboard = () => {
                     {item.district}
                   </div>
                 </div>
+                <div className={`${item.textSize} font-bold text-black font-gilroy-bold absolute right-4 top-1/2 transform -translate-y-1/2`}>
+                  {item.count}
+                </div>
               </div>
             ))}
           </div>
-        </div>
       </div>
+        </div>
       <img
         src="/hero-blocks.png"
         alt="Decorative blocks"
