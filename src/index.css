@@ -210,6 +210,10 @@ body::-webkit-scrollbar-thumb:hover {
   animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
+.animate-fade-in-up-delayed {
+  animation: fadeInUp 0.8s ease-out var(--animation-delay, 0.2s) both;
+}
+
 .animate-slide-in-right {
   animation: slideInRight 0.8s ease-out 0.3s both;
 }

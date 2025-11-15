@@ -112,7 +112,7 @@ const Partners = () => {
       ref={sectionRef}
     >
       {/* Powered By & Hosted By Section */}
-      <div className="px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20 min-h-auto md:h-[45vh]">
+      <div className="px-5 md:px-8 lg:px-12 py-6 md:py-8 lg:py-10 min-h-auto md:h-[25vh]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 max-w-6xl mx-auto">
           {/* Powered By */}
           <div className="flex flex-col items-center">
@@ -131,7 +131,7 @@ const Partners = () => {
                   <img
                     src="/ksum-logo-black.png"
                     alt="KSUM"
-                    className="h-16 md:h-24 lg:h-32 object-contain"
+                    className="h-12 md:h-16 lg:h-20 object-contain"
                   />
                 </div>
                 <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300 text-center">
@@ -150,7 +150,7 @@ const Partners = () => {
                   <img
                     src="/iedc-logo-color.png"
                     alt="IEDC"
-                    className="h-16 md:h-24 lg:h-32 object-contain"
+                    className="h-12 md:h-16 lg:h-20 object-contain"
                   />
                 </div>
                 <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300 text-center">
@@ -177,7 +177,7 @@ const Partners = () => {
                   <img
                     src="/lbscek-logo-black.png"
                     alt="LBS Institute"
-                    className="h-16 md:h-24 lg:h-32 object-contain"
+                    className="h-12 md:h-16 lg:h-20 object-contain"
                   />
                 </div>
                 <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black group-hover:text-blue-500 transition-colors duration-300 text-center">
@@ -209,13 +209,13 @@ const Partners = () => {
       </div>
 
       {/* Header Section */}
-      <div className="px-5 md:px-8 lg:px-12 pt-12 md:pt-16 lg:pt-20 pb-8 md:pb-16 ">
+      <div className="px-5 md:px-8 lg:px-12 pt-8 md:pt-10 lg:pt-12 pb-6 md:pb-8 ">
         {/* Left Content */}
         <div className="flex-1 w-full text-center flex flex-col items-center">
-          <h2 className="text-4xl md:text-6xl lg:text-8xl font-light font-clash-display text-blue-500 mb-3 md:mb-6 lg:mb-8 leading-tight ">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-light font-clash-display text-blue-500 mb-3 md:mb-6 lg:mb-8 leading-tight ">
             Our Partners
           </h2>
-          <p className="text-xs md:text-lg lg:text-2xl text-black font-light font-gilroy-light w-full leading-relaxed">
+          <p className="text-xs md:text-base lg:text-lg text-black font-light font-gilroy-light w-full leading-relaxed">
             Grateful to our partners who make IEDC Summit 2025 possible through
             their unwavering support and commitment to innovation.
           </p>
@@ -223,8 +223,8 @@ const Partners = () => {
       </div>
 
       {/* Startup Enablers Section */}
-      <div className="px-5 md:px-8 lg:px-12 pb-8 md:pb-12 overflow-y-hiiden">
-        <h3 className="text-2xl md:text-3xl lg:text-4xl font-light font-clash-display text-black mb-4 md:mb-6 text-center">
+      <div className="px-5 md:px-8 lg:px-12 pb-6 md:pb-8 overflow-y-hiiden">
+        <h3 className="text-xl md:text-2xl lg:text-3xl font-light font-clash-display text-black mb-4 md:mb-6 text-center">
           Startup Enablers
         </h3>
         <LogoLoop
@@ -241,8 +241,8 @@ const Partners = () => {
       </div>
 
       {/* Ecosystem Partners Section */}
-      <div className="px-5 md:px-8 lg:px-12 pb-8 md:pb-12 overflow-y-hidden">
-        <h3 className="text-2xl md:text-3xl lg:text-4xl font-light font-clash-display text-black mb-4 md:mb-6 text-center">
+      <div className="px-5 md:px-8 lg:px-12 pb-6 md:pb-8 overflow-y-hidden">
+        <h3 className="text-xl md:text-2xl lg:text-3xl font-light font-clash-display text-black mb-4 md:mb-6 text-center">
           Ecosystem Partners
         </h3>
         <LogoLoop
@@ -266,7 +266,7 @@ const Partners = () => {
       />
 
       {/* Scrolling Text Loop */}
-      <div className="w-full -mt-7 mb-10 -skew-y-2">
+      <div className="w-full -mt-7 mb-6 -skew-y-2">
         <LogoLoop
           logos={[
             { text: "IEDC SUMMIT 2025" },
