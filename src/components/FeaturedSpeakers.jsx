@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LogoLoop from "./LogoLoop";
 import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
+import { Link } from "react-router-dom";
 
 const LoadingAnimation = () => (
   <div className="flex items-center justify-center py-20">
@@ -87,7 +88,7 @@ export default function FeaturedSpeakers() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto justify-center mb-[15vh]  lg:mb-[2vh]">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto justify-center mb-[5vh] lg:mb-[2vh] ">
             {speakers.map((speaker, index) => (
               <div
                 key={speaker.id}
@@ -122,6 +123,14 @@ export default function FeaturedSpeakers() {
             ))}
           </div>
         )}
+        <div className="text-center mb-40 md:mt-10">
+          <Link
+            to="/speakers"
+            className="text-blue-600 text-lg md:text-xl font-gilroy-medium cursor-pointer hover:opacity-70 transition-opacity"
+          >
+            View all speakers...
+          </Link>
+        </div>
       </div>
 
       {/* Colored Blocks at Bottom */}
