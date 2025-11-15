@@ -74,7 +74,7 @@ export default function FeaturedSpeakers() {
       }`}
     >
       <h2 className="text-4xl md:text-6xl lg:text-7xl text-center text-blue-500 mb-12 font-clash-display">
-        Featured Speakers
+        Speakers
       </h2>
 
       <div className="w-full md:mb-30">
@@ -88,7 +88,7 @@ export default function FeaturedSpeakers() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto justify-center mb-[5vh] lg:mb-[2vh] ">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-6 gap-6 max-w-7xl mx-auto justify-center mb-[15vh]  lg:mb-[2vh]">
             {speakers.map((speaker, index) => (
               <div
                 key={speaker.id}
@@ -103,7 +103,7 @@ export default function FeaturedSpeakers() {
 
                 {/* Star decoration - asterisk with color */}
                 <div
-                  className="absolute -bottom-8 left-2 md:-bottom-23 md:left-4 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-clash-display font-semibold pointer-events-none leading-none scale-400 md:scale-300"
+                  className="absolute -bottom-8 left-2 md:-bottom-22 md:left-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-clash-display font-semibold pointer-events-none leading-none scale-350 md:scale-250"
                   style={{
                     color: starColors[index % starColors.length],
                   }}
@@ -111,11 +111,11 @@ export default function FeaturedSpeakers() {
                   *
                 </div>
                 {/* Info - Always Visible */}
-                <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/1 to-black/30 flex flex-col justify-end p-4">
-                  <p className="text-[13px] md:text-lg font-medium font-clash-display leading-tight text-white">
+                <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/5 to-black/50 flex flex-col justify-end p-4">
+                  <p className="text-[12px] md:text-[14px] font-medium font-clash-display leading-tight text-white">
                     {speaker.name}
                   </p>
-                  <p className="text-[10px] sm:text-xs md:text-sm font-light font-gilroy-light text-white mt-1">
+                  <p className="text-[10px] sm:text-xs md:text-[12px] font-light font-gilroy-light text-white mt-1">
                     {speaker.designation}
                   </p>
                 </div>

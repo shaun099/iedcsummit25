@@ -1,4 +1,5 @@
-import { StrictMode } from "react";
+import { StrictMode, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./index.css";
@@ -11,8 +12,29 @@ import Webinars from "./components/Webinars.jsx";
 import Footer from "./components/Footer.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Speaker from "./components/Speaker.jsx";
+import EOIs from "./components/EOIs.jsx";
+import Leaderboard from "./components/Leaderboard.jsx";
 import { SponsorForm } from "./components/SponsorForm";
 import { ScrollToTop } from "./components/ScrollToTop";
+
+const AccommodationRedirect = () => {
+  useEffect(() => {
+    window.location.href = "https://forms.gle/Y2rxmj3pojK1ASMc7";
+  }, []);
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-white">
+      <div className="text-center">
+        <p className="text-blue-600 font-clash-display text-lg mb-2">
+          Redirecting to accommodation form...
+        </p>
+        <p className="text-blue-400 font-gilroy-medium">
+          If you are not redirected, click <a href="https://forms.gle/Y2rxmj3pojK1ASMc7" className="text-blue-600 underline">here</a>
+        </p>
+      </div>
+    </div>
+  );
+};
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -51,6 +73,16 @@ createRoot(document.getElementById("root")).render(
             }
           />
           <Route
+            path="/eois"
+            element={
+              <>
+                <Navbar />
+                <EOIs />
+                <Footer />
+              </>
+            }
+          />
+          <Route
             path="/be-our-sponsor"
             element={
               <>
@@ -69,6 +101,20 @@ createRoot(document.getElementById("root")).render(
                 <Footer />
               </>
             }
+          />
+          <Route
+            path="/leaderboard"
+            element={
+              <>
+                <Navbar />
+                <Leaderboard />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/accomodation"
+            element={<AccommodationRedirect />}
           />
           {/* Session redirect route - /r/sessionId */}
           <Route path="/r/:sessionId" element={<SessionRedirect />} />
