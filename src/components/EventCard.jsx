@@ -1,37 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import side_image from '../assets/side_image.png';
 import { Play } from 'lucide-react';
 import LogoLoop from './LogoLoop';
 
-const MARQUEE_STYLES = `
-  @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-  }
-  
-  .marquee-container {
-    overflow: hidden;
-    width: 100%;
-  }
-  
-  .marquee-text {
-    display: inline-block;
-    padding-right: 100%;
-    animation: marquee 15s linear infinite;
-    white-space: nowrap;
-  }
-  
-  .marquee-container:hover .marquee-text {
-    animation-play-state: paused;
-  }
-`;
-
 export default function EventCard({ event, isWebinar = false }) {
   const [isEventLive, setIsEventLive] = useState(false);
-  const [isMarqueeActive, setIsMarqueeActive] = useState(false);
   const [canRegister, setCanRegister] = useState(true);
   const [isEventEnded, setIsEventEnded] = useState(false);
-  const titleRef = useRef(null);
 
   useEffect(() => {
     if (!event.startTime || !event.endTime) return;
@@ -60,19 +35,6 @@ export default function EventCard({ event, isWebinar = false }) {
     return () => clearInterval(interval);
   }, [isWebinar, event.startTime, event.endTime]);
 
-  // Check if title needs marquee effect
-  useEffect(() => {
-    if (titleRef.current) {
-      // Get the h3 element inside the container
-      const h3Element = titleRef.current.querySelector('h3');
-      if (h3Element) {
-        // Activate marquee if text is 90% of container width (lower threshold)
-        const isOverflow = h3Element.scrollWidth > titleRef.current.clientWidth;
-        setIsMarqueeActive(isOverflow);
-      }
-    }
-  }, [event.title]);
-
   // Parse webinar links (separated by comma)
   const getWebinarLinks = () => {
     if (!event.registrationLink || typeof event.registrationLink !== 'string') {
@@ -88,9 +50,7 @@ export default function EventCard({ event, isWebinar = false }) {
   const webinarLinks = isWebinar ? getWebinarLinks() : null;
 
   return (
-    <>
-      <style>{MARQUEE_STYLES}</style>
-      <div className="w-full max-w-80 mx-auto aspect-4/5 relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl">
+    <div className="w-full max-w-80 mx-auto aspect-4/5 relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl">
         {/* Event Type Badge */}
         {event.eventType && (
           <div className="absolute top-3 right-3 z-10 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-gilroy-medium">
@@ -99,11 +59,9 @@ export default function EventCard({ event, isWebinar = false }) {
         )}
         
         <div className="w-[75%] md:w-[80%] h-full left-0 top-0 absolute overflow-y-auto p-4 md:p-6 flex flex-col gap-3">
-          <div ref={titleRef} className={isMarqueeActive ? 'marquee-container' : ''}>
-            <h3 className={`${isMarqueeActive ? 'marquee-text' : ''} text-lg md:text-2xl font-gilroy-medium text-black leading-tight [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]`}>
-              {event.title}
-            </h3>
-          </div>
+          <h3 className="text-lg md:text-2xl font-gilroy-medium text-black leading-tight [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
+            {event.title}
+          </h3>
           
           {/* Speaker details for webinars - below title */}
           {isWebinar && event.speakers && event.speakers.length > 0 && (
@@ -261,6 +219,5 @@ export default function EventCard({ event, isWebinar = false }) {
           className="absolute right-0 top-0 w-20 h-auto"
         />
       </div>
-    </>
   );
 }

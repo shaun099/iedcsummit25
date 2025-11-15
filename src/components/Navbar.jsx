@@ -10,6 +10,7 @@ const navItems = [
   { label: 'Events', href: '/events' },
   //{ label: 'Schedule', href: '/schedule' },
   { label: 'Webinars', href: '/webinars' },
+  { label: 'EOIs', href: '/eois' },
   // { label: 'FAQ', href: '#faq' },
   // { label: 'Gallery', href: '#gallery' },
   { label: 'Be Our Sponsor', href: '/be-our-sponsor' },
