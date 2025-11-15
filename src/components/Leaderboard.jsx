@@ -157,7 +157,7 @@ const Leaderboard = () => {
                   </div>
                 </div>
                 <div className={`${item.textSize} font-bold text-black font-gilroy-bold absolute right-6 top-1/2 transform -translate-y-1/2`}>
-                  {item.count}
+                  {item.count > 0 ? item.count : ''}
                 </div>
               </div>
             ))}
@@ -180,7 +180,7 @@ const Leaderboard = () => {
                   </div>
                 </div>
                 <div className={`${item.textSize} font-bold text-black font-gilroy-bold absolute right-4 top-1/2 transform -translate-y-1/2`}>
-                  {item.count}
+                  {item.count > 0 ? item.count : ''}
                 </div>
               </div>
             ))}
