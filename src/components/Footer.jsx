@@ -369,6 +369,12 @@ const Footer = () => {
               Leaderboard
             </a>
             <a 
+              href="/accomodation" 
+              className="text-gray-500 hover:text-blue-400 transition-colors font-gilroy-light font-semibold"
+            >
+              Accommodation
+            </a>
+            <a 
               href="/Tender_IEDC_Summit_2025.pdf" 
               download="Tender_IEDC_Summit_2025.pdf"
               className="text-gray-500 hover:text-blue-400 transition-colors font-gilroy-light font-semibold"

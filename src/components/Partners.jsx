@@ -67,6 +67,37 @@ const Partners = () => {
       ),
       ariaLabel: "TrEST",
     },
+    {
+      node: (
+        <img
+          src="/nasscom.png"
+          alt="Nasscom"
+          className="h-10 md:h-10 object-contain"
+        />
+      ),
+      ariaLabel: "Nasscom",
+    },
+    {
+      node: (
+        <img
+          src="/haris.png"
+          alt="Haris & Co"
+          className="h-10 md:h-14 object-contain"
+        />
+      ),
+      ariaLabel: "Haris & Co",
+    },
+    {
+      node: (
+        <img
+          src="/udhyam.png"
+          alt="Udhayam"
+          className="h-10 md:h-15 object-contain"
+        />
+      ),
+      ariaLabel: "Udhayam",
+    }
+
   ];
 
   // Startup Enablers
