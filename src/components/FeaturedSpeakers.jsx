@@ -100,15 +100,15 @@ export default function FeaturedSpeakers() {
                   className="w-full h-full object-cover"
                 />
 
-                {/* {speaker.linkedin && speaker.linkedin.length > 0 && ( */}
-                <IoLogoLinkedin
-                  className="z-50 absolute top-2 right-2 text-white text-2xl md:text-3xl cursor-pointer hover:scale-110 transition-transform duration-300 drop-shadow-2xl"
-                  style={{
-                    color: starColors[index % starColors.length],
-                  }}
-                  onClick={() => window.open(speaker.linkedin, "_blank")}
-                />
-                {/* // )} */}
+                {speaker.linkedin && speaker.linkedin.length > 0 && (
+                  <IoLogoLinkedin
+                    className="z-50 absolute top-2 right-2 text-white text-2xl md:text-3xl cursor-pointer hover:scale-110 transition-transform duration-300 drop-shadow-2xl"
+                    style={{
+                      color: starColors[index % starColors.length],
+                    }}
+                    onClick={() => window.open(speaker.linkedin, "_blank")}
+                  />
+                )}
 
                 {/* Star decoration - asterisk with color */}
                 <div
