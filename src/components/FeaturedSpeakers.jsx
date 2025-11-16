@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LogoLoop from "./LogoLoop";
 import { useScrollFadeInUp } from "../hooks/useScrollFadeInUp";
-import { Link } from "react-router-dom";
+import { IoLogoLinkedin } from "react-icons/io5";
 
 const LoadingAnimation = () => (
   <div className="flex items-center justify-center py-20">
@@ -43,7 +43,6 @@ export default function FeaturedSpeakers() {
           "https://events.startupmission.in/api/event/iedc-summit-2025/speakers"
         );
         const data = await response.json();
-
         // Get featured speakers and sort by order
         const featuredSpeakers = data.Featured || [];
 
@@ -101,6 +100,16 @@ export default function FeaturedSpeakers() {
                   className="w-full h-full object-cover"
                 />
 
+                {/* {speaker.linkedin && speaker.linkedin.length > 0 && ( */}
+                <IoLogoLinkedin
+                  className="z-50 absolute top-2 right-2 text-white text-2xl md:text-3xl cursor-pointer hover:scale-110 transition-transform duration-300 drop-shadow-2xl"
+                  style={{
+                    color: starColors[index % starColors.length],
+                  }}
+                  onClick={() => window.open(speaker.linkedin, "_blank")}
+                />
+                {/* // )} */}
+
                 {/* Star decoration - asterisk with color */}
                 <div
                   className="absolute -bottom-8 left-2 md:-bottom-22 md:left-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-clash-display font-semibold pointer-events-none leading-none scale-350 md:scale-250"
@@ -123,14 +132,6 @@ export default function FeaturedSpeakers() {
             ))}
           </div>
         )}
-        <div className="text-center mb-40 md:mt-10">
-          <Link
-            to="/speakers"
-            className="text-blue-600 text-lg md:text-xl font-gilroy-medium cursor-pointer hover:opacity-70 transition-opacity"
-          >
-            View all speakers...
-          </Link>
-        </div>
       </div>
 
       {/* Colored Blocks at Bottom */}
