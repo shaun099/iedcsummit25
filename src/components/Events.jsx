@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Search } from 'lucide-react';
+import EventCard from './EventCard';
 
 const LoadingAnimation = () => (
   <div className="flex items-center justify-center py-20">
