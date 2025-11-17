@@ -95,6 +95,7 @@ const processEventDescriptions = (events) =>
           ...(extra.registration_end && { registration_end: extra.registration_end }),
           ...(extra.vidLink && { vidLink: extra.vidLink }),
           ...(extra.poc && { poc: extra.poc }),
+          ...(extra.capacity && { capacity: extra.capacity }),
         });
       }
 

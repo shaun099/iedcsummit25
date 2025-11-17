@@ -192,6 +192,16 @@ export default function EventCard({ event, isWebinar = false }) {
     );
   };
 
+  const renderCapacity = () => {
+    if (!event.capacity) return null;
+
+    return (
+      <div className="text-xs font-gilroy-bold text-blue-600">
+        Seats Available: {event.capacity}
+      </div>
+    );
+  };
+
   const renderWebinarButtons = () => {
     const { registration, meet } = webinarLinks;
 
@@ -406,6 +416,8 @@ export default function EventCard({ event, isWebinar = false }) {
           <p className="text-xs md:text-sm font-gilroy-light text-black leading-relaxed [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
             {event.description}
           </p>
+
+          {renderCapacity()}
 
           {renderLogos()}
           {renderSponsors()}
