@@ -162,7 +162,7 @@ export default function EventCard({ event, isWebinar = false }) {
     }
 
     return (
-      <div className="grid grid-cols-2 md:grid-cols-4 md:gap-2 -my-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 my-2">
         {event.sponsors.map((sponsor, index) => (
           <img
             key={index}
@@ -368,7 +368,7 @@ export default function EventCard({ event, isWebinar = false }) {
         }`}
       >
         {!isWebinar && (
-          <div className="absolute top-3 right-3 z-10 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
+          <div className="absolute top-1 right-1 z-10 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
             {event.eventType}
           </div>
         )}
