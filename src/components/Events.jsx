@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Search } from 'lucide-react';
-import EventCard from './EventCard';
 
 const LoadingAnimation = () => (
   <div className="flex items-center justify-center py-20">
@@ -234,6 +233,9 @@ export default function EventsPage() {
             <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 text-blue-600" />
           </div>
         </div>
+      {/* <div className="w-full bg-yellow-400 text-black py-4 px-5 text-center font-gilroy-medium text-lg top-10">
+        🚧 Events page is currently under maintenance. We'll be back soon! 🚧
+      </div> */}
 
         {/* Event cards grid */}
         <div className="w-full max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 md:auto-rows-fr gap-4 md:gap-6 mb-[10vh]">
