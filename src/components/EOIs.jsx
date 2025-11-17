@@ -41,6 +41,7 @@ const EOIs = () => {
                     buttonText: eoi.link ? 'APPLY NOW' : 'COMING SOON',
                     buttonAction: eoi.link ? () => window.open(eoi.link, '_blank', 'noopener,noreferrer') : () => {},
                     disabled: !eoi.link,
+                    registrationLink: eoi.link,
                     logo: null,
                     posterUrl: null,
                     poc: null,
@@ -70,6 +71,7 @@ const EOIs = () => {
                 disabled: extraData.disabled !== undefined ? extraData.disabled : eoi.disabled,
                 buttonText: extraData.buttonText || eoi.buttonText,
                 buttonAction: extraData.disabled ? () => {} : (eoi.link ? () => window.open(eoi.link, '_blank', 'noopener,noreferrer') : () => {}),
+                registrationLink: extraData.registrationLink || eoi.registrationLink,
                 id: extraData.id || eoi.id
               };
             }

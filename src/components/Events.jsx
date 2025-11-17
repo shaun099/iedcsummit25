@@ -33,8 +33,9 @@ const getEventType = (category) => {
         .split(',')
         .map((c) => c.trim());
 
-  if (categories.includes('Test')) return 'Featured';
-  // Add more mappings here if needed
+  if (categories.includes('Featured')) return 'Featured';
+  if (categories.includes('Event')) return 'Summit Day';
+  if (categories.includes('Pre-Event')) return 'Pre-Event';
   return '';
 };
 
@@ -93,6 +94,7 @@ const processEventDescriptions = (events) =>
           ...(extra.registration_start && { registration_start: extra.registration_start }),
           ...(extra.registration_end && { registration_end: extra.registration_end }),
           ...(extra.vidLink && { vidLink: extra.vidLink }),
+          ...(extra.poc && { poc: extra.poc }),
         });
       }
 
@@ -139,6 +141,14 @@ const sortEvents = (events) => {
   const now = new Date();
 
   return [...events].sort((a, b) => {
+    // First priority: Featured events with open registration
+    const aIsFeaturedOpen = a.eventType === 'Featured' && getRegistrationStatusOrder(a.startTime, a.endTime, now) !== 2;
+    const bIsFeaturedOpen = b.eventType === 'Featured' && getRegistrationStatusOrder(b.startTime, b.endTime, now) !== 2;
+
+    if (aIsFeaturedOpen && !bIsFeaturedOpen) return -1;
+    if (!aIsFeaturedOpen && bIsFeaturedOpen) return 1;
+
+    // If both are featured with open registration or both are not, use existing logic
     const statusA = getRegistrationStatusOrder(a.startTime, a.endTime, now);
     const statusB = getRegistrationStatusOrder(b.startTime, b.endTime, now);
 
@@ -220,7 +230,7 @@ export default function EventsPage() {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full h-[5vh] px-5 bg-indigo-100 rounded-[19px] text-sm text-blue-600 placeholder-blue-600 font-gilroy-light focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <Search className="absolute right-4 top-[1.5vh] w-6 h-6 text-blue-600" />
+            <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 text-blue-600" />
           </div>
         </div>
 

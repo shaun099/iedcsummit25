@@ -175,6 +175,23 @@ export default function EventCard({ event, isWebinar = false }) {
     );
   };
 
+  const renderPOC = () => {
+    if (!event.poc) return null;
+
+    return (
+      <div>
+        <h4 className="text-md font-gilroy-medium text-blue-800 mb-2">
+          Any Queries?
+        </h4>
+        <div className="text-sm font-gilroy-light text-blue-700 space-y-1">
+          {event.poc.name && <p><strong>Name:</strong> {event.poc.name}</p>}
+          {event.poc.phone && <p><strong>Phone:</strong> {event.poc.phone}</p>}
+          {event.poc.email && <p><strong>Email:</strong> {event.poc.email}</p>}
+        </div>
+      </div>
+    );
+  };
+
   const renderWebinarButtons = () => {
     const { registration, meet } = webinarLinks;
 
@@ -271,25 +288,6 @@ export default function EventCard({ event, isWebinar = false }) {
             </span>
           </button>
         )}
-
-        {event.is1Tank && (
-          <button
-            onClick={() => {
-              window.open(
-                'https://www.linkedin.com/posts/iedcsummit_iedcsummit2025-daretodisrupt-keralastartupmission-activity-7392572580018311168-3nxw',
-                '_blank',
-                'noopener,noreferrer'
-              );
-            }}
-            className="h-8 md:h-9 px-3 md:px-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center gap-2 transition shrink-0 cursor-pointer"
-            aria-label="Watch promo video"
-          >
-            <Play size={14} fill="currentColor" />
-            <span className="text-white text-xs font-medium font-clash-display tracking-tight hidden sm:inline">
-              PROMO
-            </span>
-          </button>
-        )}
       </div>
     );
   };
@@ -367,11 +365,27 @@ export default function EventCard({ event, isWebinar = false }) {
 
         {/* Poster Image */}
         {hasPoster && (
-          <div className="w-full md:w-1/2 h-auto md:h-auto shrink-0">
+          <div
+            className={`w-full md:w-1/2 h-auto md:h-auto shrink-0 ${
+              isEventEnded || registrationEnded || !canRegister
+                ? ''
+                : 'cursor-pointer'
+            }`}
+            onClick={() => {
+              const isClosed = isEventEnded || registrationEnded || !canRegister;
+              if (!isClosed) {
+                handleRegisterClick();
+              }
+            }}
+          >
             <img
               src={event.posterUrl}
               alt={`${event.title} poster`}
-              className="w-full h-auto object-contain rounded-t-xl md:rounded-l-xl md:rounded-tr-none"
+              className={`w-full h-auto object-contain rounded-t-xl md:rounded-l-xl md:rounded-tr-none ${
+                isEventEnded || registrationEnded || !canRegister
+                  ? ''
+                  : 'hover:opacity-90 transition-opacity'
+              }`}
             />
           </div>
         )}
@@ -395,6 +409,8 @@ export default function EventCard({ event, isWebinar = false }) {
 
           {renderLogos()}
           {renderSponsors()}
+
+          {renderPOC()}
 
           {isWebinar ? renderWebinarButtons() : renderRegularButtons()}
         </div>

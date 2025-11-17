@@ -17,11 +17,22 @@ const EOICard = ({ card }) => {
 
       {/* Poster Image - Takes full width on mobile, left half on desktop */}
       {hasPoster && (
-        <div className="w-full md:w-1/2 h-auto md:h-auto flex-shrink-0">
+        <div
+          className={`w-full md:w-1/2 h-auto md:h-auto flex-shrink-0 ${
+            card.disabled ? '' : 'cursor-pointer'
+          }`}
+          onClick={() => {
+            if (!card.disabled && card.registrationLink) {
+              window.open(card.registrationLink, '_blank', 'noopener,noreferrer');
+            }
+          }}
+        >
           <img
             src={card.posterUrl}
             alt={`${card.title} poster`}
-            className="w-full h-auto object-contain rounded-t-xl md:rounded-l-xl md:rounded-tr-none"
+            className={`w-full h-auto object-contain rounded-t-xl md:rounded-l-xl md:rounded-tr-none ${
+              card.disabled ? '' : 'hover:opacity-90 transition-opacity'
+            }`}
           />
         </div>
       )}
@@ -60,8 +71,8 @@ const EOICard = ({ card }) => {
 
         {/* Point of Contact */}
         {card.poc && (
-          <p className="text-xs font-gilroy-medium text-gray-700">
-            POC: {card.poc.phone}
+          <p className="text-md font-gilroy-medium text-gray-700">
+            Any Queries? {card.poc.phone}
           </p>
         )}
 
