@@ -25,7 +25,7 @@ const LoadingAnimation = () => (
 
 // Now supports category as string or array
 const getEventType = (category) => {
-  if (!category) return '';
+  if (!category) return [];
 
   const categories = Array.isArray(category)
     ? category
@@ -33,10 +33,11 @@ const getEventType = (category) => {
         .split(',')
         .map((c) => c.trim());
 
-  if (categories.includes('Featured')) return 'Featured';
-  if (categories.includes('Event')) return 'Summit Day';
-  if (categories.includes('Pre-Event')) return 'Pre-Event';
-  return '';
+  const types = [];
+  if (categories.includes('Featured')) types.push('Featured');
+  if (categories.includes('Event')) types.push('Summit Day');
+  if (categories.includes('Pre-Event')) types.push('Pre-Event');
+  return types;
 };
 
 const transformAgendaToEvents = (agenda) => {
@@ -47,6 +48,15 @@ const transformAgendaToEvents = (agenda) => {
   Object.values(agenda).forEach((dateGroup) => {
     Object.values(dateGroup).forEach((venueEvents) => {
       venueEvents.forEach((event) => {
+        const categories = Array.isArray(event.category)
+          ? event.category
+          : String(event.category)
+              .split(',')
+              .map((c) => c.trim());
+
+        // Skip events with Workshop or EOI categories
+        if (categories.includes('Workshop') || categories.includes('EOI') || categories.includes('Webinar')) return;
+
         const eventType = getEventType(event.category);
 
         if (!eventType) return;
@@ -143,8 +153,8 @@ const sortEvents = (events) => {
 
   return [...events].sort((a, b) => {
     // First priority: Featured events with open registration
-    const aIsFeaturedOpen = a.eventType === 'Featured' && getRegistrationStatusOrder(a.startTime, a.endTime, now) !== 2;
-    const bIsFeaturedOpen = b.eventType === 'Featured' && getRegistrationStatusOrder(b.startTime, b.endTime, now) !== 2;
+    const aIsFeaturedOpen = a.eventType.includes('Featured') && getRegistrationStatusOrder(a.startTime, a.endTime, now) !== 2;
+    const bIsFeaturedOpen = b.eventType.includes('Featured') && getRegistrationStatusOrder(b.startTime, b.endTime, now) !== 2;
 
     if (aIsFeaturedOpen && !bIsFeaturedOpen) return -1;
     if (!aIsFeaturedOpen && bIsFeaturedOpen) return 1;

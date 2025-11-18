@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { ChevronRight, ChevronLeft, Play } from "lucide-react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-import side_image from "../assets/side_image.png";
 import { Link } from "react-router-dom";
+import EventCard from "./EventCard";
 import LogoLoop from "./LogoLoop";
 
 const LoadingAnimation = () => (
@@ -24,81 +24,161 @@ const LoadingAnimation = () => (
   </div>
 );
 
+// ---- Helpers ----
+
+// Now supports category as string or array
+const getEventType = (category) => {
+  if (!category) return [];
+
+  const categories = Array.isArray(category)
+    ? category
+    : String(category)
+        .split(',')
+        .map((c) => c.trim());
+
+  const types = [];
+  if (categories.includes('Featured')) types.push('Featured');
+  if (categories.includes('Event')) types.push('Summit Day');
+  if (categories.includes('Pre-Event')) types.push('Pre-Event');
+  return types;
+};
+
+const transformAgendaToEvents = (agenda) => {
+  if (!agenda) return [];
+
+  const events = [];
+
+  Object.values(agenda).forEach((dateGroup) => {
+    Object.values(dateGroup).forEach((venueEvents) => {
+      venueEvents.forEach((event) => {
+        const categories = Array.isArray(event.category)
+          ? event.category
+          : String(event.category)
+              .split(',')
+              .map((c) => c.trim());
+
+        // Skip events with Workshop or EOI categories
+        if (categories.includes('Workshop') || categories.includes('EOI')) return;
+
+        const eventType = getEventType(event.category);
+
+        if (eventType.includes('Featured')) {
+          events.push({
+            id: event.id || Math.random(),
+            title: event.name || '',
+            description: event.description || '',
+            registrationLink: event.link || '',
+            eventType,
+            startTime: event.start_time,
+            endTime: event.end_time,
+          });
+        }
+      });
+    });
+  });
+
+  return events;
+};
+
+const processEventDescriptions = (events) =>
+  events.map((event) => {
+    const rawDescription = event.description || '';
+    const cleanDescription = rawDescription.trim();
+
+    if (!cleanDescription) return event;
+
+    try {
+      const descData = JSON.parse(cleanDescription);
+      const extractedDescription = descData.description || descData.Description;
+
+      if (!extractedDescription) return event;
+
+      const processedEvent = {
+        ...event,
+        description: extractedDescription,
+      };
+
+      if (descData.ExtraData) {
+        const extra = descData.ExtraData;
+        Object.assign(processedEvent, {
+          ...(extra.posterUrl && { posterUrl: extra.posterUrl }),
+          ...(extra.logos && { logos: extra.logos }),
+          ...(extra.slots && { slots: extra.slots }),
+          ...(extra.registration_start && { registration_start: extra.registration_start }),
+          ...(extra.registration_end && { registration_end: extra.registration_end }),
+          ...(extra.vidLink && { vidLink: extra.vidLink }),
+          ...(extra.poc && { poc: extra.poc }),
+          ...(extra.capacity && { capacity: extra.capacity }),
+        });
+      }
+
+      return processedEvent;
+    } catch (parseError) {
+      const descMatch = cleanDescription.match(
+        /"description"\s*:\s*"([^"]*(?:\\.[^"]*)*)"/
+      );
+
+      if (descMatch) {
+        return {
+          ...event,
+          description: descMatch[1].replace(/\\"/g, '"'),
+        };
+      }
+
+      console.warn(
+        'Failed to parse description JSON for event:',
+        event.title,
+        'Error:',
+        parseError.message
+      );
+
+      return event;
+    }
+  });
+
 const FeaturedEvents = () => {
   const [events, setEvents] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-
-  // Test data with sponsor logos
-  const testEvents = [
-    {
-      id: 1,
-      title: "1Tank for Students",
-      description:
-        "🚀 Seize Your Opportunity to Go Global! 🔥\n\n1Pitch, Infinite Opportunities\n\nPitch your startup idea on the IEDC Summit 2025 stage and stand a chance to:\n\n🏆 Secure Funding\n🎓 Win a Fully Funded* 1-Year Entrepreneurship Training in the UAE\n\nApplication Deadline: November 15, 2025",
-      registrationLink: "https://www.iedcsummit.in/1tank",
-      sponsors: ["/tiib-logo.png", "/1trepreneur-logo.png", "/campusfund-logo.png", "/tie-logo.png"]
-    }
-  ];
-
-  useEffect(() => {
-    // Comment out API fetching for testing
-    // const fetchEvents = async () => {
-    //   try {
-    //     const fetchedEvents = await fetch("https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue");
-    //     const eventsData = await fetchedEvents.json();
-    //
-    //     // Transform and filter for Featured events only
-    //     const transformedEvents = [];
-    //
-    //     if (eventsData.agenda) {
-    //       Object.values(eventsData.agenda).forEach(dateGroup => {
-    //         Object.values(dateGroup).forEach(venueEvents => {
-    //           venueEvents.forEach(event => {
-    //             // Check if the event has "Featured" in its category
-    //             if (event.category && event.category.includes("Featured")) {
-    //               transformedEvents.push({
-    //                 id: event.id || Math.random(),
-    //                 title: event.name,
-    //                 description: event.description,
-    //                 registrationLink: event.link || "",
-    //               });
-    //             }
-    //           });
-    //         });
-    //       });
-    //     }
-    //
-    //     setEvents(transformedEvents);
-    //   } catch (error) {
-    //     console.error("Error fetching events:", error);
-    //   } finally {
-    //     setIsLoading(false);
-    //   }
-    // };
-
-    // fetchEvents();
-
-    // Use test data instead
-    setEvents(testEvents);
-    setIsLoading(false);
-  }, []);
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % Math.max(events.length, 1));
-  };
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrev = () => {
-    setCurrentIndex(
-      (prev) =>
-        (prev - 1 + Math.max(events.length, 1)) % Math.max(events.length, 1)
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? events.length - 1 : prevIndex - 1
     );
   };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === events.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await fetch(
+          'https://events.startupmission.in/api/event/iedc-summit-2025/agenda/venue'
+        );
+        const data = await res.json();
+
+        const transformed = transformAgendaToEvents(data.agenda);
+        const processed = processEventDescriptions(transformed);
+
+        setEvents(processed);
+      } catch (error) {
+        console.error('Error fetching featured events:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   return (
     <section
       id="featured-events"
-      className="w-full py-16 md:py-24 bg-white relative overflow-hidden"
+      className="w-full py-5 md:py-24 bg-white relative overflow-hidden"
     >
       {/* Decorative circles */}
       <div className="w-96 h-96 left-32 top-1/3 absolute opacity-50 rounded-full border border-blue-600"></div>
@@ -118,8 +198,8 @@ const FeaturedEvents = () => {
         ) : events.length > 0 ? (
           <div className="relative">
             {/* Cards Grid with Stacked Effect */}
-            <div className="relative h-80 sm:h-96 md:h-[550px] lg:h-[700px] flex items-center justify-center mt-[12vh] mb-[5vh] md:mt-[3vh]">
-              {/* Previous Button - Large screens only, left side */}
+            <div className="relative h-[450px] sm:h-[600px] md:h-[750px] lg:h-[900px] flex items-center justify-center mt-[28vh] mb-[25vh] md:mt-0 md:-mb-[10vh]">
+            {/* Previous Button - Large screens only, left side */}
               {events.length > 1 && (
                 <button
                   onClick={handlePrev}
@@ -153,79 +233,10 @@ const FeaturedEvents = () => {
                         stiffness: 260,
                         damping: 20,
                       }}
-                      className="absolute w-full max-w-xs md:max-w-md"
+                      className="absolute w-full max-w-sm md:max-w-3xl "
                     >
-                      <div className="w-full max-w-[80vw] md:max-w-[46vw] lg:max-w-4xl mx-auto aspect-4/5 relative bg-white rounded-xl shadow-[2px_4px_4px_0px_rgba(37,99,235,0.25)] outline-2 outline-blue-600/75 overflow-hidden transition-all duration-300 hover:shadow-2xl">
-                        <div className="w-[85%] h-full left-0 top-0 absolute overflow-y-auto p-4 md:p-6 lg:p-8 flex flex-col gap-3 md:gap-4">
-                          <h3 className="text-xl md:text-3xl lg:text-4xl font-gilroy-medium text-black leading-tight [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
-                            {event.title}
-                          </h3>
-
-                          <p className="text-xs md:text-sm lg:text-base font-gilroy-light text-black leading-relaxed [text-shadow:0px_1px_8px_rgb(37_99_235/0.10)]">
-                            {event.description}
-                          </p>
-
-                          {/* Sponsor Logos */}
-                          {event.sponsors && event.sponsors.length > 0 && (
-                            <div className="flex items-center gap-2 md:gap-3 flex-wrap mt-auto pt-4">
-                              {event.sponsors.map((sponsor, idx) => (
-                                <img
-                                  key={idx}
-                                  src={sponsor} 
-                                  alt="sponsor" 
-                                  className="h-6 md:h-8 lg:h-9 object-contain"
-                                />
-                              ))}
-                            </div>
-                          )}
-
-                          {/* Buttons Container */}
-                          <div className="flex gap-2 mt-auto pt-4">
-                            {event.registrationLink ? (
-                              <a
-                                href={event.registrationLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex-1 h-9 md:h-10 lg:h-11 bg-black rounded-lg flex items-center justify-center hover:opacity-80 opacity-90 transition"
-                              >
-                                <span className="text-white text-xs md:text-sm lg:text-base font-medium font-clash-display tracking-tight">
-                                  REGISTER NOW
-                                </span>
-                              </a>
-                            ) : (
-                              <div className="flex-1 h-9 md:h-10 lg:h-11 bg-gray-400 rounded-lg flex items-center justify-center cursor-not-allowed">
-                                <span className="text-white text-xs md:text-sm lg:text-base font-medium font-clash-display tracking-tight">
-                                  COMING SOON
-                                </span>
-                              </div>
-                            )}
-
-                            {/* Promo Video Button */}
-                            <button
-                              onClick={() => {
-                                window.open(
-                                  "https://www.linkedin.com/posts/iedcsummit_iedcsummit2025-daretodisrupt-keralastartupmission-activity-7392572580018311168-3nxw",
-                                  "_blank",
-                                  "noopener,noreferrer"
-                                );
-                              }}
-                              className="h-9 md:h-10 lg:h-11 px-3 md:px-4 lg:px-5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center gap-2 transition shrink-0"
-                              aria-label="Watch promo video"
-                            >
-                              <Play size={16} fill="currentColor" />
-                              <span className="text-white text-xs md:text-sm font-medium font-clash-display tracking-tight hidden sm:inline">
-                                PROMO
-                              </span>
-                            </button>
-                          </div>
-                        </div>
-
-                        {/* Colored Decorative Blocks */}
-                        <img
-                          src={side_image}
-                          alt="side decorations"
-                          className="absolute right-0 top-0 w-12 md:w-20 h-auto"
-                        />
+                      <div className="transform-gpu">
+                        <EventCard event={event} />
                       </div>
                     </motion.div>
                   );
@@ -246,7 +257,7 @@ const FeaturedEvents = () => {
 
             {/* Navigation Controls and View All - Mobile and Tablet only */}
             {events.length > 1 && (
-              <div className="lg:hidden flex items-center justify-between gap-4 mb-[10vh]">
+              <div className="lg:hidden flex items-center justify-between gap-4 mb-[15vh]">
                 {/* Previous Button */}
                 <button
                   onClick={handlePrev}
@@ -300,7 +311,7 @@ const FeaturedEvents = () => {
         ) : (
           <div className="w-full text-center py-20">
             <p className="text-2xl font-gilroy-light text-gray-500">
-              Loading featured events...
+              No featured events available
             </p>
           </div>
         )}
@@ -310,11 +321,11 @@ const FeaturedEvents = () => {
       <img
         src="/hero-blocks.png"
         alt="Decorative blocks"
-        className="w-full h-20 sm:h-24 absolute bottom-20 left-0 object-cover"
+        className="w-full h-20 sm:h-24 relative bottom-20 left-0 object-cover"
       />
 
       {/* Scrolling Text Loop */}
-      <div className="w-full absolute bottom-12 left-0 skew-y-2">
+      <div className="w-full relative bottom-[13vh] left-0 skew-y-2">
         <LogoLoop
           logos={[
             { text: "IEDC SUMMIT 2025" },

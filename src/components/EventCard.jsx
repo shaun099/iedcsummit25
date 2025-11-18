@@ -367,9 +367,13 @@ export default function EventCard({ event, isWebinar = false }) {
             : 'col-span-1 flex flex-col'
         }`}
       >
-        {!isWebinar && (
-          <div className="absolute top-1 right-1 z-10 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
-            {event.eventType}
+        {!isWebinar && event.eventType && event.eventType.length > 0 && (
+          <div className="absolute top-1 right-1 z-10 flex gap-2">
+            {event.eventType.map((type, index) => (
+              <div key={index} className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
+                {type}
+              </div>
+            ))}
           </div>
         )}
 
