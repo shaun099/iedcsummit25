@@ -91,7 +91,7 @@ export default function FeaturedSpeakers() {
             {speakers.map((speaker, index) => (
               <div
                 key={speaker.id}
-                className="relative w-full max-w-xs aspect-3/4 overflow-hidden"
+                className="relative w-full max-w-xs aspect-3/4 overflow-hidden group"
               >
                 {/* Speaker Image */}
                 <img
@@ -102,7 +102,7 @@ export default function FeaturedSpeakers() {
 
                 {speaker.linkedin && speaker.linkedin.length > 0 && (
                   <IoLogoLinkedin
-                    className="z-50 absolute top-2 right-2 text-white text-2xl md:text-3xl cursor-pointer hover:scale-110 transition-transform duration-300 drop-shadow-2xl"
+                    className="z-50 absolute top-2 right-2 text-white text-2xl md:text-3xl cursor-pointer hover:scale-110 transition-all duration-500 drop-shadow-2xl md:opacity-0 md:group-hover:opacity-100 md:-translate-y-4 md:group-hover:translate-y-0"
                     style={{
                       color: starColors[index % starColors.length],
                     }}
