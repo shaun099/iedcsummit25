@@ -86,13 +86,13 @@ const Highlights = () => {
   return (
     <section
       id="about"
-      className={`w-full h-[90vh] md:h-[110vh] bg-white overflow-hidden relative ${
+      className={`w-full min-h-[90vh] md:min-h-[110vh] bg-white overflow-hidden relative ${
         sectionVisible ? "fade-in-up-visible" : "fade-in-up-hidden"
       }`}
       ref={sectionRef}
     >
       {/* Header Section */}
-      <div className="px-5 md:px-8 lg:px-12 pt-8 md:pt-12 pb-8 md:pb-16 flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 md:gap-8 lg:gap-12 md:mb-40">
+      <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 pt-0  md:pt-12 pb-8 md:pb-16 flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 md:gap-8 lg:gap-12 mb-20 md:mb-40">
         {/* Left Content */}
         <div className="flex-1 w-full lg:w-auto">
           <h2 className="text-4xl md:text-6xl lg:text-8xl font-light font-clash-display text-blue-500 mb-3 md:mb-6 lg:mb-8 leading-tight">
@@ -123,11 +123,11 @@ const Highlights = () => {
       <img
         src="/hero-blocks.png"
         alt="Decorative blocks"
-        className="w-full h-20 sm:h-24 absolute bottom-20 left-0 object-cover"
+        className="w-full h-20 sm:h-24 relative -mt-[10vh] md:-mt-[15vh] left-0 object-cover"
       />
 
       {/* Scrolling Text Loop */}
-      <div className="w-full absolute bottom-12 left-0 -skew-y-2">
+      <div className="w-full relative -mt-[4vh] mb-[3vh] left-0 -skew-y-2">
         <LogoLoop
           logos={[
             { text: "IEDC SUMMIT 2025" },

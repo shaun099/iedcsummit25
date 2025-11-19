@@ -114,6 +114,11 @@ const Faq = () => {
         "Absolutely! The summit is designed to provide participants with direct interaction opportunities with successful founders, entrepreneurs, and industry professionals. You can attend panel discussions, workshops, and networking sessions to gain insights, ask questions, and explore potential collaborations.",
     },
     {
+      question: "How to do bulk registration for the IEDC Summit 2025?",
+      description:
+        'To book bulk tickets through the IEDC Summit website, please refer to the <a href="https://drive.google.com/file/d/1tbxi3lB77vrTNivxiruZbignkZbzQGoG/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="text-blue-300 hover:text-blue-100 underline">attached PDF</a>. It will guide you through the booking process step-by-step.',
+    },
+    {
       question:
         "Are the workshops at the IEDC Summit suitable for beginners, or do I need prior experience?",
       description:
@@ -190,9 +195,10 @@ const Faq = () => {
               </div>
               {expandedItems.includes(index) && (
                 <div className="mt-4 text-left">
-                  <p className="mb-3 text-base md:text-lg lg:text-xl md:mt-8 leading-relaxed">
-                    {item.description}
-                  </p>
+                  <p 
+                    className="mb-3 text-base md:text-lg lg:text-xl md:mt-8 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: item.description }}
+                  />
                 </div>
               )}
             </div>

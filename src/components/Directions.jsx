@@ -220,7 +220,7 @@ const Directions = () => {
             </div>
 
             {/* Content Display */}
-            <div className="space-y-4 mb-[25vh] md:mb-[15vh]">
+            <div className="space-y-4 mb-[15vh] md:mb-[10vh]">
               {(() => {
                 const directions =
                   activeCollege === "lbs" ? lbsDirections : cukDirections;
@@ -302,11 +302,11 @@ const Directions = () => {
       <img
         src="/hero-blocks.png"
         alt="Decorative blocks"
-        className="w-full h-20 sm:h-24 absolute bottom-20 left-0 object-cover"
+        className="w-full h-20 sm:h-24 relative bottom-20 left-0 object-cover"
       />
 
       {/* Scrolling Text Loop */}
-      <div className="w-full absolute bottom-12 left-0 skew-y-2">
+      <div className="w-full relative bottom-[13vh] left-0 skew-y-2">
         <LogoLoop
           logos={[
             { text: "IEDC SUMMIT 2025" },
